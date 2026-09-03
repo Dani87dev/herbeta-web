@@ -163,10 +163,13 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
   color:#F4F1EA; isolation:isolate}
 .hero--cover .hero__grid{padding-block:clamp(3rem,6vw,4.5rem);
   grid-template-columns:minmax(0,1fr) minmax(0,300px)}
-/* etiqueta d'especimen, ancorada a la cantonada superior esquerra */
-.hero__tag{position:absolute; z-index:3; top:clamp(1.4rem,3vw,2.2rem); left:var(--gut);
-  display:flex; flex-direction:column; align-items:flex-start; gap:.45rem; max-width:11rem}
-.hero__tag .rule{height:1px; width:2.2rem; background:rgba(244,241,234,.45)}
+/* etiqueta d'especimen, en una linia damunt la portada. Va absoluta i
+   per tant no reserva espai: apilada en columna requeia damunt el
+   titular a partir dels 861px, aixi que es manté sempre horitzontal. */
+.hero__tag{position:absolute; z-index:3; top:clamp(1.4rem,3vw,2.2rem);
+  left:var(--gut); right:var(--gut);
+  display:flex; flex-direction:row; align-items:center; flex-wrap:wrap; gap:.6rem}
+.hero__tag .rule{height:1px; width:1.1rem; background:rgba(244,241,234,.45); flex:none}
 .hero__tag .label{font-size:.66rem; line-height:1.45}
 .hero__bg{position:absolute; inset:0; z-index:0; overflow:hidden}
 .hero__bg img{width:100%; height:calc(100%/.42); object-fit:cover; object-position:center top; display:block}
@@ -184,8 +187,6 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
 .hero--cover .btn--ghost:hover{color:#fff; border-color:#E9B79E}
 @media (max-width:860px){
   .hero--cover .hero__grid{grid-template-columns:1fr; padding-top:7rem}
-  .hero__tag{max-width:none; flex-direction:row; align-items:center; gap:.6rem}
-  .hero__tag .rule{width:1.1rem}
 }
 @media (max-width:1040px){
   .hero--cover{min-height:auto}
@@ -266,7 +267,21 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
 @media (max-width:900px){
   .quees__split{grid-template-columns:1fr}
   .quees__text{max-width:none}
-  .figure--quees{height:auto; min-height:0; aspect-ratio:4/3; max-height:380px}
+  /* A una columna el muntatge passa a flux i deixa d'anar per aspect-ratio:
+     el Safari d'iOS no li donava alcada (tots els fills hi van absoluts) i
+     la lamina quedava reduida a la franja del passe-partout, amb la cartela
+     tallada. Ara l'alcada la du la caixa interior amb el padding en % i la
+     cartela va davall, en flux normal. */
+  .figure--quees{height:auto; min-height:0; aspect-ratio:auto; max-height:none;
+    padding-bottom:calc(var(--mat-b) * .32)}
+  .figure--quees .plate__in{position:relative; inset:auto;
+    width:100%; height:0; padding-bottom:75%}
+  .figure--quees figcaption{position:static; margin-top:calc(var(--mat-b) * .40)}
+}
+/* en tauleta i movil apaisat la lamina s'estira massa amb el 4:3:
+   la deixam apaisada, com feia abans el max-height */
+@media (min-width:561px) and (max-width:900px){
+  .figure--quees .plate__in{padding-bottom:48%}
 }
 
 .contacte__split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,250px);
