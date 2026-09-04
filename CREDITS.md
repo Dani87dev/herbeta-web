@@ -1,18 +1,17 @@
 # Crèdits de les imatges
 
-Origen i llicència de cada imatge de `assets/img/`.
-Cal deixar-hi el enllaç sempre que se n'afegeixi una de nova.
+Origen i llicència de cada imatge que fa servir el web. Cal afegir-hi una
+fila sempre que n'entri una de nova.
 
 ## Verificades
 
 `bosc-fons.jpg` és un retoc propi de l'original, que es conserva a
-`assets/originals/pexels-kamil-szerlag-1972585-4413488.jpg`.
+`assets/originals/publicades/pexels-kamil-szerlag-1972585-4413488.jpg`.
 
 | Fitxer | Autor | Origen | Llicència |
 |---|---|---|---|
 | `bolets-tronc.jpg` | Tim Heckmann (usuari `lonnyphotography`) | https://www.pexels.com/photo/10836723/ | Pexels |
 | `logo-herbeta.jpg` | Malen Bibiloni Amorós | Pròpia | Pròpia |
-| `alzina-mirant-amunt.jpg` | Malen Bibiloni Amorós | Pròpia | Pròpia |
 | `malena-retrat.jpg` | Malen Bibiloni Amorós | Pròpia | Pròpia |
 | `bosc-fons.jpg` | Kamil Szerlag | https://www.pexels.com/photo/4413488/ | Pexels · edició pròpia |
 | `botiga-postals.jpg` | mlkbnl | https://www.pexels.com/photo/10074697/ | Pexels |
@@ -39,8 +38,17 @@ A `botiga-bossa-tela.jpg` s'hi ha d'estampar un disseny seu.
 Les fulles del contacte, les branquetes del retrat i les aiguades de fons
 es dibuixen amb SVG des del JavaScript de `index.html`. No són fitxers.
 
-## Fotografies sense fer servir
+## Material d'origen
 
-`assets/originals/` guarda material de treball que la web no fa servir.
+`assets/originals/` guarda el material de treball, que el web no carrega,
+ordenat segons què n'hem fet:
+
+| Carpeta | Contingut |
+|---|---|
+| `publicades/` | Els fitxers d'origen de les imatges que surten al web |
+| `descartades/` | Fotografies de Pexels valorades i no triades |
+| `propies/` | Fotografies pròpies que el web no fa servir |
+| `marca/` | Material de marca: proves del logotip |
+
 Les `pexels-*.jpg` porten l'identificador de la foto al nom: es poden
 consultar a `pexels.com/photo/<id>/`.

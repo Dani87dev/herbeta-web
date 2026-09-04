@@ -1,99 +1,78 @@
 # Herbeta del Bosc
 
-Web de **Herbeta del Bosc**, el projecte de na Malen Bibiloni Amorós: banys de
-bosc, educació ambiental i experiències a la natura a Mallorca.
+Web de **Herbeta del Bosc**, un projecte de banys de bosc, educació ambiental i
+experiències a la natura a Mallorca.
 
-És un negoci real i la web ja és en línia:
+**En producció: [herbetadelbosc.com](https://herbetadelbosc.com)**
 
-- **https://herbetadelbosc.com** (i `www.herbetadelbosc.com`)
+## El projecte
 
-## Desplegament
+Herbeta del Bosc acompanya particulars, escoles i entitats en experiències de
+connexió amb l'entorn natural. La web presenta les experiències i l'agenda,
+desplega una proposta específica per a centres educatius i obre un canal de
+contacte directe.
 
-GitHub Pages, servint la branca `main` des de l'arrel. El domini propi surt
-del fitxer `CNAME`, que ha de contenir el domini i prou — si es perd, Pages
-torna a `dani87dev.github.io/herbeta-web` i el domini deixa de resoldre.
+És un encàrrec per a un negoci real, en funcionament i amb domini propi.
 
-**Cada push a `main` publica.** No hi ha entorn de proves ni pas de
-construcció: el que es puja és el que es veu.
+## Plantejament
 
-## Com treballar-hi en local
+Un negoci petit necessita una web que duri anys sense manteniment, que carregui
+de pressa amb la cobertura justa i que no depengui de serveis que puguin
+desaparèixer. D'aquí surten les decisions tècniques:
 
-Obrir `index.html` al navegador ja basta per a la major part de la feina.
-Per servir-lo com al domini real:
+- **Sense dependències ni procés de construcció.** HTML, CSS i JavaScript
+  escrits a mà. No hi ha empaquetador, ni `node_modules`, ni res que caduqui:
+  el repositori és, literalment, el que es publica.
+- **Una sola càrrega externa**, les tipografies de Google Fonts.
+- **Il·lustracions dibuixades amb codi.** Les fulles, les branquetes del retrat
+  i les aiguades de fons són SVG generats en JavaScript. No són fitxers: no
+  pesen, escalen a qualsevol pantalla i segueixen el traç dels materials de la
+  marca.
+- **Contingut separat del marcatge.** Les targetes de públics i de botiga es
+  generen a partir d'objectes de dades, de manera que actualitzar l'oferta no
+  obliga a tocar HTML.
+- **Dues pàgines en un sol document**, que s'alternen al navegador sense
+  recarregar.
 
-```bash
-python3 -m http.server 8000
-# després: http://localhost:8000
-```
+## Sistema visual
 
-Lloc estàtic d'un sol fitxer: HTML, CSS i JavaScript sense dependències ni
-procés de construcció. L'única càrrega externa són les tipografies de Google
-Fonts (Newsreader, Karla i Courier Prime).
+La paleta surt dels materials de la marca —teal, arena, topo i terra sobre un
+fons de paper— i tot el lloc es construeix sobre la metàfora d'un plec
+d'herbari: retolació en versaleta, filets fins i fitxes d'espècimen.
 
-## Estructura
+Tres tipografies amb feines separades: **Newsreader** per als titulars,
+**Karla** per al text i **Courier Prime** per a les etiquetes i les dades.
 
-```
-index.html            la web
-index2.html           primera versió, conservada per comparar
-CNAME                 domini propi de GitHub Pages
-CREDITS.md            origen i llicència de cada imatge
-PENDENT.md            feina oberta i coses per demanar a na Malena
-assets/
-  img/                imatges que fa servir la web
-  originals/          fotografies d'origen i material sense fer servir
-```
+## Accessibilitat
 
-## Com funciona per dins
+- Totes les animacions respecten `prefers-reduced-motion`.
+- Enllaç per saltar al contingut, focus visible i elements decoratius marcats
+  com a `aria-hidden`.
+- El titular de la portada és text real sobre la fotografia, no una imatge:
+  s'indexa, se selecciona i el llegeix un lector de pantalla.
 
-Tot és dins `index.html`. El JavaScript del final del fitxer s'encarrega de:
+## Animació d'entrada
 
-- **Dues pàgines en un sol document.** `data-page="home"` i
-  `data-page="escoles"` s'alternen sense recarregar. No hi ha rutes ni
-  ancoratges d'entrada: sempre s'arriba a la portada.
-- **Contingut generat.** Les targetes de públics i de botiga surten dels
-  objectes `PUB` i `PROD`; per canviar-les, es toquen aquests objectes i no
-  el marcatge.
-- **Il·lustracions dibuixades.** Les fulles del contacte, les branquetes del
-  retrat i les aiguades de fons són SVG generats des del mateix script. No
-  són fitxers d'imatge.
-- **Aparició per scroll.** Els elements amb classe `rv` entren amb un
-  `IntersectionObserver`.
+Un vel d'obertura amb el logotip i una salutació, que apareix un cop per sessió,
+dura uns dos segons i es pot saltar amb un clic, amb l'scroll o amb `Esc`.
 
-### Animació d'entrada
-
-Hi ha un vel d'entrada amb el logo i «Benvinguda / Benvingut», dins dos blocs
-marcats amb `── INICI INTRO ──` / `── FI INTRO ──`: un a la fulla d'estils i
-un altre a dalt del `<body>`.
-
-**Ara està apagat** (`var INTRO_ACTIVA = false`), pendent de refer-lo amb el
-logo en alta resolució, perquè a la mida de l'intro el fitxer actual s'escala
-massa. Per encendre'l, `true` i prou.
-
-Dues coses a recordar si s'hi torna: el logo es fon amb el paper gràcies a
-`mix-blend-mode: multiply`, que funciona perquè el JPG té fons blanc (amb un
-PNG amb transparència s'ha de llevar); i `.intro__in` no pot dur `position`,
-`z-index`, `opacity` ni `transform`, perquè faria capa pròpia i trencaria
-aquesta fusió.
+Ara mateix està **desactivada** darrere d'un indicador (`INTRO_ACTIVA`), a
+l'espera del logotip en alta resolució. Està escrita perquè activar-la o
+retirar-la no pugui afectar la resta del lloc: viu en dos blocs delimitats, no
+amaga res de la pàgina en repòs i el vel du una sortida de seguretat en CSS que
+la retira encara que el JavaScript no arribi a executar-se mai.
 
 ## Imatges
 
-Totes les fotografies són **de na Malena o de Pexels**. `CREDITS.md` en duu
-l'autoria i l'enllaç una per una, i s'hi ha d'afegir una fila cada vegada que
-n'entri una de nova.
+Fotografies pròpies del projecte i material de Pexels. `CREDITS.md` en recull
+l'autoria, l'origen i la llicència, fitxer per fitxer.
 
-Queda un serrell obert, detallat a `PENDENT.md`: les imatges de la botiga
-tenen llicència però mostren productes que no són els seus, així que s'han de
-substituir per fotografies dels reals.
+## Repositori
 
-## Avisos de web en construcció
-
-La web es declara en construcció en dos llocs, i tots dos s'han de llevar el
-dia que es doni per oberta:
-
-- La franja de dalt de tot (`.mocknote`), «Web en construcció · alguns preus
-  o dates poden no estar actualitzats».
-- El peu, «Web en construcció · 2026».
-
-A més, els formularis encara no envien res: responen amb un missatge que
-demana escriure a `herbetadelbosc@gmail.com`. Connectar-los és l'altra feina
-pendent abans d'obrir-la.
+```
+index.html          el lloc
+CNAME               domini
+CREDITS.md          autoria i llicència de les imatges
+assets/img/         imatges que carrega el web
+assets/originals/   material d'origen, ordenat per ús
+```
