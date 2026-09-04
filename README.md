@@ -85,10 +85,15 @@ Queda un serrell obert, detallat a `PENDENT.md`: les imatges de la botiga
 tenen llicència però mostren productes que no són els seus, així que s'han de
 substituir per fotografies dels reals.
 
-## Avís de maqueta
+## Avisos de web en construcció
 
-La web encara mostra la franja «Web en construcció · alguns preus o dates
-poden no estar actualitzats» i els formularis no envien res: només responen
-amb un missatge.
-Abans de donar-la per oberta al públic s'ha de llevar la franja i connectar
-els formularis a `herbetadelbosc@gmail.com`.
+La web es declara en construcció en dos llocs, i tots dos s'han de llevar el
+dia que es doni per oberta:
+
+- La franja de dalt de tot (`.mocknote`), «Web en construcció · alguns preus
+  o dates poden no estar actualitzats».
+- El peu, «Web en construcció · 2026».
+
+A més, els formularis encara no envien res: responen amb un missatge que
+demana escriure a `herbetadelbosc@gmail.com`. Connectar-los és l'altra feina
+pendent abans d'obrir-la.
