@@ -87,7 +87,8 @@ substituir per fotografies dels reals.
 
 ## Avís de maqueta
 
-La web encara mostra la franja «Maqueta de treball · continguts i preus
-d'exemple» i els formularis no envien res: només responen amb un missatge.
+La web encara mostra la franja «Web en construcció · alguns preus o dates
+poden no estar actualitzats» i els formularis no envien res: només responen
+amb un missatge.
 Abans de donar-la per oberta al públic s'ha de llevar la franja i connectar
 els formularis a `herbetadelbosc@gmail.com`.

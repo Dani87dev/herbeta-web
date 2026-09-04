@@ -20,8 +20,8 @@
 
 La web ja es al domini, pero encara du posat que es una maqueta:
 
-- [ ] Llevar la franja «Maqueta de treball · continguts i preus d'exemple»
-      de dalt de tot (`.mocknote`, a `index.html`).
+- [ ] Llevar la franja «Web en construccio · alguns preus o dates poden no
+      estar actualitzats» de dalt de tot (`.mocknote`, a `index.html`).
 - [ ] Els formularis no envien res: nomes responen amb un missatge. Cal
       connectar-los a herbetadelbosc@gmail.com.
 - [ ] Repassar els preus i els continguts d'exemple.
