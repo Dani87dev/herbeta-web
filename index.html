@@ -657,9 +657,207 @@ footer{background:var(--teal-deep); color:#C8D3D2; padding-block:clamp(3rem,6vw,
 .skip{position:absolute; left:-9999px}
 .skip:focus{left:1rem; top:1rem; z-index:99; background:var(--teal); color:#fff; padding:.6rem 1rem}
 
+/* ══════════════════════════════════════════════════════════════
+   ── INICI BLOC INTRO ──  animacio d'entrada (logo + benvinguda)
+   Tot el bloc es autonom. Per llevar-ho: aquest bloc, el <div
+   class="intro"> de dalt del body i el seu script. Per apagar-ho
+   sense llevar res: INTRO_ACTIVA = false dins aquell script.
+   Res del web queda amagat per defecte: si el JS falla o es lleva
+   nomes mig bloc, la pagina es veu igualment.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --intro-speed:1;      /* multiplica tots els temps de l'intro */
+  --intro-logo-k:1.55;  /* mida del logo dins el vel */
+}
+@media (max-width:900px){ :root{--intro-logo-k:1.15} }
+@media (max-width:560px){ :root{--intro-logo-k:.86} }
+
+.intro{
+  position:fixed; inset:0; z-index:100;
+  display:grid; place-items:center;
+  background:var(--paper);
+  /* isolation + z-index negatiu a les pseudo: el gra i el halo pinten
+     damunt el fons del vel pero SOTA el contingut, i aixi el multiply
+     del logo troba el paper com a fons real. Si .intro__in fes capa
+     propia (position+z-index, opacity o transform) el blanc del JPG
+     del logo es veuria tal qual: no li'n poseu. */
+  isolation:isolate;
+  /* xarxa de seguretat: si el JS no arriba a treure el vel, se'n va tot sol */
+  animation:intro-failsafe 6s linear forwards;
+}
+.intro::before{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.55;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+}
+.intro::after{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:radial-gradient(58% 46% at 50% 46%, rgba(196,213,212,.42), rgba(245,242,234,0) 70%);
+}
+@keyframes intro-failsafe{ 0%,92%{opacity:1} 100%{opacity:0; visibility:hidden} }
+
+.intro__in{
+  display:flex; flex-direction:column; align-items:center;
+  gap:clamp(1.1rem,2.6vw,1.7rem);
+  padding-inline:var(--gut); text-align:center;
+}
+.intro__logo{--k:var(--intro-logo-k); mix-blend-mode:multiply}
+/* el filet i la paraula: ─── BENVINGUDA / BENVINGUT ─── */
+.intro__welcome{display:flex; align-items:center; justify-content:center;
+  gap:clamp(.7rem,2vw,1.1rem); margin-top:clamp(.2rem,.8vw,.5rem)}
+.intro__rule{display:block; height:1px; width:clamp(1.6rem,5vw,3.8rem);
+  background:var(--teal); opacity:.42; transform:scaleX(0)}
+.intro__rule--l{transform-origin:right center}
+.intro__rule--r{transform-origin:left center}
+.intro__welcome .label{font-size:clamp(.63rem,1.5vw,.78rem); letter-spacing:.22em;
+  color:var(--teal); white-space:nowrap}
+
+.intro__skip{
+  position:absolute; z-index:3; right:clamp(1rem,3vw,2rem); bottom:clamp(1rem,3vw,2rem);
+  background:none; border:1px solid var(--rule); border-radius:2px; cursor:pointer;
+  font-family:var(--f-label); font-size:.66rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink-3); padding:.5rem .8rem; opacity:0;
+  transition:color .2s, border-color .2s;
+  animation:intro-rise calc(.5s*var(--intro-speed)) ease calc(.7s*var(--intro-speed)) both;
+}
+.intro__skip:hover{color:var(--terra); border-color:var(--terra)}
+
+/* estat de partida: nomes dins el vel, mai al web */
+.intro__logo, .intro__welcome .label{opacity:0}
+.intro__logo{transform:translateY(10px) scale(.955)}
+.intro__welcome .label{transform:translateY(8px)}
+
+/* els temps, encavalcats: logo → titol → filet + benvinguda */
+.intro.is-playing{animation:none}
+.intro.is-playing .intro__logo{
+  animation:intro-rise calc(.62s*var(--intro-speed)) cubic-bezier(.22,.75,.3,1) calc(.10s*var(--intro-speed)) both}
+.intro.is-playing .intro__rule{
+  animation:intro-draw calc(.55s*var(--intro-speed)) cubic-bezier(.22,.75,.3,1) calc(.46s*var(--intro-speed)) both}
+.intro.is-playing .intro__welcome .label{
+  animation:intro-rise calc(.55s*var(--intro-speed)) cubic-bezier(.22,.75,.3,1) calc(.54s*var(--intro-speed)) both}
+@keyframes intro-rise{ from{opacity:0} to{opacity:1; transform:none} }
+@keyframes intro-draw{ from{transform:scaleX(0)} to{transform:scaleX(1)} }
+
+/* sortida: el vel puja un pel i s'esvaeix. L'animacio va damunt .intro
+   i no damunt .intro__in, que aixi no fa capa i el logo conserva el blend. */
+.intro.is-leaving{
+  animation:intro-veil-out calc(.56s*var(--intro-speed)) cubic-bezier(.4,0,.25,1) both;
+  pointer-events:none}
+@keyframes intro-veil-out{ from{opacity:1} to{opacity:0; transform:translateY(-1.6%)} }
+.intro[hidden]{display:none}
+
+/* el web apareix darrere el vel. Nomes mentre hi ha la classe:
+   en repos res no du opacitat, per aixo llevar l'intro no pot deixar
+   la pagina en blanc. */
+html.intro-surt body > *:not(.intro){animation:intro-page-in .72s cubic-bezier(.22,.75,.3,1) both}
+html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,.75,.3,1) both}
+@keyframes intro-page-in{ from{opacity:0} to{opacity:1} }
+@keyframes intro-hero-settle{ from{transform:scale(1.045)} to{transform:none} }
+
+@media (prefers-reduced-motion:reduce){
+  .intro.is-playing .intro__logo,
+  .intro.is-playing .intro__rule,
+  .intro.is-playing .intro__welcome .label,
+  .intro__skip{animation:none; opacity:1; transform:none}
+  .intro.is-leaving{animation:intro-veil-out .2s linear both}
+  html.intro-surt body > *:not(.intro),
+  html.intro-surt .hero__bg img{animation:none}
+}
+/* ── FI BLOC INTRO ── */
 </style>
 </head>
 <body>
+
+<!-- ══ INICI INTRO ══ animacio d'entrada. Per apagar-la sense llevar res:
+     INTRO_ACTIVA = false, aqui baix. Per llevar-la del tot: aquest bloc
+     sencer (fins a "FI INTRO") i el bloc INTRO de la fulla d'estils. ══ -->
+<div class="intro" id="intro" role="presentation" aria-hidden="true">
+  <div class="intro__in">
+    <span class="logo intro__logo" role="img" aria-label="Herbeta del Bosc"></span>
+    <p class="intro__welcome">
+      <span class="intro__rule intro__rule--l" aria-hidden="true"></span>
+      <span class="label">Benvinguda / Benvingut</span>
+      <span class="intro__rule intro__rule--r" aria-hidden="true"></span>
+    </p>
+  </div>
+  <button class="intro__skip" id="introSkip" type="button">Saltar</button>
+</div>
+<noscript><style>.intro{display:none}</style></noscript>
+<script>
+(function(){
+  "use strict";
+
+  /* ── L'INTERRUPTOR ──────────────────────────────────────────
+     false = l'animacio no surt mai, sense haver de llevar res.
+     Ara esta apagada a proposit: queda pendent refer-la quan hi
+     hagi el logo en alta resolucio. Per encendre-la: true. */
+  var INTRO_ACTIVA = false;
+
+  var SESSION_KEY = "herbeta:intro-vist";
+  var HOLD_MS  = 1500;   /* pausa amb tot ja escrit, abans de treure el vel */
+  var LEAVE_MS = 560;    /* durada de la sortida del vel */
+
+  var intro = document.getElementById("intro");
+  if(!intro) return;
+
+  function amaga(){ intro.hidden = true; }
+
+  var vist = false;
+  try{ vist = sessionStorage.getItem(SESSION_KEY) === "1"; }catch(e){}
+  if(!INTRO_ACTIVA || vist){ amaga(); return; }
+
+  var arrel = document.documentElement;
+  var sortint = false, tempsPausa = null;
+
+  function velocitat(){
+    var v = parseFloat(getComputedStyle(arrel).getPropertyValue("--intro-speed"));
+    return v > 0 ? v : 1;
+  }
+
+  function surt(){
+    if(sortint) return;
+    sortint = true;
+    clearTimeout(tempsPausa);
+    intro.classList.remove("is-playing");
+    intro.classList.add("is-leaving");
+    arrel.classList.add("intro-surt");
+    arrel.style.overflow = "";
+    try{ sessionStorage.setItem(SESSION_KEY,"1"); }catch(e){}
+    setTimeout(function(){
+      amaga();
+      arrel.classList.remove("intro-surt");
+    }, LEAVE_MS*velocitat() + 400);
+    window.removeEventListener("keydown", tecla);
+  }
+  function tecla(e){
+    if(e.key === "Escape" || e.key === "Enter" || e.key === " ") surt();
+  }
+
+  function juga(){
+    arrel.style.overflow = "hidden";
+    if(window.scrollY) window.scrollTo(0,0);
+    intro.classList.add("is-playing");
+    window.addEventListener("wheel", surt, {passive:true, once:true});
+    window.addEventListener("touchmove", surt, {passive:true, once:true});
+    window.addEventListener("keydown", tecla);
+    tempsPausa = setTimeout(surt, HOLD_MS*velocitat());
+  }
+
+  document.getElementById("introSkip").addEventListener("click", surt);
+  intro.addEventListener("click", surt);
+
+  /* esperam les tipografies perque el titol no salti a mitja animacio;
+     si es fan pregar mes de 700 ms, tiram endavant igualment */
+  if(document.fonts && document.fonts.ready){
+    var fet = false;
+    var ara = function(){ if(!fet){ fet = true; juga(); } };
+    document.fonts.ready.then(ara)["catch"](ara);
+    setTimeout(ara, 700);
+  } else {
+    juga();
+  }
+})();
+</script>
+<!-- ══ FI INTRO ══ -->
 <a class="skip" href="#main">Vés al contingut</a>
 
 <div class="mocknote">Maqueta de treball · <b>Herbeta del Bosc</b> · continguts i preus d'exemple</div>
