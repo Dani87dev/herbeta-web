@@ -22,14 +22,11 @@ Cal deixar-hi el enllaç sempre que se n'afegeixi una de nova.
 | `botiga-quadern.jpg` | cottonbro | https://www.pexels.com/photo/6033798/ | Pexels |
 | `public-escoles.jpg` | cottonbro | https://www.pexels.com/photo/9302787/ | Pexels |
 | `public-agroturisme.jpg` | Songul Cavdar | https://www.pexels.com/photo/34439990/ | Pexels |
+| `hero-portada.jpg` | Malen Bibiloni Amorós | Pròpia | Pròpia |
+| `tresors-natura.jpg` | Malen Bibiloni Amorós | Pròpia | Pròpia |
+| `public-particulars.jpg` | Malen Bibiloni Amorós | Pròpia | Pròpia |
 
-## Pendents de verificar
-
-| Fitxer | Autor | Origen | Llicència |
-|---|---|---|---|
-| `hero-portada.jpg` | — | Del PDF «Què és un bany de bosc?» de na Malena. Cal preguntar-li d'on la va treure. | ? |
-| `tresors-natura.jpg` | — | Del PDF «Programa educatiu 2026-27» de na Malena. Cal preguntar-li d'on la va treure. | ? |
-| `public-particulars.jpg` | — | D'un PDF de na Malena. Cal preguntar-li d'on la va treure. | ? |
+Les tres darreres venien de PDF seus i na Malena ha confirmat que són seves.
 
 ## Provisionals
 
