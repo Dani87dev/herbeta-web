@@ -324,6 +324,22 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
 .card h3{font-size:var(--fs-h3)}
 .card p{color:var(--ink-2); font-size:var(--fs-sm)}
 
+/* ── benestar ── */
+.benestar__cards .card{border-top:2px solid var(--teal)}
+.benestar__cards .card + .card{border-top-color:var(--terra)}
+.benestar__notes{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.6rem; max-width:68ch}
+.benestar__notes li{display:flex; gap:.7rem; align-items:baseline; font-size:var(--fs-sm); color:var(--ink-2)}
+.benestar__notes li::before{content:""; width:5px; height:5px; border-radius:50%; background:var(--terra); flex:none; transform:translateY(-2px)}
+.benestar__notes strong{color:var(--ink); font-weight:600}
+.benestar .btn{align-self:flex-start}
+/* pagina de benestar */
+.objectius{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+.objectius .card{border-top:2px solid var(--teal)}
+.objectius .card:nth-child(even){border-top-color:var(--terra)}
+.creds strong{color:var(--ink); font-weight:600}
+.testimonis{align-items:start}
+.testimonis .quote{margin:0; font-size:clamp(1.15rem,1.8vw,1.4rem)}
+
 /* ── beneficis: una sola peca amb quatre compartiments ── */
 .benefits{display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
   background:var(--field); border:1px solid var(--rule-soft); border-radius:2px; overflow:hidden}
@@ -434,6 +450,16 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
   .legend__fig svg{width:44px; height:56px}
   .legend__txt{grid-column:2}
 }
+/* fitxa solta sota la taula: mateixa lamina, sense dibuix */
+.refugi{display:grid; grid-template-columns:minmax(0,12rem) minmax(0,1fr);
+  gap:clamp(1rem,2.4vw,2.2rem); padding-top:1rem}
+.refugi .legend__name{font-size:1.4rem}
+.refugi__body{display:flex; flex-direction:column; gap:.9rem}
+.refugi__body .legend__txt{font-size:var(--fs-body)}
+.refugi__when{font-family:var(--f-label); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--brass)}
+.refugi__when a{color:#F4EFE1; text-decoration-color:var(--brass-soft); text-underline-offset:.25em}
+.refugi__when a:hover{text-decoration-color:var(--brass)}
+@media (max-width:760px){ .refugi{grid-template-columns:1fr; gap:.6rem} }
 
 /* ── seccio amb el bosc al darrere ──────────────────────────────
    El vel es un degradat que va de mig transparent a dalt (el dosel
@@ -891,6 +917,7 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
     <nav class="nav" id="nav">
       <a href="#home" data-nav="home">Inici</a>
       <a href="#experiencies" data-nav="home#experiencies">Experiències</a>
+      <a href="#benestar" data-nav="benestar">Benestar</a>
       <a href="#agenda" data-nav="home#agenda">Agenda</a>
       <a href="#escoles" data-nav="escoles">Escoles i entitats</a>
       <a href="#botiga" data-nav="home#botiga">Botiga</a>
@@ -971,6 +998,47 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
           <p class="board__tab"><span>Taula I</span><span class="board__rule"></span><span>Modalitats de bany de bosc</span></p>
           <div class="legend" id="mods"></div>
         </div>
+        <div class="board rv">
+          <p class="board__tab"><span>Taula II</span><span class="board__rule"></span><span>Experiència de nit</span></p>
+          <div class="refugi">
+            <h3 class="legend__name">Nit i Alba al Refugi</h3>
+            <div class="refugi__body">
+              <p class="legend__txt">Una experiència de nit i matinada al refugi, que combina bany de bosc, propostes creatives i educació ambiental en petit grup. Passejada etnobotànica, sopar i nit al refugi, i bany de bosc a l'alba.</p>
+              <p class="refugi__when">Properes dates: <a href="#agenda" data-nav="home#agenda">consulta l'agenda</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="benestar" id="benestar">
+    <div class="wrap sheet">
+      <div class="sheet__margin">
+        <p class="label">Benestar</p>
+        <div class="rule"></div>
+      </div>
+      <div class="stack" style="gap:2rem">
+        <div>
+          <h2 class="h2">Naturalesa que acompanya, natura que cura</h2>
+          <p class="lead">Un espai per a qui necessita anar a la natura amb un acompanyament més proper: ja sigui per iniciativa pròpia, o perquè un professional de la salut ho recomana.</p>
+        </div>
+        <div class="grid grid--2 benestar__cards rv">
+          <article class="card">
+            <h3>Teràpia de bosc</h3>
+            <p>Programes dissenyats de forma conjunta amb professionals de la salut o entitats socials. El bany de bosc com a eina de prevenció de salut i com a intervenció complementària a processos de cura, que promou alhora la connexió profunda amb la natura.</p>
+          </article>
+          <article class="card">
+            <h3>Plans de benestar personalitzats</h3>
+            <p>Un acompanyament dissenyat segons cada persona, ja sigui a partir d'una derivació professional o per iniciativa pròpia. El bany de bosc com a eina principal, complementat amb altres propostes de connexió.</p>
+          </article>
+        </div>
+        <ul class="benestar__notes">
+          <li><span>Un exemple d'aquest acompanyament és el <strong>Cercle de Dones</strong>, programa mensual en col·laboració amb una psicòloga.</span></li>
+          <li><span>Vols convertir la connexió amb la natura en un hàbit? Els <strong>Sospirs de Bosc</strong> són petites immersions setmanals entre setmana per mantenir-lo viu.</span></li>
+        </ul>
+        <!-- Pendent: barra de dades i imatge de la secció -->
+        <a class="btn" href="#benestar" data-nav="benestar">Veure els programes de benestar <span class="btn__arrow">→</span></a>
       </div>
     </div>
   </section>
@@ -1038,17 +1106,18 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
           <div class="prose">
             <p><span class="i">Herbeta del Bosc</span> neix del meu camí vital, com una manera d'honrar la bellesa del món natural i compartir espais de connexió i escolta profunda amb les persones i la natura.</p>
             <p>Durant nou anys he estat educadora ambiental al MUCBO | Jardí Botànic de Sóller, on he acompanyat milers d'infants i joves a descobrir el món vegetal i a estimar la natura des de la vivència.</p>
+            <p>Des del 2022, a través d'Herbeta del Bosc, he facilitat més d'un centenar de banys de bosc i experiències de benestar, acompanyant col·lectius diversos, incloent persones amb VIH, salut mental i famílies cuidadores, així com professionals de la salut i dels serveis socials.</p>
           </div>
           <ul class="creds">
             <li>Biòloga</li>
             <li>Educadora ambiental</li>
-            <li>Guia certificada de banys de bosc i teràpia de bosc</li>
+            <li>Guia certificada de banys de bosc i professional de teràpia de bosc (FTHub)</li>
             <li>Il·lustradora botànica</li>
           </ul>
           <div class="stack" style="gap:.8rem; margin-top:.8rem">
             <p class="label">Han confiat en el projecte</p>
             <div class="clients">
-              <span>MUCBO · Jardí Botànic de Sóller</span><span>ABBIB</span><span>IMAS</span><span>Erasmus+</span><span>Ajuntament de Sencelles</span><span>Fundació Es Garrover</span><span>Siloé</span><span>Banc de Temps de Sencelles</span>
+              <span>MUCBO · Jardí Botànic de Sóller</span><span>ABBIB</span><span>IMAS</span><span>IB-Salut</span><span>Fundació Sa Nostra</span><span>Erasmus+</span><span>Ajuntament de Sencelles</span><span>Fundació Es Garrover</span><span>Siloé</span><span>Banc de Temps de Sencelles</span>
             </div>
           </div>
         </div>
@@ -1093,6 +1162,7 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
             <select id="c-tipus" name="tipus">
               <option>Plaça a una activitat de l'agenda</option>
               <option>Bany de bosc a mida (grup, família, celebració)</option>
+              <option>Pla de benestar (entitat o individual)</option>
               <option>Activitat per a escola o entitat</option>
               <option>Empresa o agroturisme</option>
               <option>Materials didàctics o il·lustració</option>
@@ -1257,16 +1327,15 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
         </div>
         <div class="tablewrap">
           <table>
-            <thead><tr><th>Format</th><th>Durada</th><th>Preu orientatiu</th></tr></thead>
+            <thead><tr><th>Format</th><th>Durada orientativa</th></tr></thead>
             <tbody>
-              <tr><td>Activitats de taller</td><td>1h – 1h 30</td><td>120 – 200 €</td></tr>
-              <tr><td>Banys de bosc i activitats amb sortida</td><td>1h 30 – 2h</td><td>150 – 280 €</td></tr>
-              <tr><td>Sessions per a equips docents</td><td>2h – 3h</td><td>250 – 350 €</td></tr>
-              <tr><td>Cicle trimestral (3 sessions)</td><td>a convenir</td><td>amb descompte</td></tr>
+              <tr><td>Activitats de taller</td><td>1h – 1h 30</td></tr>
+              <tr><td>Banys de bosc i activitats amb sortida</td><td>1h 30 – 2h</td></tr>
+              <tr><td>Sessions per a equips docents</td><td>2h – 3h</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="formnote">Els banys de bosc escolars comencen a partir de 150 € per grup de fins a 25 alumnes. El preu final depèn del format, la durada, els materials inclosos i el desplaçament.</p>
+        <p class="formnote">Les activitats tenen un cost que va des dels 120 € fins als 350 € per sessió, segons el format, la durada i els materials inclosos. Els banys de bosc escolars comencen a partir de 150 € per grup de fins a 25 alumnes.</p>
       </div>
     </div>
   </section>
@@ -1321,9 +1390,226 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
           <div class="f f--full"><label for="e-msg">Context del centre</label><textarea id="e-msg" placeholder="Espais verds disponibles, possibilitat de sortida, objectius pedagògics…"></textarea></div>
           <div class="f--full" style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center">
             <button class="btn" type="submit">Enviar la sol·licitud <span class="btn__arrow">→</span></button>
-            <p class="formnote">O descarrega el dossier complet del programa 2026-27 en PDF.</p>
           </div>
         </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════ BENESTAR ══════════════════════ -->
+<div class="page" data-page="benestar" hidden>
+
+  <section class="hero" style="padding-block:clamp(3rem,6vw,5rem) clamp(3rem,6vw,5rem)">
+    <div class="wrap hero__grid">
+      <div class="sheet__margin">
+        <p class="label">Programes</p>
+        <div class="rule"></div>
+        <p class="label">Teràpia de bosc</p>
+      </div>
+      <div>
+        <p class="label label--accent">Banys de bosc i teràpia de bosc</p>
+        <h1 style="font-size:clamp(2.3rem,5.2vw,4rem); max-width:18ch">Programes de benestar a la natura</h1>
+        <p class="lead hero__lead">Una intervenció estructurada, basada en l'evidència i adaptable a cada col·lectiu, que integra la pràctica del bany de bosc com a eina de promoció de la salut i el benestar.</p>
+        <div class="hero__cta">
+          <a class="btn" href="#contacte" data-nav="home#contacte">Contacta'ns <span class="btn__arrow">→</span></a>
+          <a class="btn btn--ghost" href="#b-formats" data-nav="benestar#b-formats">Formats del programa</a>
+        </div>
+        <div class="hero__meta">
+          <div><span class="label">Durada</span><strong>1,5 – 2 hores</strong></div>
+          <div><span class="label">Freqüència</span><strong>Setmanal</strong></div>
+          <div><span class="label">Participants</span><strong>Grups reduïts</strong></div>
+        </div>
+      </div>
+      <figure class="hero__figure photo rv" style="aspect-ratio:3/4"><img src="assets/img/public-particulars.jpg" loading="lazy" decoding="async" alt="Un grup de persones amb motxilla, en rotllana en un camí de terra, escoltant na Malena sota uns arbres" style="object-position:48% center"></figure>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap sheet">
+      <div class="sheet__margin">
+        <p class="label">La natura</p>
+        <div class="rule"></div>
+      </div>
+      <div class="grid grid--2" style="align-items:start">
+        <h2 class="h2">La natura, una eina de salut i benestar</h2>
+        <div class="prose">
+          <p>Vivim en un context marcat per l'estrès crònic, la fatiga mental i la dificultat per gestionar les emocions. L'acceleració del ritme de vida, la sobreestimulació digital i la pèrdua de contacte amb els entorns naturals tenen un impacte directe sobre la salut física, mental i social de les persones.</p>
+          <p>Les evidències científiques són clares: el contacte regular amb la natura redueix el cortisol, millora l'estat d'ànim, enforteix el sistema immunitari i afavoreix la recuperació de la fatiga mental. No és una tendència, és fisiologia.</p>
+          <p>Una proposta complementària, accessible i transformadora, per a les entitats que acompanyen persones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="b-terapia">
+    <div class="wrap sheet">
+      <div class="sheet__margin">
+        <p class="label">Teràpia de bosc</p>
+        <div class="rule"></div>
+      </div>
+      <div class="grid grid--2" style="align-items:start">
+        <div class="stack" style="gap:1.2rem">
+          <h2 class="h2">Teràpia de bosc</h2>
+          <div class="prose">
+            <p>La Teràpia de Bosc és una intervenció basada en la natura que té en compte les necessitats de les persones i el seu entorn físic i social. Parteix de la idea que la salut és el resultat de l'adaptació de l'ésser humà al seu entorn. Es fonamenta en un enfocament multidisciplinari que integra àmbits com la psicologia, la sociologia o l'ecologia, i pot complementar els tractaments mèdics i els processos de rehabilitació.</p>
+            <p>A través del contacte conscient amb la natura, la teràpia de bosc genera beneficis en diferents àmbits de la salut i el benestar.</p>
+          </div>
+        </div>
+        <div class="card">
+          <p class="label">Nivells d'intervenció</p>
+          <p>La teràpia de bosc s'inscriu dins les estratègies de promoció de la salut, aplicant-se en diferents nivells d'intervenció, tant en l'àmbit preventiu com terapèutic i de rehabilitació, adaptant-se a cada col·lectiu.</p>
+          <p>Els programes de teràpia de bosc ofereixen una intervenció complementària, accessible i adaptable que pot integrar-se en els serveis socials i de salut, contribuint al benestar de les persones i reforçant els processos d'acompanyament ja existents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--paper-2)" id="b-objectius">
+    <div class="wrap sheet">
+      <div class="sheet__margin">
+        <p class="label">Objectius</p>
+        <div class="rule"></div>
+      </div>
+      <div class="stack" style="gap:2rem">
+        <div>
+          <h2 class="h2">Què aporten aquests programes?</h2>
+          <p class="lead">Objectius que es poden treballar.</p>
+        </div>
+        <div class="grid grid--2 objectius" id="b-obj"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="b-sessions">
+    <div class="wrap sheet">
+      <div class="sheet__margin">
+        <p class="label">Sessions</p>
+        <div class="rule"></div>
+      </div>
+      <div class="grid grid--2" style="align-items:start">
+        <div class="stack" style="gap:1.2rem">
+          <h2 class="h2">Com es desenvolupen les sessions</h2>
+          <div class="prose">
+            <p>El programa consta d'un nombre determinat de sessions en entorns naturals, distribuïdes al llarg de diverses setmanes. Les sessions es basen en la pràctica del bany de bosc.</p>
+            <p>Cada trobada consisteix en un passeig lent, amb un recorregut accessible (aproximadament 500 - 1500 m), durant el qual es fan diverses aturades, que es poden realitzar dempeus o asseguts.</p>
+            <p>Al llarg del recorregut es proposen activitats individuals i grupals orientades a afavorir la connexió amb l'entorn a través dels sentits. Aquestes propostes són voluntàries i adaptables a les necessitats de cada participant.</p>
+            <p>Al final de cada sessió s'ofereix un espai de compartició en grup, on les persones participants poden expressar la seva experiència mitjançant paraules, silencis o altres formes d'expressió.</p>
+            <p>Entre sessions, es proposen senzilles pràctiques per realitzar a casa, amb l'objectiu de reforçar la connexió amb la natura. Aquestes es recullen en un diari personal guiat.</p>
+            <p>Durant el programa, es duran a terme avaluacions que es realitzen de forma anònima. L'avaluació s'adapta als objectius del programa i pot incloure indicadors de benestar percebut, observació qualitativa i retorn conjunt amb l'equip professional.</p>
+          </div>
+        </div>
+        <div class="card">
+          <p class="label">Característiques generals de les sessions</p>
+          <ul class="creds">
+            <li><span><strong>Durada habitual:</strong> entre 1,5 i 2 hores</span></li>
+            <li><span><strong>Freqüència:</strong> setmanal (adaptable)</span></li>
+            <li><span><strong>Nombre de participants:</strong> grups reduïts (variable segons col·lectiu i objectius)</span></li>
+            <li><span><strong>Espais:</strong> entorns naturals accessibles i adequats al grup</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="b-formats">
+    <div class="wrap sheet">
+      <div class="sheet__margin">
+        <p class="label">Formats</p>
+        <div class="rule"></div>
+      </div>
+      <div class="stack" style="gap:2rem">
+        <div>
+          <h2 class="h2">Formats del programa</h2>
+          <p class="lead">Els programes poden ajustar-se segons les necessitats del grup. Inclouen una sessió prèvia de trobada inicial, destinada a presentar el funcionament del programa, resoldre dubtes i començar a generar un espai de confiança entre les persones participants.</p>
+        </div>
+        <div class="grid grid--3" id="b-formats-list"></div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Format</th><th>Preu orientatiu*</th></tr></thead>
+            <tbody>
+              <tr><td>Sessió puntual</td><td>200-300€</td></tr>
+              <tr><td>Programa 6 setmanes</td><td>1.000-1.500€</td></tr>
+              <tr><td>Programa 12 setmanes</td><td>1.800-2.500€</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="formnote">*El preu s'adapta segons el col·lectiu, el nombre de participants i les característiques de l'entitat. Contacta'ns per rebre una proposta personalitzada.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="b-collectius">
+    <div class="wrap sheet">
+      <div class="sheet__margin">
+        <p class="label">Col·lectius</p>
+        <div class="rule"></div>
+      </div>
+      <div class="stack" style="gap:2rem">
+        <div>
+          <h2 class="h2">Aplicació segons el col·lectiu</h2>
+          <p class="lead">Els programes de teràpia de bosc s'adapten a diferents col·lectius, especialment en contextos de vulnerabilitat, promovent el benestar, la inclusió i la cohesió social.</p>
+        </div>
+        <div class="mods" id="b-coll"></div>
+        <p class="formnote">Els programes es dissenyen de manera específica per a cada col·lectiu i territori.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--paper-2)" id="b-collaboracio">
+    <div class="wrap sheet">
+      <div class="sheet__margin">
+        <p class="label">Col·laboració</p>
+        <div class="rule"></div>
+      </div>
+      <div class="grid grid--2" style="align-items:start">
+        <div class="stack" style="gap:1.2rem">
+          <h2 class="h2">Treball en col·laboració</h2>
+          <div class="prose">
+            <p>Els programes de teràpia de bosc es desenvolupen en coordinació amb l'entitat o servei, amb l'objectiu d'adaptar la intervenció a les necessitats específiques del col·lectiu i garantir-ne la coherència amb el treball socioeducatiu o terapèutic en curs.</p>
+            <p>El guia de bany de bosc/professional de teràpia de bosc assumeix un rol clau com a facilitador d'una experiència de connexió entre el participant i l'entorn natural. La seva responsabilitat principal és dissenyar i conduir el passeig. No actua com a terapeuta, sinó que sosté un espai segur, respectuós i obert, on cada persona pot viure l'experiència des de la seva pròpia autonomia.</p>
+            <p>Per aprofundir en els beneficis i aplicacions de la teràpia de bosc en l'àmbit social, es pot consultar el següent article: <a href="https://www.revistaalimara.net/revista/banys-de-bosc-fonaments-i-aplicabilitat-terapeutica-en-lambit-social-i-de-la-salut/" target="_blank" rel="noopener">«Banys de bosc: fonaments i aplicabilitat terapèutica en l'àmbit social i de la salut»</a> (revista Alimara).</p>
+          </div>
+        </div>
+        <div class="card">
+          <ul class="creds">
+            <li>Coordinació amb els equips professionals de salut de referència</li>
+            <li>Possibilitat de suport i acompanyament durant les sessions</li>
+            <li>Seguiment dels objectius establerts</li>
+            <li>Avaluació conjunta del procés i dels resultats</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="b-testimonis">
+    <div class="wrap sheet">
+      <div class="sheet__margin">
+        <p class="label">Testimonis</p>
+        <div class="rule"></div>
+      </div>
+      <div class="stack" style="gap:2rem">
+        <p class="lead">Les persones participants destaquen la calma, la connexió i el benestar que emergeixen durant les sessions. També posen en valor la qualitat de l'acompanyament i l'experiència.</p>
+        <div class="grid grid--3 testimonis">
+          <blockquote class="quote rv">“Serenor, tranquil·litat i connexió amb mi mateixa.”</blockquote>
+          <blockquote class="quote rv">“Un ambient de respecte i connexió amb el grup i l'entorn.”</blockquote>
+          <blockquote class="quote rv">“Una experiència terapèutica que aporta una nova mirada.”</blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap sheet">
+      <div class="sheet__margin">
+        <p class="label">Contacte</p>
+        <div class="rule"></div>
+      </div>
+      <div class="stack" style="gap:1.4rem">
+        <h2 class="h2">Estaré encantada d'escoltar-te.</h2>
+        <p class="lead">Gràcies per dedicar uns minuts a conèixer Herbeta del Bosc.</p>
+        <a class="btn" href="#contacte" data-nav="home#contacte" style="align-self:flex-start">Contacta'ns <span class="btn__arrow">→</span></a>
       </div>
     </div>
   </section>
@@ -1342,12 +1628,14 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
         <h4>Experiències</h4>
         <a href="#quees" data-nav="home#quees">Què és un bany de bosc</a>
         <a href="#experiencies" data-nav="home#experiencies">Modalitats</a>
+        <a href="#benestar" data-nav="home#benestar">Benestar</a>
         <a href="#agenda" data-nav="home#agenda">Agenda</a>
         <a href="#amida" data-nav="home#amida">Experiències a mida</a>
       </div>
       <div>
         <h4>Professional</h4>
         <a href="#escoles" data-nav="escoles">Escoles i entitats</a>
+        <a href="#benestar" data-nav="benestar">Programes de benestar</a>
         <a href="#docents" data-nav="escoles#docents">Equips i empreses</a>
         <a href="#preus" data-nav="escoles#preus">Formats i preus</a>
         <a href="#botiga" data-nav="home#botiga">Botiga</a>
@@ -1734,7 +2022,37 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
     return '<details><summary>'+f[0]+'</summary><p>'+f[1]+'</p></details>';
   }).join(''));
 
-  /* ── routing between the two pages ── */
+  /* ── benestar: objectius, formats i col·lectius ── */
+  var obj=[
+    ['Física',['Millorar la salut i el benestar percebuts','Accelerar la recuperació de malalties','Incrementar la qualitat del son','Mantenir la salut cardiovascular i enfortir el sistema immunitari','Augmentar l’activitat física']],
+    ['Mental i emocional',['Fomentar estats d’ànim positius, la vitalitat i el benestar psicològic','Gestionar l’estrès','Restaurar la fatiga mental','Crear resiliència','Disminuir els nivells d’irritabilitat i agressivitat','Renovar la capacitat d’atenció dirigida i reduir el deteriorament cognitiu','Gestionar les emocions, augmentant les positives i reduint les negatives','Reduir l’ansietat','Fomentar l’autoconsciència','Alleujar els símptomes depressius']],
+    ['Social',['Estimular les interaccions socials i augmentar els contactes','Afavorir la inclusió social i reduir la solitud i l’aïllament','Millorar les habilitats socials','Promoure comportaments prosocials']],
+    ['Planetària',['Promoure comportaments proambientals','Incrementar la connexió amb la natura']]
+  ];
+  set('b-obj', obj.map(function(o){
+    return '<div class="card rv"><h3>'+o[0]+'</h3><ul class="creds">'+
+      o[1].map(function(li){return '<li>'+li+'</li>';}).join('')+'</ul></div>';
+  }).join(''));
+
+  var formats=[
+    ['1. Sessió puntual',['Primer contacte amb la pràctica de bany de bosc','Experiència vivencial única en entorn natural','Ideal com a introducció o activitat de benestar']],
+    ['2. Programa 6 setmanes',['Introducció progressiva a la pràctica','Afavoreix la incorporació d’hàbits de benestar','Requereix compromís assequible pels participants']],
+    ['3. Programa 12 setmanes',['Procés més profund i sostingut en el temps','Facilita la integració dels beneficis en el dia a dia','Afavoreix canvis més consolidats en el benestar']]
+  ];
+  set('b-formats-list', formats.map(function(o){
+    return '<div class="card rv"><h3>'+o[0]+'</h3><ul class="creds">'+
+      o[1].map(function(li){return '<li>'+li+'</li>';}).join('')+'</ul></div>';
+  }).join(''));
+
+  var coll=[
+    ['Infància, adolescència i famílies','Afavoreix el desenvolupament emocional, l’atenció i la creació de vincles saludables.'],
+    ['Gent gran i situacions de solitud','Contribueix al benestar, la mobilitat suau i la reducció de l’aïllament social.'],
+    ['Persones en situació de vulnerabilitat social','(Atur, risc d’exclusió, processos migratoris, etc.) Reforça l’autoestima, els vincles i la participació en un entorn acollidor.'],
+    ['Persones amb necessitats de suport específic','(Salut mental, dones en situació de violència, etc.) Ofereix espais segurs, inclusius i adaptats que afavoreixen el benestar i l’expressió personal.']
+  ];
+  set('b-coll', coll.map(function(m){return '<div class="mod rv"><h3>'+m[0]+'</h3><p>'+m[1]+'</p></div>';}).join(''));
+
+  /* ── routing between the pages ── */
   var pages = document.querySelectorAll('.page');
   function show(page, hash){
     pages.forEach(function(p){ p.hidden = (p.dataset.page !== page); });
