@@ -25,6 +25,9 @@ desaparèixer. D'aquí surten les decisions tècniques:
   el repositori és, literalment, el que es publica.
 - **Dues càrregues externes**: les tipografies de Google Fonts i el comptador
   de Cloudflare Web Analytics, que no posa galetes ni recull dades personals.
+- **Formularis per correu.** Com que el lloc no té servidor, els formularis
+  s'envien a Web3Forms, que ho reenvia al correu de na Malena. La resposta des
+  del Gmail va directament a qui ha escrit.
 - **Il·lustracions dibuixades amb codi.** Les fulles, les branquetes del retrat
   i les aiguades de fons són SVG generats en JavaScript. No són fitxers: no
   pesen, escalen a qualsevol pantalla i segueixen el traç dels materials de la
