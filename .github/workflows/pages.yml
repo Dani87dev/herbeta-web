@@ -1,0 +1,58 @@
+# Publica el lloc a GitHub Pages.
+#
+#   herbetadelbosc.com          ← branca main (el lloc oficial)
+#   herbetadelbosc.com/wip/     ← branca wip   (textos i preus, per revisar amb na Malena)
+#   herbetadelbosc.com/estil/   ← branca estil (proves visuals)
+#
+# Es torna a muntar sencer cada vegada que es puja qualsevol de les tres
+# branques. Les dues previsualitzacions no s'enllacen enlloc, no s'indexen
+# a Google i no compten a les estadistiques.
+
+name: Publica el lloc
+
+on:
+  push:
+    branches: [main, wip, estil]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  publica:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Munta el lloc
+        env:
+          REPO: https://github.com/${{ github.repository }}.git
+        run: |
+          git clone --quiet --depth 1 --branch main "$REPO" _site
+          for branca in wip estil; do
+            if git ls-remote --exit-code --heads "$REPO" "$branca" >/dev/null; then
+              git clone --quiet --depth 1 --branch "$branca" "$REPO" "_site/$branca"
+              pagina="_site/$branca/index.html"
+              # que Google no la indexi
+              sed -i '0,/<head>/s//<head>\n<meta name="robots" content="noindex, nofollow">/' "$pagina"
+              # que no compti a les estadistiques
+              sed -i '/cloudflareinsights/d' "$pagina"
+              rm -f "_site/$branca/CNAME"
+            fi
+          done
+          find _site -name .git -prune -exec rm -rf {} +
+          find _site -name .github -prune -exec rm -rf {} +
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deploy
+        uses: actions/deploy-pages@v4
