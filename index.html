@@ -405,6 +405,7 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
   background:var(--paper-3); border:1px solid var(--rule); color:var(--teal); line-height:1}
 .ag__blank b{font-family:var(--f-display); font-size:64px; font-weight:400}
 .ag__blank small{margin-top:.9rem; font-family:var(--f-label); font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3)}
+.ag__blank--rec b{font-size:34px}
 .ag__body{display:flex; flex-direction:column; gap:10px}
 .ag__top{display:flex; align-items:center; justify-content:space-between; gap:1rem}
 .ag__mdate{display:none}
@@ -422,6 +423,9 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
   .ag__aside{display:none}
   .ag__mdate{display:flex; align-items:baseline; gap:.5rem; color:var(--teal); line-height:1}
   .ag__mdate b{font-family:var(--f-display); font-size:2.1rem; font-weight:400}
+  .ag__mdate--rec b{font-size:1.6rem}
+  .ag__mdate--rec small{display:none}
+  .ag__top .tag{white-space:nowrap}
   .ag__mdate small{font-family:var(--f-label); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3)}
   .ag__body h3{font-size:1.5rem}
   .ag__strip{display:flex; align-items:center; gap:.9rem; width:100%; margin-top:.35rem; padding:.5rem .9rem .5rem .5rem;
@@ -2001,9 +2005,14 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
 
   /* ── home: agenda ──
      data: AAAA-MM-DD. fins (opcional): darrer dia, si en dura més d'un.
+     Les activitats fixes no duen data sinó cada (p. ex. 'setmana') i van davant.
      cartell (opcional): imatge del cartell. form (opcional): sense, la
      reserva va al formulari de contacte. */
   var agenda=[
+    {cada:'setmana',freq:'4 sessions al mes',t:'Sospirs de Bosc',
+     meta:['Sencelles i voltants','Sessions de 90 minuts','Setmanes alternes de dematí i d’horabaixa'],
+     desc:'Petites immersions de 90 minuts per reconnectar amb el silenci, amb la natura i amb tu. Cada mes, quatre sessions en espais naturals de Sencelles i voltants. Cada sessió és única i independent, així que pots venir a la que et vagi millor.',
+     price:'Preu per concretar',state:'places'},
     {data:'2026-10-17',t:'Bany de bosc creatiu · Tardor',
      meta:['Lloret de Vistalegre','9.30 – 13.30 h','Amb Virginia de Moix & Moix'],
      desc:'Un lent passeig per la natura per despertar els sentits, inspirat en els primers signes de la tardor i la subtilesa de les petites transformacions. La nostra cita estacional d’octubre.',
@@ -2027,6 +2036,7 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
   function dia(txt){ var p=txt.split('-'); return new Date(+p[0],p[1]-1,+p[2]); }
   function deMes(m){ return (/^[aeiou]/.test(m)?'d’':'de ')+m; }
   agenda.forEach(function(a){
+    if(a.cada){ a.dia='Setmanal'; a.mes=a.freq; a.quan='Cada '+a.cada; return; }
     var f=dia(a.data), mes=MESOS[f.getMonth()];
     a.dia=String(f.getDate());
     a.mes=mes;
@@ -2057,7 +2067,7 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
           '<span class="ag__paper"><img src="'+a.cartell+'" alt="" loading="lazy"></span>'+
           '<span class="ag__stamp" aria-hidden="true"><b>'+a.dia+'</b><small>'+a.mesCurt+'</small></span>'+
           '<span class="ag__zoom" aria-hidden="true">'+ZOOM+'</span></button>'
-      : '<div class="ag__blank" aria-hidden="true"><b>'+a.dia+'</b><small>'+a.mes+'</small></div>';
+      : '<div class="ag__blank'+(a.cada?' ag__blank--rec':'')+'" aria-hidden="true"><b>'+a.dia+'</b><small>'+a.mes+'</small></div>';
     var strip = a.cartell
       ? '<button type="button" class="ag__strip" data-cartell="'+i+'" aria-label="'+label+'">'+
           '<img src="'+a.cartell+'" alt="" loading="lazy">'+
@@ -2066,7 +2076,7 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
     return '<article class="ag__item rv">'+
       '<div class="ag__aside">'+aside+'</div>'+
       '<div class="ag__body">'+
-        '<div class="ag__top"><span class="ag__mdate" aria-hidden="true"><b>'+a.dia+'</b><small>'+a.mes+'</small></span>'+tag+'</div>'+
+        '<div class="ag__top"><span class="ag__mdate'+(a.cada?' ag__mdate--rec':'')+'" aria-hidden="true"><b>'+a.dia+'</b><small>'+a.mes+'</small></span>'+tag+'</div>'+
         '<h3>'+a.t+'</h3>'+
         '<div class="ag__meta">'+[a.quan].concat(a.meta).map(function(x){return '<span>'+x+'</span>';}).join('<span aria-hidden="true">·</span>')+'</div>'+
         '<p class="ag__desc">'+a.desc+'</p>'+
