@@ -2017,7 +2017,7 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
     {data:'2026-11-21',fins:'2026-11-22',t:'Nit i Alba al Refugi',
      meta:['Refugi del Castell d’Alaró'],
      desc:'Repetim la nit a la muntanya, aquesta vegada en cap de setmana: pujada amb passejada etnobotànica, sopar al refugi i bany de bosc a l’alba. I hi afegim una novetat: un taller de Diari de Natura per aprofitar les hores de nit.',
-     price:'Preu per concretar',state:'places',
+     price:'Preu per concretar',state:'limitades',
      cartell:'assets/img/cartell-nit-alba-2026-11.jpg'}
   ];
   var MESOS=['gener','febrer','març','abril','maig','juny','juliol','agost','setembre','octubre','novembre','desembre'];
@@ -2048,7 +2048,9 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
   set('agenda-list', agenda.map(function(a,i){
     var tag = a.state==='full'
       ? '<span class="tag tag--full">Places exhaurides</span>'
-      : '<span class="tag">Places obertes</span>';
+      : a.state==='limitades'
+        ? '<span class="tag">Places molt limitades</span>'
+        : '<span class="tag">Places obertes</span>';
     var label='Amplia el cartell de '+a.t;
     var aside = a.cartell
       ? '<button type="button" class="ag__poster" data-cartell="'+i+'" aria-label="'+label+'">'+
