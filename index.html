@@ -394,6 +394,8 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
 .ag__poster:hover .ag__stamp,
 .ag__poster:focus-visible .ag__stamp{transform:translateY(-4px)}
 .ag__stamp b{font-family:var(--f-display); font-size:28px; font-weight:400}
+.ag__stamp--rec b{font-size:20px}
+.ag__stamp--rec small{display:none}
 .ag__stamp small{margin-top:.3rem; font-family:var(--f-label); font-size:10px; letter-spacing:.14em; text-transform:uppercase}
 .ag__zoom{position:absolute; right:-10px; bottom:-10px; z-index:1; display:grid; place-items:center;
   width:34px; height:34px; border-radius:50%; background:var(--paper); border:1px solid var(--rule); color:var(--teal);
@@ -2024,7 +2026,8 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
        {data:'2026-10-13',hora:'9.30 – 11 h',lloc:'Cas Canar'},
        {data:'2026-10-21',hora:'17 – 18.30 h',lloc:'Son Boi'},
        {data:'2026-10-29',hora:'9.30 – 11 h',lloc:'Cas Menescal'}],
-     price:'Preu per concretar',state:'places'},
+     price:'Preu per concretar',state:'places',
+     cartell:'assets/img/cartell-sospirs-de-bosc.jpg'},
     {data:'2026-10-17',t:'Bany de bosc creatiu · Tardor',
      meta:['Lloret de Vistalegre','9.30 – 13.30 h','Amb Virginia de Moix & Moix'],
      desc:'Un lent passeig per la natura per despertar els sentits, inspirat en els primers signes de la tardor i la subtilesa de les petites transformacions. La nostra cita estacional d’octubre.',
@@ -2085,7 +2088,7 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
     var aside = a.cartell
       ? '<button type="button" class="ag__poster" data-cartell="'+i+'" aria-label="'+label+'">'+
           '<span class="ag__paper"><img src="'+a.cartell+'" alt="" loading="lazy"></span>'+
-          '<span class="ag__stamp" aria-hidden="true"><b>'+a.dia+'</b><small>'+a.mesCurt+'</small></span>'+
+          '<span class="ag__stamp'+(a.cada?' ag__stamp--rec':'')+'" aria-hidden="true"><b>'+a.dia+'</b><small>'+a.mesCurt+'</small></span>'+
           '<span class="ag__zoom" aria-hidden="true">'+ZOOM+'</span></button>'
       : '<div class="ag__blank'+(a.cada?' ag__blank--rec':'')+'" aria-hidden="true"><b>'+a.dia+'</b><small>'+a.mes+'</small></div>';
     var strip = a.cartell
