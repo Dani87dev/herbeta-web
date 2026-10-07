@@ -386,8 +386,6 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
 .ag__desc{color:var(--ink-2); max-width:62ch}
 .ag__price{color:var(--ink-2); font-size:var(--fs-sm)}
 .ag__price a{color:var(--teal); text-underline-offset:.2em}
-.ag__empty{padding:1.5rem 0; border-bottom:1px solid var(--rule); color:var(--ink-2)}
-.ag__empty a{color:var(--teal)}
 .tag{display:inline-block; font-family:var(--f-label); font-size:.63rem; letter-spacing:.13em; text-transform:uppercase;
   border:1px solid var(--terra); color:var(--terra); padding:.16rem .45rem; border-radius:2px}
 .tag--full{border-color:var(--ink-3); color:var(--ink-3)}
@@ -1908,23 +1906,20 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
   }
   document.querySelectorAll('section.dark').forEach(leafFall);
 
-  /* ── home: agenda ──
-     Cada activitat desapareix sola l'endema de la seva data. */
+  /* ── home: agenda ── */
   var agenda=[
-    {data:'2026-10-17',d:'17',m:'Octubre',t:'Bany de bosc creatiu · Tardor',
+    {d:'17',m:'Octubre',t:'Bany de bosc creatiu · Tardor',
      meta:['Lloret de Vistalegre','9.30 – 13.30 h','Amb Virginia de Moix & Moix'],
      desc:'Un lent passeig per la natura per despertar els sentits, inspirat en els primers signes de la tardor i la subtilesa de les petites transformacions. La nostra cita estacional d’octubre.',
      price:'Preu per concretar',state:'places',
      form:'https://forms.gle/Vj6uopooiaDSBWTb7',cartell:'assets/img/cartell-bany-lloret-2026-10.jpg'},
-    {data:'2026-10-24',d:'24',m:'Octubre',t:'Jornada Origen',
+    {d:'24',m:'Octubre',t:'Jornada Origen',
      meta:['Pla de Mallorca','10.30 – 19 h','Amb Mada Cardell (Magic Seeds)'],
      desc:'Una jornada immersiva al món del benestar natural amb olis essencials i bany de bosc. Crearem una farmaciola natural de 6 roll-ons amb olis essencials purs que t’enduràs a casa, i també les pautes per incorporar el bany de bosc a la teva rutina.',
      price:'Preu per concretar',state:'places',
      form:'https://forms.gle/b5ziEf5UZZSvmPtdA',cartell:'assets/img/cartell-jornada-origen-2026-10.jpg'}
   ];
-  var avui=new Date(); avui=avui.getFullYear()+'-'+('0'+(avui.getMonth()+1)).slice(-2)+'-'+('0'+avui.getDate()).slice(-2);
-  var properes=agenda.filter(function(a){return a.data>=avui;});
-  set('agenda-list', properes.length ? properes.map(function(a){
+  set('agenda-list', agenda.map(function(a){
     var tag = a.state==='full'
       ? '<span class="tag tag--full">Places exhaurides</span>'
       : '<span class="tag">Places obertes</span>';
@@ -1938,7 +1933,7 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
         '<p class="ag__desc">'+a.desc+'</p>'+
         '<p class="ag__price">'+a.price+' · <a href="'+a.cartell+'" target="_blank" rel="noopener">Veure el cartell</a></p></div>'+
       btn+'</article>';
-  }).join('') : '<p class="ag__empty">Aviat publicarem noves dates. Si vols que t’avisem, <a href="#contacte" data-nav="home#contacte">escriu-nos</a>.</p>');
+  }).join(''));
 
   /* ── home: públics ──
      Imatges provisionals: cal substituir-les per material propi. */
