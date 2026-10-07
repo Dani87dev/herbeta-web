@@ -2000,7 +2000,9 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
   document.querySelectorAll('section.dark').forEach(leafFall);
 
   /* ── home: agenda ──
-     data: AAAA-MM-DD. cartell (opcional): imatge del cartell. */
+     data: AAAA-MM-DD. fins (opcional): darrer dia, si en dura més d'un.
+     cartell (opcional): imatge del cartell. form (opcional): sense, la
+     reserva va al formulari de contacte. */
   var agenda=[
     {data:'2026-10-17',t:'Bany de bosc creatiu · Tardor',
      meta:['Lloret de Vistalegre','9.30 – 13.30 h','Amb Virginia de Moix & Moix'],
@@ -2011,23 +2013,37 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
      meta:['Pla de Mallorca','10.30 – 19 h','Amb Mada Cardell (Magic Seeds)'],
      desc:'Una jornada immersiva al món del benestar natural amb olis essencials i bany de bosc. Crearem una farmaciola natural de 6 roll-ons amb olis essencials purs que t’enduràs a casa, i també les pautes per incorporar el bany de bosc a la teva rutina.',
      price:'Preu per concretar',state:'places',
-     form:'https://forms.gle/b5ziEf5UZZSvmPtdA',cartell:'assets/img/cartell-jornada-origen-2026-10.jpg'}
+     form:'https://forms.gle/b5ziEf5UZZSvmPtdA',cartell:'assets/img/cartell-jornada-origen-2026-10.jpg'},
+    {data:'2026-11-21',fins:'2026-11-22',t:'Nit i Alba al Refugi',
+     meta:['Refugi del Castell d’Alaró'],
+     desc:'Repetim la nit a la muntanya, aquesta vegada en cap de setmana: pujada amb passejada etnobotànica, sopar al refugi i bany de bosc a l’alba. I hi afegim una novetat: un taller de Diari de Natura per aprofitar les hores de nit.',
+     price:'Preu per concretar',state:'places',
+     cartell:'assets/img/cartell-nit-alba-2026-11.jpg'}
   ];
   var MESOS=['gener','febrer','març','abril','maig','juny','juliol','agost','setembre','octubre','novembre','desembre'];
   var MESOS_CURT=['gen','febr','març','abr','maig','juny','jul','ag','set','oct','nov','des'];
   var DIES=['Diumenge','Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte'];
   var ZOOM='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21M10.5 7.5v6M7.5 10.5h6"/></svg>';
+  function dia(txt){ var p=txt.split('-'); return new Date(+p[0],p[1]-1,+p[2]); }
+  function deMes(m){ return (/^[aeiou]/.test(m)?'d’':'de ')+m; }
   agenda.forEach(function(a){
-    var p=a.data.split('-'), f=new Date(+p[0],p[1]-1,+p[2]), mes=MESOS[f.getMonth()];
+    var f=dia(a.data), mes=MESOS[f.getMonth()];
     a.dia=String(f.getDate());
     a.mes=mes;
     a.mesCurt=MESOS_CURT[f.getMonth()];
-    a.quan=DIES[f.getDay()]+' '+a.dia+' '+(/^[aeiou]/.test(mes)?'d’':'de ')+mes;
+    a.quan=DIES[f.getDay()]+' '+a.dia+' '+deMes(mes);
+    if(a.fins){
+      var g=dia(a.fins), mesFi=MESOS[g.getMonth()];
+      a.dia+='–'+g.getDate();
+      a.quan=DIES[f.getDay()]+' '+f.getDate()+(mesFi===mes?'':' '+deMes(mes))+' i '+DIES[g.getDay()].toLowerCase()+' '+g.getDate()+' '+deMes(mesFi);
+    }
   });
   function agBtn(a){
     return a.state==='full'
       ? '<a class="btn btn--ghost" href="#contacte" data-nav="home#contacte">Llista d’espera</a>'
-      : '<a class="btn" href="'+a.form+'" target="_blank" rel="noopener">Reserva la plaça <span class="btn__arrow">→</span></a>';
+      : a.form
+        ? '<a class="btn" href="'+a.form+'" target="_blank" rel="noopener">Reserva la plaça <span class="btn__arrow">→</span></a>'
+        : '<a class="btn" href="#contacte" data-nav="home#contacte">Reserva la plaça <span class="btn__arrow">→</span></a>';
   }
   set('agenda-list', agenda.map(function(a,i){
     var tag = a.state==='full'
