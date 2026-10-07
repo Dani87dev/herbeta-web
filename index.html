@@ -413,6 +413,10 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
 .ag__meta{display:flex; flex-wrap:wrap; gap:.4rem .9rem; color:var(--ink-3); font-size:var(--fs-sm)}
 .ag__desc{color:var(--ink-2); max-width:680px}
 .ag__strip{display:none}
+.ag__ses{list-style:none; margin:.25rem 0 0; padding:0; max-width:680px; border-top:1px solid var(--rule); font-size:var(--fs-sm)}
+.ag__ses li{display:grid; grid-template-columns:11.5rem 7.5rem minmax(0,1fr); gap:.2rem 1rem; padding:.55rem 0; border-bottom:1px solid var(--rule-soft); color:var(--ink-2)}
+.ag__ses li b{font-weight:500; color:var(--ink)}
+.ag__ses .is-past{opacity:.45}
 .ag__actions{display:flex; flex-wrap:wrap; align-items:center; gap:.75rem 1.75rem; margin-top:.5rem}
 .ag__price{color:var(--ink-3); font-size:var(--fs-sm)}
 .tag{display:inline-block; font-family:var(--f-label); font-size:.63rem; letter-spacing:.13em; text-transform:uppercase;
@@ -435,6 +439,8 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
   .ag__strip span{flex:1; display:flex; flex-direction:column; line-height:1.3}
   .ag__strip small{color:var(--ink-3); font-size:.8rem}
   .ag__strip svg{width:20px; height:20px; flex:none; color:var(--teal)}
+  .ag__ses li{grid-template-columns:auto minmax(0,1fr); column-gap:1rem}
+  .ag__ses li b{grid-column:1/-1}
   .ag__actions{flex-direction:column; align-items:stretch; gap:.6rem}
   .ag__actions .btn{justify-content:center; min-height:52px}
   .ag__price{text-align:center}
@@ -2005,13 +2011,19 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
 
   /* ── home: agenda ──
      data: AAAA-MM-DD. fins (opcional): darrer dia, si en dura més d'un.
-     Les activitats fixes no duen data sinó cada (p. ex. 'setmana') i van davant.
+     Les activitats fixes no duen data sinó cada (p. ex. 'setmana') i van davant;
+     sessions (opcional): les trobades del mes, s'actualitzen cada mes.
      cartell (opcional): imatge del cartell. form (opcional): sense, la
      reserva va al formulari de contacte. */
   var agenda=[
     {cada:'setmana',freq:'4 sessions al mes',t:'Sospirs de Bosc',
      meta:['Sencelles i voltants','Sessions de 90 minuts','Setmanes alternes de dematí i d’horabaixa'],
      desc:'Petites immersions de 90 minuts per reconnectar amb el silenci, amb la natura i amb tu. Cada mes, quatre sessions en espais naturals de Sencelles i voltants. Cada sessió és única i independent, així que pots venir a la que et vagi millor.',
+     sessions:[
+       {data:'2026-10-05',hora:'17 – 18.30 h',lloc:'Cas Menescal'},
+       {data:'2026-10-13',hora:'9.30 – 11 h',lloc:'Cas Canar'},
+       {data:'2026-10-21',hora:'17 – 18.30 h',lloc:'Son Boi'},
+       {data:'2026-10-29',hora:'9.30 – 11 h',lloc:'Cas Menescal'}],
      price:'Preu per concretar',state:'places'},
     {data:'2026-10-17',t:'Bany de bosc creatiu · Tardor',
      meta:['Lloret de Vistalegre','9.30 – 13.30 h','Amb Virginia de Moix & Moix'],
@@ -2048,6 +2060,14 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
       a.quan=DIES[f.getDay()]+' '+f.getDate()+(mesFi===mes?'':' '+deMes(mes))+' i '+DIES[g.getDay()].toLowerCase()+' '+g.getDate()+' '+deMes(mesFi);
     }
   });
+  function sessions(llista){
+    var avui=new Date(); avui.setHours(0,0,0,0);
+    return '<ul class="ag__ses">'+llista.map(function(x){
+      var f=dia(x.data), mes=MESOS[f.getMonth()];
+      return '<li'+(f<avui?' class="is-past"':'')+'><b>'+DIES[f.getDay()]+' '+f.getDate()+' '+deMes(mes)+'</b>'+
+        '<span>'+x.hora+'</span><span>'+x.lloc+'</span></li>';
+    }).join('')+'</ul>';
+  }
   function agBtn(a){
     return a.state==='full'
       ? '<a class="btn btn--ghost" href="#contacte" data-nav="home#contacte">Llista d’espera</a>'
@@ -2080,6 +2100,7 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
         '<h3>'+a.t+'</h3>'+
         '<div class="ag__meta">'+[a.quan].concat(a.meta).map(function(x){return '<span>'+x+'</span>';}).join('<span aria-hidden="true">·</span>')+'</div>'+
         '<p class="ag__desc">'+a.desc+'</p>'+
+        (a.sessions ? sessions(a.sessions) : '')+
         strip+
         '<div class="ag__actions">'+agBtn(a)+'<span class="ag__price">'+a.price+'</span></div>'+
       '</div></article>';
