@@ -373,25 +373,102 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
 .mod p{color:var(--ink-2); font-size:var(--fs-sm)}
 @media (max-width:700px){.mod{grid-template-columns:1fr; gap:.4rem}}
 
-/* ── agenda ── */
+/* ── agenda ──
+   Cada activitat: el cartell a l'esquerra (o la data, si no n'hi ha)
+   i el contingut a la dreta. En mòbil el cartell passa a ser una franja. */
 .ag{display:flex; flex-direction:column; border-top:1px solid var(--rule)}
-.ag__item{display:grid; grid-template-columns:5.5rem minmax(0,1fr) auto; gap:1.5rem; align-items:start;
-  padding:1.5rem 0; border-bottom:1px solid var(--rule)}
-.ag__date{display:flex; flex-direction:column; align-items:flex-start; line-height:1.05; color:var(--teal)}
-.ag__day{font-family:var(--f-display); font-size:2.1rem; font-weight:400}
-.ag__mon{font-family:var(--f-label); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3)}
-.ag__body{display:flex; flex-direction:column; gap:.35rem}
-.ag__body h3{font-size:1.2rem}
+.ag__item{display:grid; grid-template-columns:168px minmax(0,1fr); column-gap:48px; align-items:start;
+  padding:36px 0; border-bottom:1px solid var(--rule)}
+.ag__poster{position:relative; display:block; width:168px; padding:0; border:0; background:none;
+  cursor:zoom-in; font:inherit; color:inherit}
+.ag__paper{display:block; padding:8px; background:var(--paper);
+  box-shadow:0 1px 2px rgba(60,50,30,.10), 0 12px 26px -12px rgba(60,50,30,.42);
+  transition:transform .25s ease, box-shadow .25s ease}
+.ag__paper img{display:block; width:100%; height:auto}
+.ag__poster:hover .ag__paper,
+.ag__poster:focus-visible .ag__paper{transform:translateY(-4px);
+  box-shadow:0 2px 4px rgba(60,50,30,.12), 0 20px 34px -12px rgba(60,50,30,.5)}
+.ag__stamp{position:absolute; top:-10px; left:-10px; z-index:1; display:flex; flex-direction:column; align-items:center;
+  min-width:52px; padding:.3rem .5rem .35rem; background:var(--teal); color:#FFF; line-height:1;
+  transition:transform .25s ease}
+.ag__poster:hover .ag__stamp,
+.ag__poster:focus-visible .ag__stamp{transform:translateY(-4px)}
+.ag__stamp b{font-family:var(--f-display); font-size:28px; font-weight:400}
+.ag__stamp small{margin-top:.3rem; font-family:var(--f-label); font-size:10px; letter-spacing:.14em; text-transform:uppercase}
+.ag__zoom{position:absolute; right:-10px; bottom:-10px; z-index:1; display:grid; place-items:center;
+  width:34px; height:34px; border-radius:50%; background:var(--paper); border:1px solid var(--rule); color:var(--teal);
+  transition:transform .25s ease}
+.ag__poster:hover .ag__zoom,
+.ag__poster:focus-visible .ag__zoom{transform:translateY(-4px)}
+.ag__zoom svg{width:16px; height:16px}
+.ag__blank{display:flex; flex-direction:column; align-items:center; justify-content:center; width:168px; height:236px;
+  background:var(--paper-3); border:1px solid var(--rule); color:var(--teal); line-height:1}
+.ag__blank b{font-family:var(--f-display); font-size:64px; font-weight:400}
+.ag__blank small{margin-top:.9rem; font-family:var(--f-label); font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3)}
+.ag__body{display:flex; flex-direction:column; gap:10px}
+.ag__top{display:flex; align-items:center; justify-content:space-between; gap:1rem}
+.ag__mdate{display:none}
+.ag__body h3{font-size:1.75rem}
 .ag__meta{display:flex; flex-wrap:wrap; gap:.4rem .9rem; color:var(--ink-3); font-size:var(--fs-sm)}
-.ag__desc{color:var(--ink-2); max-width:62ch}
-.ag__price{color:var(--ink-2); font-size:var(--fs-sm)}
-.ag__price a{color:var(--teal); text-underline-offset:.2em}
+.ag__desc{color:var(--ink-2); max-width:680px}
+.ag__strip{display:none}
+.ag__actions{display:flex; flex-wrap:wrap; align-items:center; gap:.75rem 1.75rem; margin-top:.5rem}
+.ag__price{color:var(--ink-3); font-size:var(--fs-sm)}
 .tag{display:inline-block; font-family:var(--f-label); font-size:.63rem; letter-spacing:.13em; text-transform:uppercase;
   border:1px solid var(--terra); color:var(--terra); padding:.16rem .45rem; border-radius:2px}
 .tag--full{border-color:var(--ink-3); color:var(--ink-3)}
-@media (max-width:760px){
-  .ag__item{grid-template-columns:4.2rem minmax(0,1fr)}
-  .ag__item .btn{grid-column:2}
+@media (max-width:719px){
+  .ag__item{grid-template-columns:minmax(0,1fr); padding:28px 0}
+  .ag__aside{display:none}
+  .ag__mdate{display:flex; align-items:baseline; gap:.5rem; color:var(--teal); line-height:1}
+  .ag__mdate b{font-family:var(--f-display); font-size:2.1rem; font-weight:400}
+  .ag__mdate small{font-family:var(--f-label); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3)}
+  .ag__body h3{font-size:1.5rem}
+  .ag__strip{display:flex; align-items:center; gap:.9rem; width:100%; margin-top:.35rem; padding:.5rem .9rem .5rem .5rem;
+    background:var(--field); border:1px solid var(--rule); border-radius:2px; cursor:zoom-in;
+    font:inherit; color:var(--ink); text-align:left}
+  .ag__strip img{width:56px; height:auto; flex:none; box-shadow:0 1px 2px rgba(60,50,30,.15)}
+  .ag__strip span{flex:1; display:flex; flex-direction:column; line-height:1.3}
+  .ag__strip small{color:var(--ink-3); font-size:.8rem}
+  .ag__strip svg{width:20px; height:20px; flex:none; color:var(--teal)}
+  .ag__actions{flex-direction:column; align-items:stretch; gap:.6rem}
+  .ag__actions .btn{justify-content:center; min-height:52px}
+  .ag__price{text-align:center}
+}
+
+/* ── cartell ampliat ── */
+.lb{position:fixed; inset:0; z-index:90; overflow-y:auto; background:rgba(28,33,32,.95); color:#F4EFE1}
+.lb[hidden]{display:none}
+.lb:focus{outline:none}
+.lb__inner{display:flex; align-items:center; justify-content:center; gap:clamp(2rem,7vw,6.5rem);
+  min-height:100%; padding:clamp(4.5rem,8vh,5rem) var(--gut)}
+.lb__img{display:block; max-height:85vh; max-width:min(48vw,640px); width:auto; height:auto;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.lb__info{display:flex; flex-direction:column; align-items:flex-start; gap:.9rem; max-width:320px}
+.lb__date{font-family:var(--f-label); font-size:var(--fs-label); letter-spacing:.18em; text-transform:uppercase; color:rgba(244,239,225,.75)}
+.lb__title{font-size:clamp(2rem,3.4vw,2.6rem); color:#F4EFE1}
+.lb__meta{color:rgba(244,239,225,.82); font-size:var(--fs-sm)}
+.lb .btn{margin-top:.6rem; background:var(--paper-2); border-color:var(--paper-2); color:var(--ink)}
+.lb .btn:hover{background:var(--terra); border-color:var(--terra); color:#FFF}
+.lb .btn--ghost{background:transparent; border-color:rgba(244,239,225,.5); color:#F4EFE1}
+.lb__dl{display:inline-flex; align-items:center; gap:.5rem; font-size:.85rem; color:#F4EFE1; text-underline-offset:.2em}
+.lb__dl:hover{color:#E9B79E}
+.lb__dl svg{width:14px; height:14px}
+.lb__esc{display:flex; align-items:center; gap:.6rem; width:100%; margin-top:1.4rem; padding-top:1.4rem;
+  border-top:1px solid rgba(244,239,225,.16); font-size:.8rem; color:rgba(244,239,225,.6)}
+.lb__esc kbd{font-family:var(--f-label); font-size:.7rem; padding:.1rem .4rem; border:1px solid rgba(244,239,225,.4); border-radius:2px}
+.lb__close{position:fixed; top:1.5rem; right:1.5rem; z-index:1; display:grid; place-items:center; width:48px; height:48px;
+  border-radius:50%; border:1px solid rgba(244,239,225,.4); background:rgba(28,33,32,.6); color:#F4EFE1; cursor:pointer;
+  transition:border-color .2s}
+.lb__close:hover{border-color:#F4EFE1}
+.lb__close svg{width:18px; height:18px}
+@media (max-width:719px){
+  .lb__inner{flex-direction:column; align-items:stretch; gap:1.75rem; padding-top:5rem}
+  .lb__img{max-width:100%; max-height:none; margin-inline:auto}
+  .lb__info{max-width:none}
+  .lb__cta{align-self:stretch}
+  .lb__cta .btn{width:100%; justify-content:center; min-height:52px}
+  .lb__esc{display:none}
 }
 
 /* ── seccio fosca: contrapunt al paper, com la portada ──────────
@@ -1667,6 +1744,22 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
   </div>
 </footer>
 
+<!-- cartell ampliat: un sol lightbox per a totes les activitats de l'agenda -->
+<div class="lb" id="cartell-lb" role="dialog" aria-modal="true" aria-labelledby="lb-title" tabindex="-1" hidden>
+  <button type="button" class="lb__close" aria-label="Tanca"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <div class="lb__inner">
+    <img class="lb__img" src="" alt="">
+    <div class="lb__info">
+      <p class="lb__date"></p>
+      <h2 class="lb__title" id="lb-title"></h2>
+      <p class="lb__meta"></p>
+      <div class="lb__cta"></div>
+      <a class="lb__dl" href="" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descarrega el cartell</a>
+      <p class="lb__esc"><kbd>Esc</kbd> per tancar</p>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   "use strict";
@@ -1906,34 +1999,104 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
   }
   document.querySelectorAll('section.dark').forEach(leafFall);
 
-  /* ── home: agenda ── */
+  /* ── home: agenda ──
+     data: AAAA-MM-DD. cartell (opcional): imatge del cartell. */
   var agenda=[
-    {d:'17',m:'Octubre',t:'Bany de bosc creatiu · Tardor',
+    {data:'2026-10-17',t:'Bany de bosc creatiu · Tardor',
      meta:['Lloret de Vistalegre','9.30 – 13.30 h','Amb Virginia de Moix & Moix'],
      desc:'Un lent passeig per la natura per despertar els sentits, inspirat en els primers signes de la tardor i la subtilesa de les petites transformacions. La nostra cita estacional d’octubre.',
      price:'Preu per concretar',state:'places',
      form:'https://forms.gle/Vj6uopooiaDSBWTb7',cartell:'assets/img/cartell-bany-lloret-2026-10.jpg'},
-    {d:'24',m:'Octubre',t:'Jornada Origen',
+    {data:'2026-10-24',t:'Jornada Origen',
      meta:['Pla de Mallorca','10.30 – 19 h','Amb Mada Cardell (Magic Seeds)'],
      desc:'Una jornada immersiva al món del benestar natural amb olis essencials i bany de bosc. Crearem una farmaciola natural de 6 roll-ons amb olis essencials purs que t’enduràs a casa, i també les pautes per incorporar el bany de bosc a la teva rutina.',
      price:'Preu per concretar',state:'places',
      form:'https://forms.gle/b5ziEf5UZZSvmPtdA',cartell:'assets/img/cartell-jornada-origen-2026-10.jpg'}
   ];
-  set('agenda-list', agenda.map(function(a){
+  var MESOS=['gener','febrer','març','abril','maig','juny','juliol','agost','setembre','octubre','novembre','desembre'];
+  var MESOS_CURT=['gen','febr','març','abr','maig','juny','jul','ag','set','oct','nov','des'];
+  var DIES=['Diumenge','Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte'];
+  var ZOOM='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21M10.5 7.5v6M7.5 10.5h6"/></svg>';
+  agenda.forEach(function(a){
+    var p=a.data.split('-'), f=new Date(+p[0],p[1]-1,+p[2]), mes=MESOS[f.getMonth()];
+    a.dia=String(f.getDate());
+    a.mes=mes;
+    a.mesCurt=MESOS_CURT[f.getMonth()];
+    a.quan=DIES[f.getDay()]+' '+a.dia+' '+(/^[aeiou]/.test(mes)?'d’':'de ')+mes;
+  });
+  function agBtn(a){
+    return a.state==='full'
+      ? '<a class="btn btn--ghost" href="#contacte" data-nav="home#contacte">Llista d’espera</a>'
+      : '<a class="btn" href="'+a.form+'" target="_blank" rel="noopener">Reserva la plaça <span class="btn__arrow">→</span></a>';
+  }
+  set('agenda-list', agenda.map(function(a,i){
     var tag = a.state==='full'
       ? '<span class="tag tag--full">Places exhaurides</span>'
       : '<span class="tag">Places obertes</span>';
-    var btn = a.state==='full'
-      ? '<a class="btn btn--ghost" href="#contacte" data-nav="home#contacte">Llista d’espera</a>'
-      : '<a class="btn" href="'+a.form+'" target="_blank" rel="noopener">Reserva la plaça <span class="btn__arrow">→</span></a>';
+    var label='Amplia el cartell de '+a.t;
+    var aside = a.cartell
+      ? '<button type="button" class="ag__poster" data-cartell="'+i+'" aria-label="'+label+'">'+
+          '<span class="ag__paper"><img src="'+a.cartell+'" alt="" loading="lazy"></span>'+
+          '<span class="ag__stamp" aria-hidden="true"><b>'+a.dia+'</b><small>'+a.mesCurt+'</small></span>'+
+          '<span class="ag__zoom" aria-hidden="true">'+ZOOM+'</span></button>'
+      : '<div class="ag__blank" aria-hidden="true"><b>'+a.dia+'</b><small>'+a.mes+'</small></div>';
+    var strip = a.cartell
+      ? '<button type="button" class="ag__strip" data-cartell="'+i+'" aria-label="'+label+'">'+
+          '<img src="'+a.cartell+'" alt="" loading="lazy">'+
+          '<span>Veure el cartell<small>Toca per ampliar</small></span>'+ZOOM+'</button>'
+      : '';
     return '<article class="ag__item rv">'+
-      '<div class="ag__date"><span class="ag__day">'+a.d+'</span><span class="ag__mon">'+a.m+'</span></div>'+
-      '<div class="ag__body">'+tag+'<h3>'+a.t+'</h3>'+
-        '<div class="ag__meta">'+a.meta.map(function(x){return '<span>'+x+'</span>';}).join('<span>·</span>')+'</div>'+
+      '<div class="ag__aside">'+aside+'</div>'+
+      '<div class="ag__body">'+
+        '<div class="ag__top"><span class="ag__mdate" aria-hidden="true"><b>'+a.dia+'</b><small>'+a.mes+'</small></span>'+tag+'</div>'+
+        '<h3>'+a.t+'</h3>'+
+        '<div class="ag__meta">'+[a.quan].concat(a.meta).map(function(x){return '<span>'+x+'</span>';}).join('<span aria-hidden="true">·</span>')+'</div>'+
         '<p class="ag__desc">'+a.desc+'</p>'+
-        '<p class="ag__price">'+a.price+' · <a href="'+a.cartell+'" target="_blank" rel="noopener">Veure el cartell</a></p></div>'+
-      btn+'</article>';
+        strip+
+        '<div class="ag__actions">'+agBtn(a)+'<span class="ag__price">'+a.price+'</span></div>'+
+      '</div></article>';
   }).join(''));
+
+  /* cartell ampliat: s'obre des del cartell o la franja de mòbil,
+     es tanca amb la X, amb Esc o clicant fora, i torna el focus on era. */
+  var lb=document.getElementById('cartell-lb'), lbFrom=null;
+  function lbOpen(a, from){
+    lbFrom=from;
+    var img=lb.querySelector('.lb__img');
+    img.src=a.cartell; img.alt='Cartell de '+a.t;
+    lb.querySelector('.lb__date').textContent=a.quan;
+    lb.querySelector('.lb__title').textContent=a.t;
+    lb.querySelector('.lb__meta').innerHTML=a.meta.slice(0,2).join(' · ')+(a.meta.length>2?'<br>'+a.meta.slice(2).join(' · '):'');
+    lb.querySelector('.lb__cta').innerHTML=agBtn(a);
+    lb.querySelector('.lb__dl').href=a.cartell;
+    lb.hidden=false;
+    document.documentElement.style.overflow='hidden';
+    document.body.style.overflow='hidden';
+    lb.focus();
+  }
+  function lbClose(){
+    if(lb.hidden) return;
+    lb.hidden=true;
+    document.documentElement.style.overflow='';
+    document.body.style.overflow='';
+    if(lbFrom) lbFrom.focus();
+    lbFrom=null;
+  }
+  document.getElementById('agenda-list').addEventListener('click', function(e){
+    var b=e.target.closest('[data-cartell]');
+    if(b) lbOpen(agenda[+b.getAttribute('data-cartell')], b);
+  });
+  lb.addEventListener('click', function(e){
+    if(e.target===lb || e.target.classList.contains('lb__inner') || e.target.closest('.lb__close, [data-nav]')) lbClose();
+  });
+  document.addEventListener('keydown', function(e){
+    if(lb.hidden) return;
+    if(e.key==='Escape'){ lbClose(); return; }
+    if(e.key!=='Tab') return;
+    var f=lb.querySelectorAll('button, a[href]'), first=f[0], last=f[f.length-1];
+    if(e.shiftKey && (document.activeElement===first || document.activeElement===lb)){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  });
 
   /* ── home: públics ──
      Imatges provisionals: cal substituir-les per material propi. */
