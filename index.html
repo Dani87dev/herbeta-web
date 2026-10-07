@@ -383,7 +383,11 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
 .ag__body{display:flex; flex-direction:column; gap:.35rem}
 .ag__body h3{font-size:1.2rem}
 .ag__meta{display:flex; flex-wrap:wrap; gap:.4rem .9rem; color:var(--ink-3); font-size:var(--fs-sm)}
+.ag__desc{color:var(--ink-2); max-width:62ch}
 .ag__price{color:var(--ink-2); font-size:var(--fs-sm)}
+.ag__price a{color:var(--teal); text-underline-offset:.2em}
+.ag__empty{padding:1.5rem 0; border-bottom:1px solid var(--rule); color:var(--ink-2)}
+.ag__empty a{color:var(--teal)}
 .tag{display:inline-block; font-family:var(--f-label); font-size:.63rem; letter-spacing:.13em; text-transform:uppercase;
   border:1px solid var(--terra); color:var(--terra); padding:.16rem .45rem; border-radius:2px}
 .tag--full{border-color:var(--ink-3); color:var(--ink-3)}
@@ -1059,7 +1063,7 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
       <div class="stack" style="gap:2rem">
         <div>
           <h2 class="h2">Properes activitats</h2>
-          <p class="lead">Places limitades. Escriu-nos i confirmam la teva plaça per correu.</p>
+          <p class="lead">Places limitades. Reserva la teva plaça amb el formulari de cada activitat.</p>
         </div>
         <div class="ag" id="agenda-list"></div>
         <p class="formnote">Les places es confirmen per correu i el pagament es fa per Bizum o transferència abans de l'activitat. Si una data és plena, t'avisam de la següent.</p>
@@ -1904,27 +1908,37 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
   }
   document.querySelectorAll('section.dark').forEach(leafFall);
 
-  /* ── home: agenda (exemple) ── */
+  /* ── home: agenda ──
+     Cada activitat desapareix sola l'endema de la seva data. */
   var agenda=[
-    {d:'14',m:'Setembre',t:'Cercle de Dones · Natura & Psicologia',meta:['Biniamar','Dissabtes matí','Amb María del Diego'],price:'40 €/mes · 350 € el programa complet',state:'places'},
-    {d:'28',m:'Setembre',t:'Bany de bosc essencial',meta:['MUCBO · Jardí Botànic de Sóller','1h 30'],price:'30 € per persona',state:'places'},
-    {d:'12',m:'Octubre',t:'Bany de bosc creatiu · il·lustració a la natura',meta:['Amb Moiximoix','2h 30'],price:'45 € per persona',state:'full'},
-    {d:'08',m:'Novembre',t:'Jornada d’immersió de tardor',meta:['Serra de Tramuntana','6h · dinar inclòs'],price:'des de 70 € per persona',state:'places'}
+    {data:'2026-10-17',d:'17',m:'Octubre',t:'Bany de bosc creatiu · Tardor',
+     meta:['Lloret de Vistalegre','9.30 – 13.30 h','Amb Virginia de Moix & Moix'],
+     desc:'Un lent passeig per la natura per despertar els sentits, inspirat en els primers signes de la tardor i la subtilesa de les petites transformacions. La nostra cita estacional d’octubre.',
+     price:'Preu per concretar',state:'places',
+     form:'https://forms.gle/Vj6uopooiaDSBWTb7',cartell:'assets/img/cartell-bany-lloret-2026-10.jpg'},
+    {data:'2026-10-24',d:'24',m:'Octubre',t:'Jornada Origen',
+     meta:['Pla de Mallorca','10.30 – 19 h','Amb Mada Cardell (Magic Seeds)'],
+     desc:'Una jornada immersiva al món del benestar natural amb olis essencials i bany de bosc. Crearem una farmaciola natural de 6 roll-ons amb olis essencials purs que t’enduràs a casa, i també les pautes per incorporar el bany de bosc a la teva rutina.',
+     price:'Preu per concretar',state:'places',
+     form:'https://forms.gle/b5ziEf5UZZSvmPtdA',cartell:'assets/img/cartell-jornada-origen-2026-10.jpg'}
   ];
-  set('agenda-list', agenda.map(function(a){
+  var avui=new Date(); avui=avui.getFullYear()+'-'+('0'+(avui.getMonth()+1)).slice(-2)+'-'+('0'+avui.getDate()).slice(-2);
+  var properes=agenda.filter(function(a){return a.data>=avui;});
+  set('agenda-list', properes.length ? properes.map(function(a){
     var tag = a.state==='full'
       ? '<span class="tag tag--full">Places exhaurides</span>'
       : '<span class="tag">Places obertes</span>';
     var btn = a.state==='full'
       ? '<a class="btn btn--ghost" href="#contacte" data-nav="home#contacte">Llista d’espera</a>'
-      : '<a class="btn" href="#contacte" data-nav="home#contacte">Sol·licitar plaça <span class="btn__arrow">→</span></a>';
+      : '<a class="btn" href="'+a.form+'" target="_blank" rel="noopener">Reserva la plaça <span class="btn__arrow">→</span></a>';
     return '<article class="ag__item rv">'+
       '<div class="ag__date"><span class="ag__day">'+a.d+'</span><span class="ag__mon">'+a.m+'</span></div>'+
       '<div class="ag__body">'+tag+'<h3>'+a.t+'</h3>'+
         '<div class="ag__meta">'+a.meta.map(function(x){return '<span>'+x+'</span>';}).join('<span>·</span>')+'</div>'+
-        '<p class="ag__price">'+a.price+'</p></div>'+
+        '<p class="ag__desc">'+a.desc+'</p>'+
+        '<p class="ag__price">'+a.price+' · <a href="'+a.cartell+'" target="_blank" rel="noopener">Veure el cartell</a></p></div>'+
       btn+'</article>';
-  }).join(''));
+  }).join('') : '<p class="ag__empty">Aviat publicarem noves dates. Si vols que t’avisem, <a href="#contacte" data-nav="home#contacte">escriu-nos</a>.</p>');
 
   /* ── home: públics ──
      Imatges provisionals: cal substituir-les per material propi. */
