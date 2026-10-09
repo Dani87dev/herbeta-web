@@ -9,38 +9,38 @@
   "use strict";
 
   /* canviar-la fa que la finestra torni a sortir sola a qui ja l'havia vist */
-  var VERSIO = "2026-10-09";
+  var VERSIO = "2026-10-09b";
   var CLAU = "herbeta:novetats-vistes";
 
   var CANVIS = [
     {
-      titol: "Versión en castellano",
-      intro: "La web entera está traducida al castellano, sin añadir contenido nuevo. Conviene leerla de arriba abajo por si alguna frase no suena natural.",
+      titol: "Versió en castellà",
+      intro: "Tota la web està traduïda al castellà, sense afegir-hi contingut nou. Convé llegir-la de dalt a baix per si alguna frase no sona natural.",
       punts: [
-        "Arriba a la derecha hay un selector <b>CA · ES</b> para cambiar de idioma.",
-        "Los nombres de las actividades se quedan en catalán, igual que los carteles: Sospirs de Bosc, Nit i Alba al Refugi, Jornada Origen.",
-        "Si alguien escribe desde la versión en castellano, el correo llega con «(en castellà)» en el asunto.",
-        "El artículo de la revista Alimara se enlaza tal cual, indicando que está en catalán."
+        "A dalt a la dreta hi ha un selector <b>CA · ES</b> per canviar d'idioma.",
+        "Els noms de les activitats queden en català, igual que els cartells: Sospirs de Bosc, Nit i Alba al Refugi, Jornada Origen.",
+        "Si algú escriu des de la versió en castellà, el correu arriba amb «(en castellà)» a l'assumpte.",
+        "L'article de la revista Alimara s'enllaça tal com és, indicant que està en català."
       ]
     },
     {
-      titol: "Textos que cambian en catalán",
-      intro: "Para que la web salga al buscar «banys de bosc Mallorca» o «educació ambiental Mallorca». En castellano se han hecho los mismos cambios.",
+      titol: "Textos que canvien en català",
+      intro: "Perquè la web surti quan es cerca «banys de bosc Mallorca» o «educació ambiental Mallorca». En castellà s'han fet els mateixos canvis.",
       taula: [
-        ["Portada, etiqueta sobre el titular", "Cultivant vincles amb la natura", "Banys de bosc i educació ambiental a Mallorca"],
-        ["«Què és», primer párrafo", "…originària del Japó (<i>shinrin-yoku</i>)…", "…originària del Japó (<i>shinrin-yoku</i>, o <i>forest bathing</i> en anglès)…"],
-        ["Titular de la página de escuelas", "Programa educatiu i vivencial a la natura", "Programa d'educació ambiental i vivencial a Mallorca"],
-        ["Titular de la página de bienestar", "Programes de benestar a la natura", "Banys i teràpia de bosc: benestar a la natura de Mallorca"],
-        ["Pie de página", "Malena Bibiloni Amorós · Mallorca", "Malena Bibiloni Amorós · Banys de bosc a Mallorca"]
+        ["Portada, etiqueta damunt el titular", "Cultivant vincles amb la natura", "Banys de bosc i educació ambiental a Mallorca"],
+        ["«Què és», primer paràgraf", "…originària del Japó (<i>shinrin-yoku</i>)…", "…originària del Japó (<i>shinrin-yoku</i>, o <i>forest bathing</i> en anglès)…"],
+        ["Titular de la pàgina d'escoles", "Programa educatiu i vivencial a la natura", "Programa d'educació ambiental i vivencial a Mallorca"],
+        ["Titular de la pàgina de benestar", "Programes de benestar a la natura", "Banys i teràpia de bosc: benestar a la natura de Mallorca"],
+        ["Peu de pàgina", "Malena Bibiloni Amorós · Mallorca", "Malena Bibiloni Amorós · Banys de bosc a Mallorca"]
       ],
-      nota: "«Cultivant vincles amb la natura» se sigue viendo en el pie de página."
+      nota: "«Cultivant vincles amb la natura» es continua veient al peu de pàgina."
     },
     {
-      titol: "Lo que sale en Google",
-      intro: "No se ve en la página: sale en la pestaña del navegador y en los resultados de búsqueda.",
+      titol: "El que surt a Google",
+      intro: "No es veu a la pàgina: surt a la pestanya del navegador i als resultats de cerca.",
       taula: [
-        ["Título", "Herbeta del Bosc", "Banys de bosc i educació ambiental a Mallorca · Herbeta del Bosc"],
-        ["Descripción", "Herbeta del Bosc - banys de bosc, educacio ambiental i experiencies…", "Banys de bosc (shinrin-yoku o forest bathing), teràpia de bosc i educació ambiental a Mallorca per a particulars, escoles i entitats, amb na Malena Bibiloni."]
+        ["Títol", "Herbeta del Bosc", "Banys de bosc i educació ambiental a Mallorca · Herbeta del Bosc"],
+        ["Descripció", "Herbeta del Bosc - banys de bosc, educacio ambiental i experiencies…", "Banys de bosc (shinrin-yoku o forest bathing), teràpia de bosc i educació ambiental a Mallorca per a particulars, escoles i entitats, amb na Malena Bibiloni."]
       ]
     }
   ];
@@ -82,8 +82,8 @@
     ".nv__ara{color:var(--ink,#343030)}"+
     ".nv__abans::before,.nv__ara::before{display:inline-block;width:4.2rem;font-family:var(--f-label,monospace);"+
       "font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none}"+
-    ".nv__abans::before{content:'Antes';color:var(--ink-3,#8A8279)}"+
-    ".nv__ara::before{content:'Ahora';color:var(--teal,#506A6B)}"+
+    ".nv__abans::before{content:'Abans';color:var(--ink-3,#8A8279)}"+
+    ".nv__ara::before{content:'Ara';color:var(--teal,#506A6B)}"+
     "@media (min-width:640px){.nv__fila{padding:.85rem 1.1rem}}";
 
   function seccio(c){
@@ -104,8 +104,8 @@
 
   var bar = document.createElement("div");
   bar.className = "nv-bar";
-  bar.innerHTML = '<span>Previsualización · hay cambios por revisar</span>'+
-    '<button type="button" aria-haspopup="dialog">Ver los cambios</button>';
+  bar.innerHTML = '<span>Previsualització · hi ha canvis per revisar</span>'+
+    '<button type="button" aria-haspopup="dialog">Veure els canvis</button>';
   document.body.insertBefore(bar, document.body.firstChild);
 
   var nv = document.createElement("div");
@@ -113,10 +113,10 @@
   nv.hidden = true;
   nv.innerHTML =
     '<div class="nv__box" role="dialog" aria-modal="true" aria-labelledby="nv-titol" tabindex="-1">'+
-      '<button type="button" class="nv__close" aria-label="Cerrar">×</button>'+
-      '<p class="nv__kicker">Novedades en la previsualización</p>'+
-      '<h2 id="nv-titol">Qué ha cambiado en la web</h2>'+
-      '<p class="nv__lead">Todo esto se ve aquí, en la previsualización. Todavía no está en la web oficial.</p>'+
+      '<button type="button" class="nv__close" aria-label="Tanca">×</button>'+
+      '<p class="nv__kicker">Novetats a la previsualització</p>'+
+      '<h2 id="nv-titol">Què ha canviat a la web</h2>'+
+      '<p class="nv__lead">Tot això es veu aquí, a la previsualització. Encara no és a la web oficial.</p>'+
       CANVIS.map(seccio).join('')+
     '</div>';
   document.body.appendChild(nv);
