@@ -6,7 +6,9 @@
 #
 # Es torna a muntar sencer cada vegada que es puja qualsevol de les tres
 # branques. Les dues previsualitzacions no s'enllacen enlloc, no s'indexen
-# a Google i no compten a les estadistiques.
+# a Google i no compten a les estadistiques. Si una previsualitzacio du
+# novetats.js, les seves pagines mostren la finestra amb els canvis per
+# revisar; a la web oficial no hi va mai.
 
 name: Publica el lloc
 
@@ -36,6 +38,8 @@ jobs:
           REPO: https://github.com/${{ github.repository }}.git
         run: |
           git clone --quiet --depth 1 --branch main "$REPO" _site
+          # la llista de novetats es nomes per a les previsualitzacions
+          rm -f _site/novetats.js
           for branca in wip estil; do
             if git ls-remote --exit-code --heads "$REPO" "$branca" >/dev/null; then
               git clone --quiet --depth 1 --branch "$branca" "$REPO" "_site/$branca"
@@ -45,6 +49,10 @@ jobs:
                 sed -i '0,/<head>/s//<head>\n<meta name="robots" content="noindex, nofollow">/' "$pagina"
                 # que no compti a les estadistiques
                 sed -i '/cloudflareinsights/d' "$pagina"
+                # finestra de novetats, si la branca en du (novetats.js)
+                if [ -f "_site/$branca/novetats.js" ]; then
+                  sed -i "s#</body>#<script src=\"/$branca/novetats.js\" defer></script>\n</body>#" "$pagina"
+                fi
               done
               rm -f "_site/$branca/CNAME"
             fi
