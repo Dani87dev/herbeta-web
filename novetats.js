@@ -9,10 +9,22 @@
   "use strict";
 
   /* canviar-la fa que la finestra torni a sortir sola a qui ja l'havia vist */
-  var VERSIO = "2026-10-09b";
+  var VERSIO = "2026-10-09c";
   var CLAU = "herbeta:novetats-vistes";
 
   var CANVIS = [
+    {
+      titol: "Ja no diu «Web en construcció»: cal revisar els preus",
+      intro: "Hem llevat la franja de dalt («Web en construcció · alguns preus o dates poden no estar actualitzats») i el «Web en construcció · 2026» del peu, en català i en castellà. Com que ja no hi ha l'avís, <b>tots els preus que surten a la web han de ser correctes</b>. Són aquests:",
+      punts: [
+        "<b>Portada</b>, davall el titular: «Des de 30 € / persona».",
+        "<b>Escoles i entitats</b>, a dalt: «Des de 150 € / grup».",
+        "<b>Escoles i entitats</b>, apartat «Durades i preus orientatius»: de 120 € a 350 € per sessió, i els banys de bosc escolars a partir de 150 € per grup de fins a 25 alumnes.",
+        "<b>Programes de benestar</b>, taula de formats: sessió puntual 200-300 €, programa de 6 setmanes 1.000-1.500 €, programa de 12 setmanes 1.800-2.500 €.",
+        "<b>Agenda</b>: totes les activitats diuen «Preu per concretar». Si ja tens el preu d'alguna, digues-nos-el."
+      ],
+      nota: "Els preus de la botiga no hi són: la botiga la mirarem més endavant i de moment queda com està."
+    },
     {
       titol: "Versió en castellà",
       intro: "Tota la web està traduïda al castellà, sense afegir-hi contingut nou. Convé llegir-la de dalt a baix per si alguna frase no sona natural.",

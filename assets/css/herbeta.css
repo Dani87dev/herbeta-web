@@ -56,12 +56,6 @@ img,svg{max-width:100%}
   letter-spacing:.15em; color:var(--teal); margin:0}
 .label--accent{color:var(--terra)}
 
-.mocknote{
-  position:relative; z-index:5; background:var(--teal-deep); color:#E7EDEC;
-  font-family:var(--f-label); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
-  text-align:center; padding:.5rem 1rem;
-}
-.mocknote b{color:#fff; font-weight:400}
 
 /* ── header ── */
 /* blanc: el logo du fons blanc i fa multiply, aixi no hi ha salt de to */
