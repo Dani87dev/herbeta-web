@@ -20,10 +20,9 @@
         "<b>Portada</b>, davall el titular: «Des de 30 € / persona».",
         "<b>Escoles i entitats</b>, a dalt: «Des de 150 € / grup».",
         "<b>Escoles i entitats</b>, apartat «Durades i preus orientatius»: de 120 € a 350 € per sessió, i els banys de bosc escolars a partir de 150 € per grup de fins a 25 alumnes.",
-        "<b>Programes de benestar</b>, taula de formats: sessió puntual 200-300 €, programa de 6 setmanes 1.000-1.500 €, programa de 12 setmanes 1.800-2.500 €.",
-        "<b>Agenda</b>: totes les activitats diuen «Preu per concretar». Si ja tens el preu d'alguna, digues-nos-el."
+        "<b>Programes de benestar</b>, taula de formats: sessió puntual 200-300 €, programa de 6 setmanes 1.000-1.500 €, programa de 12 setmanes 1.800-2.500 €."
       ],
-      nota: "Els preus de la botiga no hi són: la botiga la mirarem més endavant i de moment queda com està."
+      nota: "Els preus de l'agenda ja són els que ens vas passar i ja surten a la web oficial. Els de la botiga no hi són: la botiga la mirarem més endavant i de moment queda com està."
     },
     {
       titol: "Versió en castellà",
