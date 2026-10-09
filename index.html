@@ -9,6 +9,52 @@
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <link rel="apple-touch-icon" href="/favicon-192.png">
+<link rel="canonical" href="https://herbetadelbosc.com/">
+
+<!-- com es veu en compartir l'enllac (WhatsApp, Facebook, Telegram...) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Herbeta del Bosc">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:url" content="https://herbetadelbosc.com/">
+<meta property="og:title" content="Herbeta del Bosc">
+<meta property="og:description" content="Banys de bosc, educació ambiental i experiències a la natura a Mallorca, amb na Malena Bibiloni.">
+<meta property="og:image" content="https://herbetadelbosc.com/assets/img/hero-portada.jpg">
+<meta property="og:image:width" content="1274">
+<meta property="og:image:height" content="872">
+<meta property="og:image:alt" content="Una fulla de tardor a contrallum, amb el bosc desenfocat al darrere">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- fitxa del negoci per a Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://herbetadelbosc.com/#negoci",
+  "name": "Herbeta del Bosc",
+  "description": "Banys de bosc (shinrin-yoku, forest bathing), teràpia de bosc i educació ambiental a Mallorca per a particulars, escoles i entitats.",
+  "url": "https://herbetadelbosc.com/",
+  "logo": "https://herbetadelbosc.com/favicon-192.png",
+  "image": "https://herbetadelbosc.com/assets/img/hero-portada.jpg",
+  "email": "herbetadelbosc@gmail.com",
+  "telephone": "+34616278515",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "Illes Balears",
+    "addressCountry": "ES"
+  },
+  "areaServed": {
+    "@type": "Place",
+    "name": "Mallorca"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Malena Bibiloni Amorós"
+  },
+  "knowsAbout": ["Banys de bosc", "Shinrin-yoku", "Forest bathing", "Teràpia de bosc", "Educació ambiental"],
+  "inLanguage": "ca",
+  "sameAs": ["https://www.instagram.com/malenabibiloni"]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Karla:wght@300..700&family=Courier+Prime:wght@400;700&display=swap">
@@ -2090,13 +2136,13 @@ html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,
     var label='Amplia el cartell de '+a.t;
     var aside = a.cartell
       ? '<button type="button" class="ag__poster" data-cartell="'+i+'" aria-label="'+label+'">'+
-          '<span class="ag__paper"><img src="'+a.cartell+'" alt="" loading="lazy"></span>'+
+          '<span class="ag__paper"><img src="'+a.cartell+'" alt="Cartell de '+a.t+'" loading="lazy"></span>'+
           '<span class="ag__stamp'+(a.cada?' ag__stamp--rec':'')+'" aria-hidden="true"><b>'+a.dia+'</b><small>'+a.mesCurt+'</small></span>'+
           '<span class="ag__zoom" aria-hidden="true">'+ZOOM+'</span></button>'
       : '<div class="ag__blank'+(a.cada?' ag__blank--rec':'')+'" aria-hidden="true"><b>'+a.dia+'</b><small>'+a.mes+'</small></div>';
     var strip = a.cartell
       ? '<button type="button" class="ag__strip" data-cartell="'+i+'" aria-label="'+label+'">'+
-          '<img src="'+a.cartell+'" alt="" loading="lazy">'+
+          '<img src="'+a.cartell+'" alt="Cartell de '+a.t+'" loading="lazy">'+
           '<span>Veure el cartell<small>Toca per ampliar</small></span>'+ZOOM+'</button>'
       : '';
     return '<article class="ag__item rv">'+
