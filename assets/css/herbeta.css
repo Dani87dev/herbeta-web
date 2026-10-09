@@ -1,0 +1,882 @@
+/* ─────────────────────────────────────────────────────────────
+   Herbeta del Bosc — paleta extreta dels materials de na Malena
+   #506A6B teal · #D7D1C5 arena · #9D8774 topo · #B6715B terra
+   Disseny compromès amb un sol món visual: clar, aquarel·la.
+   ───────────────────────────────────────────────────────────── */
+:root{
+  --paper:#F5F2EA; --paper-2:#EBE5D8; --paper-3:#DED7C7;
+  --band:#E4EBE9; --field:#FCFAF5;
+  --ink:#343030; --ink-2:#5C5751; --ink-3:#8A8279;
+  --teal:#506A6B; --teal-deep:#3D4D4E; --teal-soft:#8CADAF; --teal-pale:#C4D5D4;
+  --topo:#9D8774; --terra:#B6715B; --ocre:#896C3C;
+  --rule:rgba(52,48,48,.16); --rule-soft:rgba(52,48,48,.08);
+  --leaf:rgba(80,106,107,.34);
+  --leaf-pale:rgba(255,255,255,.86);
+
+  --f-display:"Newsreader",Georgia,"Times New Roman",serif;
+  --f-body:"Karla","Helvetica Neue",Arial,sans-serif;
+  --f-label:"Courier Prime","Courier New",monospace;
+
+  --fs-display:clamp(2.7rem,6.6vw,5rem);
+  --fs-h2:clamp(1.85rem,3.4vw,2.75rem);
+  --fs-h3:1.3rem;
+  --fs-lead:clamp(1.1rem,1.6vw,1.32rem);
+  --fs-body:1.0625rem;
+  --fs-sm:.925rem;
+  --fs-label:.71rem;
+
+  --wrap:1180px;
+  --gut:clamp(1.25rem,4vw,3.25rem);
+  --sheet-col:150px;
+  --img-brand:url("../img/logo-herbeta.jpg");
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--f-body); font-size:var(--fs-body); line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+/* gra de paper molt subtil */
+body::before{
+  content:""; position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.55;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+}
+h1,h2,h3,h4{font-family:var(--f-display); font-weight:500; line-height:1.08; text-wrap:balance; margin:0}
+p{margin:0}
+a{color:inherit}
+ul{list-style:none; margin:0; padding:0}
+img,svg{max-width:100%}
+:focus-visible{outline:2px solid var(--terra); outline-offset:3px; border-radius:2px}
+
+.wrap{width:100%; max-width:var(--wrap); margin-inline:auto; padding-inline:var(--gut); position:relative; z-index:2}
+.stack{display:flex; flex-direction:column}
+
+.label{font-family:var(--f-label); font-size:var(--fs-label); text-transform:uppercase;
+  letter-spacing:.15em; color:var(--teal); margin:0}
+.label--accent{color:var(--terra)}
+
+.mocknote{
+  position:relative; z-index:5; background:var(--teal-deep); color:#E7EDEC;
+  font-family:var(--f-label); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
+  text-align:center; padding:.5rem 1rem;
+}
+.mocknote b{color:#fff; font-weight:400}
+
+/* ── header ── */
+/* blanc: el logo du fons blanc i fa multiply, aixi no hi ha salt de to */
+.site{position:sticky; top:0; z-index:40; background:#FFFFFF;
+  border-bottom:1px solid var(--rule-soft)}
+.site__in{display:flex; align-items:center; gap:1.5rem; min-height:70px}
+.brand{display:flex; align-items:center; gap:.62rem; text-decoration:none; margin-right:auto; color:var(--teal)}
+
+.brand__name{font-family:var(--f-display); font-size:1.12rem; line-height:1.05; color:var(--ink)}
+.brand__sub{font-family:var(--f-label); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3)}
+.nav{display:flex; align-items:center; gap:1.4rem}
+.nav a{font-size:.9rem; text-decoration:none; color:var(--ink-2); padding-block:.35rem;
+  border-bottom:1px solid transparent; transition:color .2s, border-color .2s}
+.nav a:hover{color:var(--teal); border-bottom-color:var(--terra)}
+.nav a[aria-current="page"]{color:var(--teal); border-bottom-color:var(--terra)}
+.navtoggle{display:none}
+/* selector d'idioma: al mobil queda fora del menu, sempre visible */
+.lang{display:flex; align-items:center; gap:.45rem; font-family:var(--f-label); font-size:.68rem;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3)}
+.lang a{text-decoration:none; color:var(--ink-3); transition:color .2s}
+.lang a:hover{color:var(--teal)}
+.lang [aria-current]{color:var(--teal)}
+@media (min-width:861px){ .lang{order:3} }
+@media (max-width:860px){
+  .nav{display:none; position:absolute; inset:70px 0 auto; flex-direction:column; align-items:flex-start;
+    gap:0; background:#FFFFFF; border-bottom:1px solid var(--rule); padding:.5rem var(--gut) 1.25rem}
+  .nav.is-open{display:flex}
+  .nav a{width:100%; padding-block:.7rem; border-bottom:1px solid var(--rule-soft)}
+  .navtoggle{display:inline-flex; align-items:center; gap:.5rem; background:none; border:1px solid var(--rule);
+    border-radius:2px; padding:.45rem .7rem; color:var(--ink); cursor:pointer;
+    font-family:var(--f-label); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase}
+}
+
+/* ── botons ── */
+.btn{display:inline-flex; align-items:center; gap:.55rem; text-decoration:none; cursor:pointer;
+  font-family:var(--f-body); font-size:.92rem; font-weight:500;
+  padding:.78rem 1.35rem; border-radius:2px; border:1px solid var(--teal);
+  background:var(--teal); color:#F7F5F0; transition:background .2s, color .2s, border-color .2s}
+.btn:hover{background:var(--terra); border-color:var(--terra); color:#FFF}
+.btn--ghost{background:transparent; color:var(--teal); border-color:var(--teal-pale)}
+.btn--ghost:hover{background:transparent; color:var(--terra); border-color:var(--terra)}
+.btn__arrow{transition:transform .2s}
+.btn:hover .btn__arrow{transform:translateX(3px)}
+
+/* ── graella de plec d'herbari ── */
+/* El retol va damunt del titol, no en una columna lateral:
+   aixi el contingut ocupa tota l'amplada i res queda descentrat. */
+.sheet{display:block}
+.sheet__margin{display:flex; flex-direction:row; align-items:center; flex-wrap:wrap;
+  gap:.7rem; margin-bottom:clamp(1.2rem,2.5vw,1.8rem)}
+.sheet__margin .rule{height:1px; width:1.8rem; flex:none; background:var(--rule)}
+
+section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
+.band{background:var(--band)}
+.sand{background:var(--paper-2)}
+
+.sprig{display:block; width:100%; height:auto}
+
+/* aigualides d'aquarel·la */
+.wash{position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden}
+.wash svg{position:absolute; width:100%; height:100%}
+
+.h2{font-size:var(--fs-h2); margin-bottom:1.1rem}
+.lead{font-family:var(--f-display); font-size:var(--fs-lead); line-height:1.5; color:var(--ink-2); max-width:60ch}
+.prose{max-width:64ch; color:var(--ink-2); display:flex; flex-direction:column; gap:1rem}
+.i{font-style:italic}
+
+/* ── hero ── */
+.hero{padding-block:clamp(3.5rem,8vw,6.5rem) clamp(4rem,9vw,7.5rem)}
+.hero__grid{display:grid; grid-template-columns:var(--sheet-col) minmax(0,1fr) minmax(0,290px);
+  gap:clamp(1.5rem,4vw,3.5rem); align-items:start}
+.hero h1{font-size:var(--fs-display); font-weight:400; letter-spacing:-.015em; max-width:15ch; margin-block:1.4rem 0}
+.hero h1 em{font-style:italic; color:var(--teal)}
+.hero__lead{margin-top:1.6rem; max-width:46ch}
+.hero__cta{display:flex; flex-wrap:wrap; gap:.75rem; margin-top:2.2rem}
+@media (max-width:1040px){
+  .hero__grid{grid-template-columns:var(--sheet-col) minmax(0,1fr)}
+  .hero__figure{grid-column:1/-1; aspect-ratio:16/9 !important; margin-top:2rem}
+  .hero__figure img{object-position:center 40%}
+}
+@media (max-width:860px){
+  .hero__grid{grid-template-columns:1fr; gap:1rem}
+}
+.hero__meta{display:flex; flex-wrap:wrap; gap:1.4rem; margin-top:3rem; padding-top:1.4rem; border-top:1px solid var(--rule)}
+.hero__meta div{display:flex; flex-direction:column; gap:.15rem}
+.hero__meta strong{font-family:var(--f-display); font-size:1.05rem; font-weight:500}
+
+/* ── portada ────────────────────────────────────────────────
+   La foto de la portada seva, retallada per damunt del titol
+   que du incrustat (comenca al 45% de l'alcada; en mostram 42%).
+   El titular va en text viu: cerca, s'adapta i es llegeix. */
+.hero--cover{padding:0; min-height:min(80vh,660px); display:flex; align-items:flex-end;
+  color:#F4F1EA; isolation:isolate}
+.hero--cover .hero__grid{padding-block:clamp(3rem,6vw,4.5rem);
+  grid-template-columns:minmax(0,1fr) minmax(0,300px)}
+/* etiqueta d'especimen, en una linia damunt la portada. Va absoluta i
+   per tant no reserva espai: apilada en columna requeia damunt el
+   titular a partir dels 861px, aixi que es manté sempre horitzontal. */
+.hero__tag{position:absolute; z-index:3; top:clamp(1.4rem,3vw,2.2rem);
+  left:var(--gut); right:var(--gut);
+  display:flex; flex-direction:row; align-items:center; flex-wrap:wrap; gap:.6rem}
+.hero__tag .rule{height:1px; width:1.1rem; background:rgba(244,241,234,.45); flex:none}
+.hero__tag .label{font-size:.66rem; line-height:1.45}
+.hero__bg{position:absolute; inset:0; z-index:0; overflow:hidden}
+.hero__bg img{width:100%; height:calc(100%/.42); object-fit:cover; object-position:center top; display:block}
+.hero__scrim{position:absolute; inset:0; z-index:1;
+  background:linear-gradient(103deg, rgba(26,34,31,.80) 0%, rgba(26,34,31,.56) 38%,
+    rgba(26,34,31,.20) 66%, rgba(26,34,31,.34) 100%)}
+.hero--cover .label{color:#CBD9D3}
+.hero--cover .label--accent{color:#E9B79E}
+.hero--cover h1{color:#F7F5EF}
+.hero--cover h1 em{color:#CFE0D8}
+.hero--cover .lead{color:#E2E4DB}
+.hero--cover .hero__meta{border-top-color:rgba(244,241,234,.30)}
+.hero--cover .hero__meta strong{color:#F7F5EF}
+.hero--cover .btn--ghost{color:#F4F1EA; border-color:rgba(244,241,234,.55)}
+.hero--cover .btn--ghost:hover{color:#fff; border-color:#E9B79E}
+@media (max-width:860px){
+  .hero--cover .hero__grid{grid-template-columns:1fr; padding-top:7rem}
+}
+@media (max-width:1040px){
+  .hero--cover{min-height:auto}
+  .hero__bg img{height:calc(100%/.42); min-height:100%}
+}
+
+/* ── fotografia ─────────────────────────────────────────────
+   L'arc es exclusiu del retrat de na Malena: una sola vegada,
+   perque signifiqui alguna cosa. La resta de fotos, rectangle net. */
+.photo{position:relative; overflow:hidden; border-radius:2px; background:var(--paper-3); margin:0}
+.photo img{width:100%; height:100%; object-fit:cover; display:block}
+
+/* ── retrat ─────────────────────────────────────────────────────
+   La foto original du l'arc retallat amb cantons blancs. En pujar
+   de mida i encaixar-la en 4:5 amb l'ancoratge avall, la cupula
+   queda fora de quadre: es llegeix com una foto normal, tallada
+   en diagonal per dalt. */
+.bio__frame{position:relative; margin:0}
+.bio__portrait{position:relative; overflow:hidden; margin:0; aspect-ratio:4/5;
+  background:var(--paper-3);
+  clip-path:polygon(0 9%, 100% 0, 100% 100%, 0 96%)}
+.bio__portrait img{width:100%; height:100%; object-fit:cover;
+  object-position:center 74%; display:block}
+/* branques que sobresurten del marc, per trencar el rectangle */
+.bio__leaf{position:absolute; z-index:2; pointer-events:none; display:block}
+.bio__leaf--a{top:-7%; right:-11%; width:34%; color:rgba(80,106,107,.34)}
+.bio__leaf--b{bottom:-6%; left:-10%; width:27%; color:rgba(137,108,60,.30); transform:scaleX(-1)}
+@media (max-width:700px){
+  .bio__leaf--a{right:-4%; width:26%}
+  .bio__leaf--b{left:-3%; width:20%}
+}
+
+.hero__figure{margin:0; align-self:start}
+
+/* retall del logo dins logo-herbeta.jpg (1051x1038) */
+.logo{--k:.36; width:calc(265px*var(--k)); height:calc(115px*var(--k));
+  background-image:var(--img-brand); background-repeat:no-repeat;
+  background-size:calc(1051px*var(--k)) auto;
+  background-position:calc(-110px*var(--k)) calc(-15px*var(--k));
+  mix-blend-mode:multiply; flex:none}
+
+.quees__split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,470px);
+  gap:clamp(2rem,5vw,4rem); align-items:stretch}
+/* la foto pren l'alcada del text: sempre acaben iguals */
+.quees__text{max-width:46ch; display:flex; flex-direction:column}
+.quees__text .h2{margin-bottom:1.4rem}
+/* el text reparteix qualsevol espai sobrant entre els paragrafs,
+   no el deixa tot al final */
+.quees__text .prose{flex:1; justify-content:space-between;
+  font-size:1.115rem; line-height:1.78; gap:1.15rem; max-width:none}
+/* La imatge s'absolutitza: aixi no aporta alcada. Amb height:100%
+   en flux queia a auto (pare d'alcada indeterminada) i es dibuixava
+   a la seva alcada intrinseca, estirant la fila per damunt del text. */
+.figure--quees{height:100%; min-height:380px}
+
+/* ── muntatge de lamina botanica ────────────────────────────────
+   Passe-partout amb marge inferior mes fondo per a la cartela, i
+   doble filet: un al cantell del muntatge, un altre voltant la
+   imatge. Tot el que hi ha dins va absolut, per no aportar alcada. */
+.plate{
+  --mat:clamp(.75rem,1.5vw,1.15rem);
+  --mat-b:clamp(2.6rem,4vw,3.2rem);
+  background:#F8F5ED; border:1px solid rgba(52,48,48,.34); border-radius:0;
+  padding:var(--mat) var(--mat) var(--mat-b);
+  box-shadow:0 1px 2px rgba(52,48,48,.05), 0 14px 30px -18px rgba(52,48,48,.30);
+}
+.plate__in{
+  position:absolute; inset:var(--mat) var(--mat) var(--mat-b);
+  display:block; overflow:hidden; border:1px solid rgba(52,48,48,.30);
+}
+.plate__in img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.plate figcaption{
+  position:absolute; left:var(--mat); right:var(--mat);
+  bottom:calc(var(--mat-b) * .32); text-align:center;
+  font-family:var(--f-label); font-size:.63rem; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--ink-3);
+}
+@media (max-width:900px){
+  .quees__split{grid-template-columns:1fr}
+  .quees__text{max-width:none}
+  /* A una columna el muntatge passa a flux i deixa d'anar per aspect-ratio:
+     el Safari d'iOS no li donava alcada (tots els fills hi van absoluts) i
+     la lamina quedava reduida a la franja del passe-partout, amb la cartela
+     tallada. Ara l'alcada la du la caixa interior amb el padding en % i la
+     cartela va davall, en flux normal. */
+  .figure--quees{height:auto; min-height:0; aspect-ratio:auto; max-height:none;
+    padding-bottom:calc(var(--mat-b) * .32)}
+  .figure--quees .plate__in{position:relative; inset:auto;
+    width:100%; height:0; padding-bottom:75%}
+  .figure--quees figcaption{position:static; margin-top:calc(var(--mat-b) * .40)}
+}
+/* en tauleta i movil apaisat la lamina s'estira massa amb el 4:3:
+   la deixam apaisada, com feia abans el max-height */
+@media (min-width:561px) and (max-width:900px){
+  .figure--quees .plate__in{padding-bottom:48%}
+}
+
+.contacte__split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,250px);
+  gap:clamp(1.5rem,4vw,3rem); align-items:center}
+.leaves{aspect-ratio:1/1}
+.leaves svg{display:block; width:100%; height:100%}
+@media (max-width:820px){
+  .contacte__split{grid-template-columns:1fr}
+  .leaves{max-width:230px; margin-inline:auto}
+}
+
+/* ── a mida: banda amb la foto a sang, com la portada ──────────
+   El vel fosqueja l'esquerra, on va el text, i s'aclareix cap a la
+   dreta perquè el camí i les dues figures quedin llegibles. */
+.amida--cover{padding:0; min-height:min(66vh,520px); display:flex; align-items:center}
+.amida--cover .wrap{position:relative; z-index:2; width:100%;
+  padding-block:clamp(3.5rem,8vw,5.5rem)}
+.amida__cta{max-width:35rem}
+.amida__cta .btn{align-self:flex-start; margin-top:.35rem}
+.amida-veil{position:absolute; inset:0;
+  background:linear-gradient(100deg,
+    rgba(30,40,34,.88) 0%, rgba(30,40,34,.74) 32%,
+    rgba(30,40,34,.42) 60%, rgba(30,40,34,.56) 100%)}
+@media (max-width:820px){
+  .amida--cover{min-height:auto}
+  .amida-veil{background:linear-gradient(180deg,
+    rgba(30,40,34,.62) 0%, rgba(30,40,34,.84) 55%, rgba(30,40,34,.93) 100%)}
+}
+
+
+/* ── targetes ── */
+.grid{display:grid; gap:clamp(1rem,2vw,1.6rem)}
+.grid--2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.grid--3{grid-template-columns:repeat(auto-fit,minmax(255px,1fr))}
+
+.card{background:var(--field); border:1px solid var(--rule-soft); border-radius:2px;
+  padding:1.6rem 1.5rem; display:flex; flex-direction:column; gap:.7rem}
+.band .card{background:rgba(255,255,255,.62)}
+.sand .card{background:rgba(255,255,255,.55)}
+.card h3{font-size:var(--fs-h3)}
+.card p{color:var(--ink-2); font-size:var(--fs-sm)}
+
+/* ── benestar ── */
+.benestar__cards .card{border-top:2px solid var(--teal)}
+.benestar__cards .card + .card{border-top-color:var(--terra)}
+.benestar__notes{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.6rem; max-width:68ch}
+.benestar__notes li{display:flex; gap:.7rem; align-items:baseline; font-size:var(--fs-sm); color:var(--ink-2)}
+.benestar__notes li::before{content:""; width:5px; height:5px; border-radius:50%; background:var(--terra); flex:none; transform:translateY(-2px)}
+.benestar__notes strong{color:var(--ink); font-weight:600}
+.benestar .btn{align-self:flex-start}
+/* pagina de benestar */
+.objectius{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+.objectius .card{border-top:2px solid var(--teal)}
+.objectius .card:nth-child(even){border-top-color:var(--terra)}
+.creds strong{color:var(--ink); font-weight:600}
+.testimonis{align-items:start}
+.testimonis .quote{margin:0; font-size:clamp(1.15rem,1.8vw,1.4rem)}
+
+/* ── beneficis: una sola peca amb quatre compartiments ── */
+.benefits{display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
+  background:var(--field); border:1px solid var(--rule-soft); border-radius:2px; overflow:hidden}
+.band .benefits{background:rgba(255,255,255,.62)}
+.benefit{display:flex; flex-direction:column; gap:.7rem;
+  padding:clamp(1.4rem,2.2vw,1.9rem) clamp(1.1rem,1.8vw,1.6rem);
+  border-left:1px solid var(--rule-soft)}
+.benefit:first-child{border-left:none}
+.benefit h3{font-size:1.1rem}
+.benefit p{font-size:.9rem; line-height:1.55; color:var(--ink-2)}
+.ico{width:46px; height:54px; color:var(--teal); stroke-width:1.5; display:block}
+.benefit:nth-child(2) .ico{color:#5E7F80}
+.benefit:nth-child(3) .ico{color:var(--topo)}
+.benefit:nth-child(4) .ico{color:var(--terra)}
+@media (max-width:900px){
+  .benefits{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .benefit{border-top:1px solid var(--rule-soft)}
+  .benefit:nth-child(-n+2){border-top:none}
+  .benefit:nth-child(odd){border-left:none}
+  .benefit:nth-child(even){border-left:1px solid var(--rule-soft)}
+}
+@media (max-width:520px){
+  .benefits{grid-template-columns:1fr}
+  .benefit{border-left:none; border-top:1px solid var(--rule-soft)}
+  .benefit:first-child{border-top:none}
+}
+
+.mods{display:flex; flex-direction:column; border-top:1px solid var(--rule)}
+.mod{display:grid; grid-template-columns:minmax(0,13rem) minmax(0,1fr); gap:1.5rem; padding:1.35rem 0; border-bottom:1px solid var(--rule)}
+.mod h3{font-size:1.18rem}
+.mod p{color:var(--ink-2); font-size:var(--fs-sm)}
+@media (max-width:700px){.mod{grid-template-columns:1fr; gap:.4rem}}
+
+/* ── agenda ──
+   Cada activitat: el cartell a l'esquerra (o la data, si no n'hi ha)
+   i el contingut a la dreta. En mòbil el cartell passa a ser una franja. */
+.ag{display:flex; flex-direction:column; border-top:1px solid var(--rule)}
+.ag__item{display:grid; grid-template-columns:168px minmax(0,1fr); column-gap:48px; align-items:start;
+  padding:36px 0; border-bottom:1px solid var(--rule)}
+.ag__poster{position:relative; display:block; width:168px; padding:0; border:0; background:none;
+  cursor:zoom-in; font:inherit; color:inherit}
+.ag__paper{display:block; padding:8px; background:var(--paper);
+  box-shadow:0 1px 2px rgba(60,50,30,.10), 0 12px 26px -12px rgba(60,50,30,.42);
+  transition:transform .25s ease, box-shadow .25s ease}
+.ag__paper img{display:block; width:100%; height:auto}
+.ag__poster:hover .ag__paper,
+.ag__poster:focus-visible .ag__paper{transform:translateY(-4px);
+  box-shadow:0 2px 4px rgba(60,50,30,.12), 0 20px 34px -12px rgba(60,50,30,.5)}
+.ag__stamp{position:absolute; top:-10px; left:-10px; z-index:1; display:flex; flex-direction:column; align-items:center;
+  min-width:52px; padding:.3rem .5rem .35rem; background:var(--teal); color:#FFF; line-height:1;
+  transition:transform .25s ease}
+.ag__poster:hover .ag__stamp,
+.ag__poster:focus-visible .ag__stamp{transform:translateY(-4px)}
+.ag__stamp b{font-family:var(--f-display); font-size:28px; font-weight:400}
+.ag__stamp--rec b{font-size:20px}
+.ag__stamp--rec small{display:none}
+.ag__stamp small{margin-top:.3rem; font-family:var(--f-label); font-size:10px; letter-spacing:.14em; text-transform:uppercase}
+.ag__zoom{position:absolute; right:-10px; bottom:-10px; z-index:1; display:grid; place-items:center;
+  width:34px; height:34px; border-radius:50%; background:var(--paper); border:1px solid var(--rule); color:var(--teal);
+  transition:transform .25s ease}
+.ag__poster:hover .ag__zoom,
+.ag__poster:focus-visible .ag__zoom{transform:translateY(-4px)}
+.ag__zoom svg{width:16px; height:16px}
+.ag__blank{display:flex; flex-direction:column; align-items:center; justify-content:center; width:168px; height:236px;
+  background:var(--paper-3); border:1px solid var(--rule); color:var(--teal); line-height:1}
+.ag__blank b{font-family:var(--f-display); font-size:64px; font-weight:400}
+.ag__blank small{margin-top:.9rem; font-family:var(--f-label); font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3)}
+.ag__blank--rec b{font-size:34px}
+.ag__body{display:flex; flex-direction:column; gap:10px}
+.ag__top{display:flex; align-items:center; justify-content:space-between; gap:1rem}
+.ag__mdate{display:none}
+.ag__body h3{font-size:1.75rem}
+.ag__meta{display:flex; flex-wrap:wrap; gap:.4rem .9rem; color:var(--ink-3); font-size:var(--fs-sm)}
+.ag__desc{color:var(--ink-2); max-width:680px}
+.ag__strip{display:none}
+.ag__ses{list-style:none; margin:.25rem 0 0; padding:0; max-width:680px; border-top:1px solid var(--rule); font-size:var(--fs-sm)}
+.ag__ses li{display:grid; grid-template-columns:11.5rem 7.5rem minmax(0,1fr); gap:.2rem 1rem; padding:.55rem 0; border-bottom:1px solid var(--rule-soft); color:var(--ink-2)}
+.ag__ses li b{font-weight:500; color:var(--ink)}
+.ag__ses .is-past{opacity:.45}
+.ag__actions{display:flex; flex-wrap:wrap; align-items:center; gap:.75rem 1.75rem; margin-top:.5rem}
+.ag__price{color:var(--ink-3); font-size:var(--fs-sm)}
+.tag{display:inline-block; font-family:var(--f-label); font-size:.63rem; letter-spacing:.13em; text-transform:uppercase;
+  border:1px solid var(--terra); color:var(--terra); padding:.16rem .45rem; border-radius:2px}
+.tag--full{border-color:var(--ink-3); color:var(--ink-3)}
+@media (max-width:719px){
+  .ag__item{grid-template-columns:minmax(0,1fr); padding:28px 0}
+  .ag__aside{display:none}
+  .ag__mdate{display:flex; align-items:baseline; gap:.5rem; color:var(--teal); line-height:1}
+  .ag__mdate b{font-family:var(--f-display); font-size:2.1rem; font-weight:400}
+  .ag__mdate--rec b{font-size:1.6rem}
+  .ag__mdate--rec small{display:none}
+  .ag__top .tag{white-space:nowrap}
+  .ag__mdate small{font-family:var(--f-label); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3)}
+  .ag__body h3{font-size:1.5rem}
+  .ag__strip{display:flex; align-items:center; gap:.9rem; width:100%; margin-top:.35rem; padding:.5rem .9rem .5rem .5rem;
+    background:var(--field); border:1px solid var(--rule); border-radius:2px; cursor:zoom-in;
+    font:inherit; color:var(--ink); text-align:left}
+  .ag__strip img{width:56px; height:auto; flex:none; box-shadow:0 1px 2px rgba(60,50,30,.15)}
+  .ag__strip span{flex:1; display:flex; flex-direction:column; line-height:1.3}
+  .ag__strip small{color:var(--ink-3); font-size:.8rem}
+  .ag__strip svg{width:20px; height:20px; flex:none; color:var(--teal)}
+  .ag__ses li{grid-template-columns:auto minmax(0,1fr); column-gap:1rem}
+  .ag__ses li b{grid-column:1/-1}
+  .ag__actions{flex-direction:column; align-items:stretch; gap:.6rem}
+  .ag__actions .btn{justify-content:center; min-height:52px}
+  .ag__price{text-align:center}
+}
+
+/* ── cartell ampliat ── */
+.lb{position:fixed; inset:0; z-index:90; overflow-y:auto; background:rgba(28,33,32,.95); color:#F4EFE1}
+.lb[hidden]{display:none}
+.lb:focus{outline:none}
+.lb__inner{display:flex; align-items:center; justify-content:center; gap:clamp(2rem,7vw,6.5rem);
+  min-height:100%; padding:clamp(4.5rem,8vh,5rem) var(--gut)}
+.lb__img{display:block; max-height:85vh; max-width:min(48vw,640px); width:auto; height:auto;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.lb__info{display:flex; flex-direction:column; align-items:flex-start; gap:.9rem; max-width:320px}
+.lb__date{font-family:var(--f-label); font-size:var(--fs-label); letter-spacing:.18em; text-transform:uppercase; color:rgba(244,239,225,.75)}
+.lb__title{font-size:clamp(2rem,3.4vw,2.6rem); color:#F4EFE1}
+.lb__meta{color:rgba(244,239,225,.82); font-size:var(--fs-sm)}
+.lb .btn{margin-top:.6rem; background:var(--paper-2); border-color:var(--paper-2); color:var(--ink)}
+.lb .btn:hover{background:var(--terra); border-color:var(--terra); color:#FFF}
+.lb .btn--ghost{background:transparent; border-color:rgba(244,239,225,.5); color:#F4EFE1}
+.lb__dl{display:inline-flex; align-items:center; gap:.5rem; font-size:.85rem; color:#F4EFE1; text-underline-offset:.2em}
+.lb__dl:hover{color:#E9B79E}
+.lb__dl svg{width:14px; height:14px}
+.lb__esc{display:flex; align-items:center; gap:.6rem; width:100%; margin-top:1.4rem; padding-top:1.4rem;
+  border-top:1px solid rgba(244,239,225,.16); font-size:.8rem; color:rgba(244,239,225,.6)}
+.lb__esc kbd{font-family:var(--f-label); font-size:.7rem; padding:.1rem .4rem; border:1px solid rgba(244,239,225,.4); border-radius:2px}
+.lb__close{position:fixed; top:1.5rem; right:1.5rem; z-index:1; display:grid; place-items:center; width:48px; height:48px;
+  border-radius:50%; border:1px solid rgba(244,239,225,.4); background:rgba(28,33,32,.6); color:#F4EFE1; cursor:pointer;
+  transition:border-color .2s}
+.lb__close:hover{border-color:#F4EFE1}
+.lb__close svg{width:18px; height:18px}
+@media (max-width:719px){
+  .lb__inner{flex-direction:column; align-items:stretch; gap:1.75rem; padding-top:5rem}
+  .lb__img{max-width:100%; max-height:none; margin-inline:auto}
+  .lb__info{max-width:none}
+  .lb__cta{align-self:stretch}
+  .lb__cta .btn{width:100%; justify-content:center; min-height:52px}
+  .lb__esc{display:none}
+}
+
+/* ── seccio fosca: contrapunt al paper, com la portada ──────────
+   Fons teal fosc derivat de la seva paleta, tinta crema. */
+/* ── seccions fosques: rebotiga d'apotecari ─────────────────────
+   Verd d'ampolla calid, filets de llauto i llum de espelma que ve
+   de fora, no de dins dels objectes. */
+.dark{
+  --dk:#2B3630; --dk-2:#333F37;
+  --brass:#C0A063; --brass-soft:rgba(192,160,99,.30);
+  background:var(--dk); color:#EDE7D8; isolation:isolate;
+}
+.dark .h2{color:#F4EFE1}
+.dark .label{color:var(--brass)}
+.dark .label--accent{color:var(--brass)}
+.dark .lead{color:#C0C7B7}
+.dark .sheet__margin .rule{background:var(--brass-soft)}
+/* llum d'espelma vessada des de dalt: il·lumina l'escena, no els objectes */
+.dark::after{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(125% 72% at 50% 8%,
+    rgba(255,216,152,.11), rgba(255,216,152,.03) 45%, rgba(255,216,152,0) 68%)}
+
+/* fulles caient: siluetes, molt tenues, sense soroll */
+.leaffall{position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden}
+.leaffall i{position:absolute; display:block; color:rgba(226,214,186,.15);
+  animation:fallY linear infinite, fallSpin linear infinite}
+/* pols suspesa a la llum, com dins una rebotiga */
+.leaffall b{position:absolute; display:block; border-radius:50%;
+  background:rgba(255,226,168,.55); animation:moteY linear infinite, motePulse ease-in-out infinite}
+@keyframes moteY{from{top:104%}to{top:-8%}}
+@keyframes motePulse{0%,100%{opacity:.08}50%{opacity:.42}}
+.leaffall svg{display:block; width:100%; height:auto}
+@keyframes fallY{from{top:-16%}to{top:116%}}
+@keyframes fallSpin{from{transform:rotate(-25deg)}to{transform:rotate(335deg)}}
+@media (prefers-reduced-motion:reduce){.leaffall{display:none}}
+
+/* ── lamina amb llegenda numerada ───────────────────────────────
+   Les xifres romanes no decoren: lliguen cada dibuix amb la seva
+   entrada, com el peu d'una lamina botanica. */
+.board{position:relative; z-index:2; border:1px solid var(--brass-soft);
+  padding:clamp(1.1rem,2.4vw,2rem) clamp(1.1rem,2.4vw,2.2rem)}
+.board__tab{display:flex; align-items:center; gap:.85rem; margin-bottom:.4rem;
+  font-family:var(--f-label); font-size:.66rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--brass)}
+.board__rule{flex:1; height:1px; background:var(--brass-soft)}
+.legend{display:flex; flex-direction:column}
+.legend__row{display:grid; grid-template-columns:76px minmax(0,12rem) minmax(0,1fr);
+  gap:clamp(1rem,2.4vw,2.2rem); align-items:center;
+  padding:1.35rem 0; border-top:1px solid rgba(192,160,99,.20)}
+.legend__row:first-child{border-top:none}
+.legend__fig{display:flex; flex-direction:column; align-items:center; gap:.45rem}
+.legend__fig svg{width:54px; height:68px; color:#E8E1CE}
+.legend__num{font-family:var(--f-label); font-size:.62rem; letter-spacing:.16em; color:var(--brass)}
+.legend__name{font-family:var(--f-display); font-size:1.22rem; color:#F4EFE1; line-height:1.2}
+.legend__txt{font-size:var(--fs-sm); line-height:1.6; color:#B9C0B0}
+@media (max-width:760px){
+  .legend__row{grid-template-columns:60px minmax(0,1fr); gap:1rem .9rem; align-items:start}
+  .legend__fig svg{width:44px; height:56px}
+  .legend__txt{grid-column:2}
+}
+/* fitxa solta sota la taula: mateixa lamina, sense dibuix */
+.refugi{display:grid; grid-template-columns:minmax(0,12rem) minmax(0,1fr);
+  gap:clamp(1rem,2.4vw,2.2rem); padding-top:1rem}
+.refugi .legend__name{font-size:1.4rem}
+.refugi__body{display:flex; flex-direction:column; gap:.9rem}
+.refugi__body .legend__txt{font-size:var(--fs-body)}
+.refugi__when{font-family:var(--f-label); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--brass)}
+.refugi__when a{color:#F4EFE1; text-decoration-color:var(--brass-soft); text-underline-offset:.25em}
+.refugi__when a:hover{text-decoration-color:var(--brass)}
+@media (max-width:760px){ .refugi{grid-template-columns:1fr; gap:.6rem} }
+
+/* ── seccio amb el bosc al darrere ──────────────────────────────
+   El vel es un degradat que va de mig transparent a dalt (el dosel
+   i els raigs es veuen) a gairebe opac a baix: garanteix que la
+   franja de terra quedi prou fosca per posar-hi les targetes,
+   sigui quin sigui el retall a cada amplada de pantalla. */
+.bosc-bg{position:absolute; inset:0; z-index:0; overflow:hidden}
+.bosc-bg img{width:100%; height:100%; object-fit:cover; object-position:center top; display:block}
+/* El vel obre a l'alcada dels raigs i tanca avall, per garantir la
+   franja de terra fosca sota les targetes a qualsevol retall. */
+.bosc-veil{position:absolute; inset:0;
+  background:linear-gradient(180deg,
+    rgba(38,48,42,.58) 0%,
+    rgba(38,48,42,.30) 18%,
+    rgba(38,48,42,.50) 38%,
+    rgba(38,48,42,.86) 62%,
+    rgba(38,48,42,.96) 100%)}
+/* les fulles i la pols han d'anar per damunt de la foto */
+.dark--photo .leaffall{z-index:1}
+
+/* ── text damunt de fotografia ──────────────────────────────────
+   Mes cos i una aureola fosca en capes: sosté la lletra sobre
+   qualsevol zona de la imatge sense haver de tapar-la mes. */
+.dark--photo .h2{
+  font-size:clamp(2.2rem,4.4vw,3.55rem);
+  text-shadow:0 0 1px rgba(16,22,18,.92),
+              0 1px 3px rgba(16,22,18,.88),
+              0 3px 18px rgba(16,22,18,.62);
+}
+.dark--photo .lead,.dark--photo .label{
+  text-shadow:0 1px 3px rgba(16,22,18,.85), 0 2px 12px rgba(16,22,18,.5);
+}
+
+/* ── halo verd i lila ───────────────────────────────────────────
+   Dues ombres del mateix radi desplacades a banda i banda: el verd
+   surt per l'esquerra, el lila per la dreta i es fonen al centre.
+   A sota, una ombra neutra fonda que manté la targeta damunt terra. */
+.dark--photo .trio__item{
+  border-radius:10px;
+  box-shadow:-16px 20px 48px -20px rgba(141,196,158,.52),
+              16px 20px 48px -20px rgba(176,146,214,.46),
+              0 22px 46px -26px rgba(0,0,0,.78),
+              inset 0 1px 0 rgba(255,238,206,.10);
+}
+.dark--photo .trio__item:hover{
+  box-shadow:-20px 26px 60px -20px rgba(141,196,158,.70),
+              20px 26px 60px -20px rgba(176,146,214,.62),
+              0 30px 58px -26px rgba(0,0,0,.82),
+              inset 0 1px 0 rgba(255,238,206,.16);
+}
+
+/* ── cos de la targeta en blanc ─────────────────────────────────
+   La foto queda a dalt i el text davall sobre paper: la targeta es
+   llegeix com una fitxa d'herbari damunt la terra fosca. */
+.dark--photo .trio__body{background:#FCFAF5}
+.dark--photo .trio__item h3{color:var(--ink)}
+.dark--photo .trio__item h3::before{background:#4F5B33}
+.dark--photo .trio__item p{color:var(--ink-2)}
+/* sense degradat al peu de la foto: davall hi ha paper, no fosca */
+.dark--photo .trio__ph::after{display:none}
+.dark--photo .trio__ph img{filter:saturate(.96) brightness(.98)}
+
+/* ── boto verd oliva ── */
+.dark--photo .trio__item .btn{
+  background:#4F5B33; border-color:#4F5B33; color:#F5F2E6; font-weight:600;
+}
+.dark--photo .trio__item .btn:hover{
+  background:#616F41; border-color:#616F41; color:#FFFDF4;
+}
+/* la llum ja la du la foto: fora l'espelma d'aquesta seccio */
+.dark--photo::after{display:none}
+/* les targetes deixen entreveure la terra del bosc */
+.dark--photo .trio__item{
+  background:linear-gradient(180deg, rgba(255,232,190,.05), rgba(255,232,190,0) 38%), rgba(45,57,50,.90);
+  backdrop-filter:blur(3px);
+}
+
+/* ── tres pots a la vitrina ─────────────────────────────────────
+   Sense halo de color: un filet de llauto, un reflex calid al
+   caire de dalt i una ombra fonda i neutra, com un objecte posat
+   damunt un prestatge. */
+.trio{display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(1.1rem,2.2vw,1.8rem)}
+.trio__item{display:flex; flex-direction:column; overflow:hidden; border-radius:2px;
+  background:linear-gradient(180deg, rgba(255,232,190,.06), rgba(255,232,190,0) 38%), var(--dk-2);
+  border:1px solid var(--brass-soft);
+  box-shadow:0 20px 44px -24px rgba(0,0,0,.80),
+             inset 0 1px 0 rgba(255,238,206,.09);
+  transition:transform .45s cubic-bezier(.2,.7,.3,1), box-shadow .45s ease, border-color .45s ease}
+.trio__item:hover{transform:translateY(-4px); border-color:rgba(192,160,99,.55);
+  box-shadow:0 28px 56px -24px rgba(0,0,0,.85),
+             inset 0 1px 0 rgba(255,238,206,.16)}
+/* la foto va a sang dins de la targeta; el coixi el posa el cos */
+.trio__ph{position:relative; aspect-ratio:16/9; overflow:hidden; background:#242D27}
+.trio__ph img{width:100%; height:100%; object-fit:cover; display:block;
+  filter:saturate(.88) brightness(.9);
+  transition:transform .7s cubic-bezier(.2,.7,.3,1)}
+.trio__item:hover .trio__ph img{transform:scale(1.045)}
+/* degradat al peu: la foto s'enfonsa dins la targeta en lloc de retallar-s'hi */
+.trio__ph::after{content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(180deg, rgba(51,63,55,0) 50%, rgba(51,63,55,.66) 100%)}
+.trio__body{flex:1; display:flex; flex-direction:column; gap:.8rem;
+  padding:clamp(1.35rem,2.4vw,1.85rem)}
+.trio__item h3{font-family:var(--f-display); font-weight:500; font-size:1.24rem;
+  line-height:1.2; color:#F4EFE1; position:relative; padding-top:.85rem}
+.trio__item h3::before{content:""; position:absolute; top:0; left:0;
+  width:2.1rem; height:1px; background:var(--brass)}
+.trio__item p{font-size:var(--fs-sm); line-height:1.6; color:#B9C0B0; flex:1}
+.trio__item .btn{align-self:flex-start; margin-top:.35rem}
+@media (max-width:860px){
+  .trio{grid-template-columns:1fr; gap:1.4rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .trio__item,.trio__item:hover{transform:none}
+}
+
+/* botons damunt fons fosc */
+.dark .btn--ghost{color:#EDE7D8; border-color:var(--brass-soft)}
+.dark .btn--ghost:hover{color:#F6E9CC; border-color:var(--brass); background:rgba(192,160,99,.10)}
+
+/* ── botiga ── */
+/* els cinc productes, sempre en una fila: amb auto-fit el cinque
+   queia tot sol a una segona linia */
+.shop{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(.8rem,1.5vw,1.25rem)}
+@media (max-width:820px){.shop{grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem}}
+@media (max-width:520px){.shop{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.prod{display:flex; flex-direction:column; gap:.55rem; text-decoration:none}
+.prod__frame{display:block; aspect-ratio:4/5; background:var(--paper-2);
+  border:1px solid var(--rule-soft); overflow:hidden; position:relative}
+.prod__frame img{width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .6s cubic-bezier(.2,.7,.3,1)}
+.prod:hover .prod__frame img{transform:scale(1.045)}
+.prod h3{font-size:.98rem; font-family:var(--f-display); font-weight:500; line-height:1.25}
+.prod__price{font-family:var(--f-label); font-size:.75rem; letter-spacing:.08em; color:var(--terra)}
+
+
+.clients{display:flex; flex-wrap:wrap; gap:.6rem 1.6rem; align-items:center}
+.clients span{font-family:var(--f-label); font-size:.74rem; letter-spacing:.09em; color:var(--ink-3)}
+
+.quote{max-width:32ch; font-family:var(--f-display); font-style:italic; font-size:clamp(1.35rem,2.6vw,2rem); line-height:1.35; color:var(--teal-deep)}
+.quote cite{display:block; font-style:normal; font-family:var(--f-label); font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); margin-top:1.1rem}
+
+/* ── bio ── */
+.bio{display:grid; grid-template-columns:minmax(0,480px) minmax(0,1fr); gap:clamp(1.5rem,4vw,3rem); align-items:start}
+
+@media (max-width:700px){.bio{grid-template-columns:1fr}}
+.creds{display:flex; flex-direction:column; gap:.5rem; margin-top:.4rem}
+.creds li{display:flex; gap:.7rem; align-items:baseline; font-size:var(--fs-sm); color:var(--ink-2)}
+.creds li::before{content:""; width:5px; height:5px; border-radius:50%; background:var(--terra); flex:none; transform:translateY(-2px)}
+
+/* ── escoles ── */
+.axis{display:flex; flex-direction:column; gap:.6rem; padding-top:1.1rem; border-top:2px solid var(--teal)}
+.axis h3{font-family:var(--f-label); font-size:.74rem; letter-spacing:.18em; text-transform:uppercase; font-weight:700; color:var(--teal)}
+.axis p{font-family:var(--f-display); font-size:1.2rem; line-height:1.4; color:var(--ink-2)}
+
+.act{display:flex; flex-direction:column; gap:.55rem; padding:1.5rem; background:var(--field); border:1px solid var(--rule-soft)}
+.band .act,.sand .act{background:rgba(255,255,255,.6)}
+.act__top{display:flex; align-items:center; justify-content:space-between; gap:1rem}
+.act__axis{font-family:var(--f-label); font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--terra)}
+.act h3{font-size:1.16rem}
+.act p{font-size:var(--fs-sm); color:var(--ink-2); flex:1}
+.act__foot{display:flex; flex-wrap:wrap; gap:.3rem 1rem; padding-top:.7rem; border-top:1px solid var(--rule-soft);
+  font-family:var(--f-label); font-size:.68rem; color:var(--ink-3); letter-spacing:.05em}
+
+.tablewrap{overflow-x:auto; border:1px solid var(--rule-soft); background:rgba(255,255,255,.55)}
+table{border-collapse:collapse; width:100%; min-width:520px; font-size:var(--fs-sm)}
+th,td{text-align:left; padding:.85rem 1.1rem; border-bottom:1px solid var(--rule-soft)}
+th{font-family:var(--f-label); font-size:.66rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--teal); font-weight:400; background:rgba(196,213,212,.35)}
+td:last-child{font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink)}
+tr:last-child td{border-bottom:none}
+
+/* ── faq ── */
+.faq{border-top:1px solid var(--rule)}
+details{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer; list-style:none; padding:1.15rem 2.5rem 1.15rem 0; position:relative;
+  font-family:var(--f-display); font-size:1.1rem; line-height:1.35}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+"; position:absolute; right:.35rem; top:1rem; font-family:var(--f-label);
+  font-size:1.1rem; color:var(--terra); transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding-bottom:1.3rem; max-width:66ch; color:var(--ink-2); font-size:var(--fs-sm)}
+
+/* ── formularis ── */
+.form{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem}
+.f{display:flex; flex-direction:column; gap:.35rem}
+.f--full{grid-column:1/-1}
+.f label{font-family:var(--f-label); font-size:.66rem; letter-spacing:.13em; text-transform:uppercase; color:var(--teal)}
+.f input,.f select,.f textarea{font-family:var(--f-body); font-size:.95rem; color:var(--ink);
+  background:rgba(255,255,255,.75); border:1px solid var(--rule); border-radius:2px; padding:.7rem .8rem; width:100%}
+.f input:focus,.f select:focus,.f textarea:focus{background:#fff; border-color:var(--teal)}
+.f textarea{min-height:110px; resize:vertical}
+.formnote{font-size:var(--fs-sm); color:var(--ink-3); max-width:52ch}
+.formmsg{grid-column:1/-1; padding:.9rem 1.1rem; border-left:2px solid var(--terra);
+  background:rgba(255,255,255,.7); font-size:var(--fs-sm); color:var(--ink-2)}
+.formmsg--ok{border-left-color:var(--teal)}
+.check{display:flex; gap:.6rem; align-items:baseline; font-size:var(--fs-sm); color:var(--ink-2); cursor:pointer}
+.check input{accent-color:var(--teal); transform:translateY(1px)}
+/* parany per a bots: invisible per a les persones */
+.hp{position:absolute; left:-9999px; width:1px; height:1px; opacity:0}
+button[disabled]{opacity:.6; cursor:wait}
+
+.cta{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:2rem; align-items:end}
+@media (max-width:760px){.cta{grid-template-columns:1fr; align-items:start}}
+
+/* ── peu ── */
+footer{background:var(--teal-deep); color:#C8D3D2; padding-block:clamp(3rem,6vw,4.5rem) 2rem; position:relative; z-index:2}
+.foot{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:2.5rem}
+.foot h4{font-family:var(--f-label); font-size:.66rem; letter-spacing:.16em; text-transform:uppercase;
+  font-weight:400; color:#9FB0AF; margin-bottom:.9rem}
+.foot a{display:block; color:#EDF1F0; text-decoration:none; font-size:var(--fs-sm); padding-block:.24rem; opacity:.88}
+.foot a:hover{opacity:1; color:#E2A78F}
+.foot__brand{font-family:var(--f-display); font-size:1.5rem; color:#F2F5F4; line-height:1.15}
+.foot .label{color:#9FB0AF}
+.foot__bottom{margin-top:3rem; padding-top:1.4rem; border-top:1px solid rgba(237,241,240,.18);
+  display:flex; flex-wrap:wrap; gap:.6rem 1.5rem; justify-content:space-between;
+  font-family:var(--f-label); font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:#9FB0AF}
+
+/* ── revelat ── */
+.rv{opacity:0; transform:translateY(14px); transition:opacity .7s ease, transform .7s ease}
+.rv.in{opacity:1; transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1; transform:none; transition:none}
+}
+
+[hidden]{display:none !important}
+.skip{position:absolute; left:-9999px}
+.skip:focus{left:1rem; top:1rem; z-index:99; background:var(--teal); color:#fff; padding:.6rem 1rem}
+
+/* ══════════════════════════════════════════════════════════════
+   ── INICI BLOC INTRO ──  animacio d'entrada (logo + benvinguda)
+   Tot el bloc es autonom. Per llevar-ho: aquest bloc, el <div
+   class="intro"> de dalt del body i el seu script. Per apagar-ho
+   sense llevar res: INTRO_ACTIVA = false dins aquell script.
+   Res del web queda amagat per defecte: si el JS falla o es lleva
+   nomes mig bloc, la pagina es veu igualment.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --intro-speed:1;      /* multiplica tots els temps de l'intro */
+  --intro-logo-k:1.55;  /* mida del logo dins el vel */
+}
+@media (max-width:900px){ :root{--intro-logo-k:1.15} }
+@media (max-width:560px){ :root{--intro-logo-k:.86} }
+
+.intro{
+  position:fixed; inset:0; z-index:100;
+  display:grid; place-items:center;
+  background:var(--paper);
+  /* isolation + z-index negatiu a les pseudo: el gra i el halo pinten
+     damunt el fons del vel pero SOTA el contingut, i aixi el multiply
+     del logo troba el paper com a fons real. Si .intro__in fes capa
+     propia (position+z-index, opacity o transform) el blanc del JPG
+     del logo es veuria tal qual: no li'n poseu. */
+  isolation:isolate;
+  /* xarxa de seguretat: si el JS no arriba a treure el vel, se'n va tot sol */
+  animation:intro-failsafe 6s linear forwards;
+}
+.intro::before{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.55;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+}
+.intro::after{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:radial-gradient(58% 46% at 50% 46%, rgba(196,213,212,.42), rgba(245,242,234,0) 70%);
+}
+@keyframes intro-failsafe{ 0%,92%{opacity:1} 100%{opacity:0; visibility:hidden} }
+
+.intro__in{
+  display:flex; flex-direction:column; align-items:center;
+  gap:clamp(1.1rem,2.6vw,1.7rem);
+  padding-inline:var(--gut); text-align:center;
+}
+.intro__logo{--k:var(--intro-logo-k); mix-blend-mode:multiply}
+/* el filet i la paraula: ─── BENVINGUDA / BENVINGUT ─── */
+.intro__welcome{display:flex; align-items:center; justify-content:center;
+  gap:clamp(.7rem,2vw,1.1rem); margin-top:clamp(.2rem,.8vw,.5rem)}
+.intro__rule{display:block; height:1px; width:clamp(1.6rem,5vw,3.8rem);
+  background:var(--teal); opacity:.42; transform:scaleX(0)}
+.intro__rule--l{transform-origin:right center}
+.intro__rule--r{transform-origin:left center}
+.intro__welcome .label{font-size:clamp(.63rem,1.5vw,.78rem); letter-spacing:.22em;
+  color:var(--teal); white-space:nowrap}
+
+.intro__skip{
+  position:absolute; z-index:3; right:clamp(1rem,3vw,2rem); bottom:clamp(1rem,3vw,2rem);
+  background:none; border:1px solid var(--rule); border-radius:2px; cursor:pointer;
+  font-family:var(--f-label); font-size:.66rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink-3); padding:.5rem .8rem; opacity:0;
+  transition:color .2s, border-color .2s;
+  animation:intro-rise calc(.5s*var(--intro-speed)) ease calc(.7s*var(--intro-speed)) both;
+}
+.intro__skip:hover{color:var(--terra); border-color:var(--terra)}
+
+/* estat de partida: nomes dins el vel, mai al web */
+.intro__logo, .intro__welcome .label{opacity:0}
+.intro__logo{transform:translateY(10px) scale(.955)}
+.intro__welcome .label{transform:translateY(8px)}
+
+/* els temps, encavalcats: logo → titol → filet + benvinguda */
+.intro.is-playing{animation:none}
+.intro.is-playing .intro__logo{
+  animation:intro-rise calc(.62s*var(--intro-speed)) cubic-bezier(.22,.75,.3,1) calc(.10s*var(--intro-speed)) both}
+.intro.is-playing .intro__rule{
+  animation:intro-draw calc(.55s*var(--intro-speed)) cubic-bezier(.22,.75,.3,1) calc(.46s*var(--intro-speed)) both}
+.intro.is-playing .intro__welcome .label{
+  animation:intro-rise calc(.55s*var(--intro-speed)) cubic-bezier(.22,.75,.3,1) calc(.54s*var(--intro-speed)) both}
+@keyframes intro-rise{ from{opacity:0} to{opacity:1; transform:none} }
+@keyframes intro-draw{ from{transform:scaleX(0)} to{transform:scaleX(1)} }
+
+/* sortida: el vel puja un pel i s'esvaeix. L'animacio va damunt .intro
+   i no damunt .intro__in, que aixi no fa capa i el logo conserva el blend. */
+.intro.is-leaving{
+  animation:intro-veil-out calc(.56s*var(--intro-speed)) cubic-bezier(.4,0,.25,1) both;
+  pointer-events:none}
+@keyframes intro-veil-out{ from{opacity:1} to{opacity:0; transform:translateY(-1.6%)} }
+.intro[hidden]{display:none}
+
+/* el web apareix darrere el vel. Nomes mentre hi ha la classe:
+   en repos res no du opacitat, per aixo llevar l'intro no pot deixar
+   la pagina en blanc. */
+html.intro-surt body > *:not(.intro){animation:intro-page-in .72s cubic-bezier(.22,.75,.3,1) both}
+html.intro-surt .hero__bg img{animation:intro-hero-settle .95s cubic-bezier(.22,.75,.3,1) both}
+@keyframes intro-page-in{ from{opacity:0} to{opacity:1} }
+@keyframes intro-hero-settle{ from{transform:scale(1.045)} to{transform:none} }
+
+@media (prefers-reduced-motion:reduce){
+  .intro.is-playing .intro__logo,
+  .intro.is-playing .intro__rule,
+  .intro.is-playing .intro__welcome .label,
+  .intro__skip{animation:none; opacity:1; transform:none}
+  .intro.is-leaving{animation:intro-veil-out .2s linear both}
+  html.intro-surt body > *:not(.intro),
+  html.intro-surt .hero__bg img{animation:none}
+}
+/* ── FI BLOC INTRO ── */

@@ -39,11 +39,13 @@ jobs:
           for branca in wip estil; do
             if git ls-remote --exit-code --heads "$REPO" "$branca" >/dev/null; then
               git clone --quiet --depth 1 --branch "$branca" "$REPO" "_site/$branca"
-              pagina="_site/$branca/index.html"
-              # que Google no la indexi
-              sed -i '0,/<head>/s//<head>\n<meta name="robots" content="noindex, nofollow">/' "$pagina"
-              # que no compti a les estadistiques
-              sed -i '/cloudflareinsights/d' "$pagina"
+              # totes les pagines de la previsualitzacio (index.html, es/index.html...)
+              find "_site/$branca" -name '*.html' -not -path '*/.git/*' | while read -r pagina; do
+                # que Google no la indexi
+                sed -i '0,/<head>/s//<head>\n<meta name="robots" content="noindex, nofollow">/' "$pagina"
+                # que no compti a les estadistiques
+                sed -i '/cloudflareinsights/d' "$pagina"
+              done
               rm -f "_site/$branca/CNAME"
             fi
           done

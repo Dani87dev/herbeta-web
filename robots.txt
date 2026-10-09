@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+# previsualitzacions de les branques de treball
+Disallow: /wip/
+Disallow: /estil/
 
 Sitemap: https://herbetadelbosc.com/sitemap.xml
