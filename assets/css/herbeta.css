@@ -135,6 +135,9 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
   gap:clamp(1.5rem,4vw,3.5rem); align-items:start}
 .hero h1{font-size:var(--fs-display); font-weight:400; letter-spacing:-.015em; max-width:15ch; margin-block:1.4rem 0}
 .hero h1 em{font-style:italic; color:var(--teal)}
+/* etiqueta petita dins el h1: es veu igual que abans, pero Google la llegeix com a titol */
+.hero h1.h1--kicker{margin-top:0}
+.h1__kicker{display:block; margin-bottom:1.4rem; line-height:1.5; letter-spacing:.15em}
 .hero__lead{margin-top:1.6rem; max-width:46ch}
 .hero__cta{display:flex; flex-wrap:wrap; gap:.75rem; margin-top:2.2rem}
 @media (max-width:1040px){
