@@ -66,19 +66,30 @@
     ".nv-bar button{font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--terra,#B6715B);background:#fff;"+
       "border:0;border-radius:2px;padding:.35rem .8rem;cursor:pointer}"+
     ".nv-bar button:hover{background:var(--paper,#F5F2EA)}"+
-    ".nv{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:16px;"+
+    /* al mobil, 100vh inclou la barra d'adreces: per aixo dvh, i la caixa arrenca de dalt */
+    ".nv{position:fixed;inset:0;z-index:100;display:flex;align-items:flex-start;justify-content:center;padding:12px;"+
       "background:rgba(52,48,48,.55)}"+
     ".nv[hidden]{display:none}"+
-    ".nv__box{position:relative;width:100%;max-width:760px;max-height:calc(100vh - 32px);overflow:auto;"+
+    "@media (min-width:640px){.nv{align-items:center;padding:16px}}"+
+    /* la capcalera amb la X no es mou; nomes llisca el cos */
+    ".nv__box{position:relative;width:100%;max-width:760px;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);"+
+      "display:flex;flex-direction:column;overflow:hidden;"+
       "background:var(--paper,#F5F2EA);color:var(--ink,#343030);border-radius:3px;box-shadow:0 20px 60px rgba(0,0,0,.3);"+
-      "padding:clamp(1.4rem,4vw,2.6rem);font-family:var(--f-body,sans-serif);font-size:1rem;line-height:1.55}"+
+      "font-family:var(--f-body,sans-serif);font-size:1rem;line-height:1.55}"+
+    ".nv__top{flex:none;display:flex;justify-content:flex-end;padding:.35rem .35rem 0}"+
+    ".nv__body{flex:1 1 auto;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;"+
+      "padding:0 clamp(1.2rem,4vw,2.6rem) clamp(1.4rem,4vw,2.4rem)}"+
+    ".nv__fi{display:flex;justify-content:center;margin-top:1.8rem}"+
+    ".nv__ok{font-family:var(--f-body,sans-serif);font-size:.95rem;color:#fff;background:var(--teal,#506A6B);border:0;"+
+      "border-radius:2px;padding:.75rem 1.4rem;cursor:pointer}"+
+    ".nv__ok:hover{background:var(--teal-deep,#3D4D4E)}"+
     ".nv__box:focus{outline:none}"+
-    ".nv__close{position:absolute;top:.8rem;right:.8rem;width:2.4rem;height:2.4rem;border:0;background:none;"+
-      "font-size:1.6rem;line-height:1;color:var(--ink-2,#5C5751);cursor:pointer;border-radius:2px}"+
+    ".nv__close{width:2.9rem;height:2.9rem;border:0;background:none;touch-action:manipulation;"+
+      "font-size:1.8rem;line-height:1;color:var(--ink-2,#5C5751);cursor:pointer;border-radius:2px}"+
     ".nv__close:hover{color:var(--terra,#B6715B)}"+
     ".nv__kicker{font-family:var(--f-label,monospace);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;"+
       "color:var(--terra,#B6715B);margin:0 0 .5rem}"+
-    ".nv h2{font-family:var(--f-display,serif);font-weight:500;font-size:clamp(1.6rem,4vw,2.1rem);line-height:1.1;margin:0 2rem .4rem 0}"+
+    ".nv h2{font-family:var(--f-display,serif);font-weight:500;font-size:clamp(1.6rem,4vw,2.1rem);line-height:1.1;margin:0 0 .4rem}"+
     ".nv__lead{color:var(--ink-2,#5C5751);margin:0 0 1.6rem}"+
     ".nv__sec{border-top:1px solid var(--rule,rgba(52,48,48,.16));padding-top:1.2rem;margin-top:1.4rem}"+
     ".nv h3{font-family:var(--f-display,serif);font-weight:500;font-size:1.25rem;margin:0 0 .4rem;color:var(--teal,#506A6B)}"+
@@ -125,21 +136,24 @@
   nv.hidden = true;
   nv.innerHTML =
     '<div class="nv__box" role="dialog" aria-modal="true" aria-labelledby="nv-titol" tabindex="-1">'+
-      '<button type="button" class="nv__close" aria-label="Tanca">×</button>'+
-      '<p class="nv__kicker">Novetats a la previsualització</p>'+
-      '<h2 id="nv-titol">Què ha canviat a la web</h2>'+
-      '<p class="nv__lead">Tot això es veu aquí, a la previsualització. Encara no és a la web oficial.</p>'+
-      CANVIS.map(seccio).join('')+
+      '<div class="nv__top"><button type="button" class="nv__close" aria-label="Tanca">×</button></div>'+
+      '<div class="nv__body">'+
+        '<p class="nv__kicker">Novetats a la previsualització</p>'+
+        '<h2 id="nv-titol">Què ha canviat a la web</h2>'+
+        '<p class="nv__lead">Tot això es veu aquí, a la previsualització. Encara no és a la web oficial.</p>'+
+        CANVIS.map(seccio).join('')+
+        '<div class="nv__fi"><button type="button" class="nv__ok">Tanca</button></div>'+
+      '</div>'+
     '</div>';
   document.body.appendChild(nv);
 
-  var box = nv.querySelector(".nv__box"), desDe = null;
+  var box = nv.querySelector(".nv__box"), cos = nv.querySelector(".nv__body"), desDe = null;
 
   function obre(){
     desDe = document.activeElement;
     nv.hidden = false;
     document.documentElement.style.overflow = "hidden";
-    box.scrollTop = 0;
+    cos.scrollTop = 0;
     box.focus();
     try{ localStorage.setItem(CLAU, VERSIO); }catch(e){}
   }
@@ -152,6 +166,7 @@
 
   bar.querySelector("button").addEventListener("click", obre);
   nv.querySelector(".nv__close").addEventListener("click", tanca);
+  nv.querySelector(".nv__ok").addEventListener("click", tanca);
   nv.addEventListener("click", function(e){ if(e.target === nv) tanca(); });
   document.addEventListener("keydown", function(e){ if(e.key === "Escape") tanca(); });
 
