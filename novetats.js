@@ -9,7 +9,7 @@
   "use strict";
 
   /* canviar-la fa que la finestra torni a sortir sola a qui ja l'havia vist */
-  var VERSIO = "2026-10-15b";
+  var VERSIO = "2026-10-15c";
   var CLAU = "herbeta:novetats-vistes";
 
   var CANVIS = [
@@ -24,9 +24,9 @@
     },
     {
       titol: "Logo de la certificació de Forest Therapy Hub",
-      intro: "Hem posat el logo que ens vas passar en dos llocs, en català i en castellà:",
+      intro: "Hem posat el logo que ens vas passar emmarcat com un diploma, en dos llocs, en català i en castellà:",
       punts: [
-        "<b>Portada, «Qui som»</b>: davall la llista de titulacions, just després de «Guia certificada de banys de bosc i professional de teràpia de bosc (FTHub)».",
+        "<b>Portada, «Qui som»</b>: davall la teva foto.",
         "<b>Programes de benestar</b>, apartat «Treball en col·laboració»: davall l'enllaç a l'article de la revista Alimara."
       ],
       nota: "Ens has passat un logo, el de professional de teràpia de bosc. Si també en tens un de guia de banys de bosc, passa'ns-el i el posarem al costat."

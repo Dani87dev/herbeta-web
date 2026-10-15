@@ -328,9 +328,16 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
 .objectius .card{border-top:2px solid var(--teal)}
 .objectius .card:nth-child(even){border-top-color:var(--terra)}
 .creds strong{color:var(--ink); font-weight:600}
-/* el logo de FTHub du fons gris clar: multiply el fon amb el paper */
-.cert{width:150px; height:auto; mix-blend-mode:multiply}
-.cert--b{width:170px; margin-top:.4rem}
+/* certificat FTHub emmarcat com un diploma: marc de fusta, passe-partout i la lamina (el JPEG, amb el seu fons) */
+.diploma{margin:clamp(2rem,4vw,2.8rem) auto 0; max-width:320px; transform:rotate(-1.2deg)}
+.diploma__marc{padding:clamp(12px,3vw,18px); background:#FDFBF6;
+  border:7px solid var(--ocre); border-color:#9A7B4C #7E6236 #6F552E #8C6E41;
+  box-shadow:inset 0 0 0 1px rgba(52,48,48,.12), inset 0 2px 6px rgba(52,48,48,.12),
+    0 1px 0 1px rgba(52,48,48,.18), 0 22px 34px -20px rgba(52,48,48,.6)}
+.diploma__marc img{display:block; width:100%; height:auto; box-shadow:0 0 0 1px rgba(52,48,48,.1), 0 1px 3px rgba(52,48,48,.12)}
+.diploma figcaption{margin-top:1rem; text-align:center; font-family:var(--f-label); font-size:.66rem;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ocre)}
+.diploma--b{margin:.8rem 0 0 .4rem; max-width:270px; transform:rotate(1deg)}
 .testimonis{align-items:start}
 .testimonis .quote{margin:0; font-size:clamp(1.15rem,1.8vw,1.4rem)}
 
