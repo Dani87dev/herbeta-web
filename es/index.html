@@ -373,7 +373,7 @@
         <div class="rule"></div>
       </div>
       <div class="bio">
-        <div class="bio__col"><div class="bio__frame rv"><span class="bio__leaf bio__leaf--a" aria-hidden="true"></span><figure class="bio__portrait"><img src="../assets/img/malena-retrat.jpg" loading="lazy" decoding="async" alt="Malena Bibiloni, mirando hacia arriba en un entorno natural, con ilustraciones de ramitas sobre la fotografía"></figure><span class="bio__leaf bio__leaf--b" aria-hidden="true"></span></div><figure class="diploma"><div class="diploma__marc"><img src="../assets/img/certificat-fthub.jpg" width="650" height="364" loading="lazy" decoding="async" alt="Forest Therapy Hub · Profesional de terapia de bosque certificada"></div><figcaption>Certificación · Forest Therapy Hub</figcaption></figure></div>
+        <div class="bio__col"><div class="bio__frame rv"><span class="bio__leaf bio__leaf--a" aria-hidden="true"></span><figure class="bio__portrait"><img src="../assets/img/malena-retrat.jpg" loading="lazy" decoding="async" alt="Malena Bibiloni, mirando hacia arriba en un entorno natural, con ilustraciones de ramitas sobre la fotografía"></figure><span class="bio__leaf bio__leaf--b" aria-hidden="true"></span></div><div class="diplomes"><button type="button" class="diploma" data-diploma="guia" data-titol="Guía de baños de bosque" aria-label="Ampliar el certificado: Guía de baños de bosque"><span class="diploma__marc"><img src="../assets/img/certificat-fthub-guia.jpg" width="650" height="364" loading="lazy" decoding="async" alt="Certificado de Forest Therapy Hub de guía de baños de bosque"></span><span class="diploma__peu">Guía de baños de bosque</span></button><button type="button" class="diploma" data-diploma="terapia" data-titol="Profesional de terapia de bosque" aria-label="Ampliar el certificado: Profesional de terapia de bosque"><span class="diploma__marc"><img src="../assets/img/certificat-fthub-terapia.jpg" width="650" height="364" loading="lazy" decoding="async" alt="Certificado de Forest Therapy Hub de profesional de terapia de bosque"></span><span class="diploma__peu">Profesional de terapia de bosque</span></button></div></div>
         <div class="stack" style="gap:1.3rem">
           <h2 class="h2">Na Malena Bibiloni Amorós</h2>
           <div class="prose">
@@ -847,7 +847,7 @@
             <p>El guía de baño de bosque/profesional de terapia de bosque asume un rol clave como facilitador de una experiencia de conexión entre el participante y el entorno natural. Su responsabilidad principal es diseñar y conducir el paseo. No actúa como terapeuta, sino que sostiene un espacio seguro, respetuoso y abierto, donde cada persona puede vivir la experiencia desde su propia autonomía.</p>
             <p>Para profundizar en los beneficios y aplicaciones de la terapia de bosque en el ámbito social, se puede consultar el siguiente artículo (en catalán): <a href="https://www.revistaalimara.net/revista/banys-de-bosc-fonaments-i-aplicabilitat-terapeutica-en-lambit-social-i-de-la-salut/" target="_blank" rel="noopener">«Banys de bosc: fonaments i aplicabilitat terapèutica en l'àmbit social i de la salut»</a> (revista Alimara).</p>
           </div>
-          <figure class="diploma diploma--b"><div class="diploma__marc"><img src="../assets/img/certificat-fthub.jpg" width="650" height="364" loading="lazy" decoding="async" alt="Forest Therapy Hub · Profesional de terapia de bosque certificada"></div><figcaption>Certificación · Forest Therapy Hub</figcaption></figure>
+          <div class="diplomes diplomes--b"><button type="button" class="diploma" data-diploma="guia" data-titol="Guía de baños de bosque" aria-label="Ampliar el certificado: Guía de baños de bosque"><span class="diploma__marc"><img src="../assets/img/certificat-fthub-guia.jpg" width="650" height="364" loading="lazy" decoding="async" alt="Certificado de Forest Therapy Hub de guía de baños de bosque"></span><span class="diploma__peu">Guía de baños de bosque</span></button><button type="button" class="diploma" data-diploma="terapia" data-titol="Profesional de terapia de bosque" aria-label="Ampliar el certificado: Profesional de terapia de bosque"><span class="diploma__marc"><img src="../assets/img/certificat-fthub-terapia.jpg" width="650" height="364" loading="lazy" decoding="async" alt="Certificado de Forest Therapy Hub de profesional de terapia de bosque"></span><span class="diploma__peu">Profesional de terapia de bosque</span></button></div>
         </div>
         <div class="card">
           <ul class="creds">
@@ -943,6 +943,19 @@
       <p class="lb__meta"></p>
       <div class="lb__cta"></div>
       <a class="lb__dl" href="" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descarga el cartel</a>
+      <p class="lb__esc"><kbd>Esc</kbd> para cerrar</p>
+    </div>
+  </div>
+</div>
+
+<!-- certificat ampliat -->
+<div class="lb lb--diploma" id="diploma-lb" role="dialog" aria-modal="true" aria-labelledby="dlb-title" tabindex="-1" hidden>
+  <button type="button" class="lb__close" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <div class="lb__inner">
+    <span class="diploma__marc"><img class="dlb__img" src="" alt=""></span>
+    <div class="lb__info">
+      <p class="lb__date">Certificación · Forest Therapy Hub</p>
+      <h2 class="lb__title" id="dlb-title"></h2>
       <p class="lb__esc"><kbd>Esc</kbd> para cerrar</p>
     </div>
   </div>
@@ -1324,6 +1337,37 @@
     var f=lb.querySelectorAll('button, a[href]'), first=f[0], last=f[f.length-1];
     if(e.shiftKey && (document.activeElement===first || document.activeElement===lb)){ e.preventDefault(); last.focus(); }
     else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  });
+
+  /* certificats FTHub: s'amplien igual que els cartells */
+  var dlb=document.getElementById('diploma-lb'), dlbFrom=null;
+  function dlbClose(){
+    if(dlb.hidden) return;
+    dlb.hidden=true;
+    document.documentElement.style.overflow='';
+    document.body.style.overflow='';
+    if(dlbFrom) dlbFrom.focus();
+    dlbFrom=null;
+  }
+  document.querySelectorAll('[data-diploma]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var img=b.querySelector('img'), di=dlb.querySelector('.dlb__img');
+      dlbFrom=b;
+      di.src=img.src; di.alt=img.alt;
+      dlb.querySelector('.lb__title').textContent=b.getAttribute('data-titol');
+      dlb.hidden=false;
+      document.documentElement.style.overflow='hidden';
+      document.body.style.overflow='hidden';
+      dlb.focus();
+    });
+  });
+  dlb.addEventListener('click', function(e){
+    if(!e.target.closest('.diploma__marc, .lb__info') || e.target.closest('.lb__close')) dlbClose();
+  });
+  document.addEventListener('keydown', function(e){
+    if(dlb.hidden) return;
+    if(e.key==='Escape') dlbClose();
+    else if(e.key==='Tab'){ e.preventDefault(); dlb.querySelector('.lb__close').focus(); }
   });
 
   /* ── home: públics ──
