@@ -328,6 +328,9 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
 .objectius .card{border-top:2px solid var(--teal)}
 .objectius .card:nth-child(even){border-top-color:var(--terra)}
 .creds strong{color:var(--ink); font-weight:600}
+/* el logo de FTHub du fons gris clar: multiply el fon amb el paper */
+.cert{width:150px; height:auto; mix-blend-mode:multiply}
+.cert--b{width:170px; margin-top:.4rem}
 .testimonis{align-items:start}
 .testimonis .quote{margin:0; font-size:clamp(1.15rem,1.8vw,1.4rem)}
 

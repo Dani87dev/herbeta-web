@@ -9,18 +9,27 @@
   "use strict";
 
   /* canviar-la fa que la finestra torni a sortir sola a qui ja l'havia vist */
-  var VERSIO = "2026-10-15";
+  var VERSIO = "2026-10-15b";
   var CLAU = "herbeta:novetats-vistes";
 
   var CANVIS = [
     {
       titol: "Fet amb els teus comentaris del 15 d'octubre",
-      intro: "Ja hi són els tres canvis que ens vas demanar:",
+      intro: "Ja hi són els canvis que ens vas demanar:",
       taula: [
         ["Escoles i entitats, «Durades i preus orientatius» (CA i ES)", "Des dels 120 € fins als 350 € per sessió", "Des dels 150 € fins als 350 € per sessió"],
         ["Castellà, Nit i Alba al Refugi (davall els formats de bany de bosc)", "Una experiencia de noche y madrugada en el refugio…", "Una experiencia de noche y amanecer en el refugio…"],
         ["«Han confiat en el projecte» (CA i ES)", "…Siloé · Banc de Temps de Sencelles", "…Siloé · Banc de Temps de Sencelles · CTO La Gola · Ajuntament de Pollença · Parc arqueològic Puig de sa Morisca · Ajuntament de Calvià"]
       ]
+    },
+    {
+      titol: "Logo de la certificació de Forest Therapy Hub",
+      intro: "Hem posat el logo que ens vas passar en dos llocs, en català i en castellà:",
+      punts: [
+        "<b>Portada, «Qui som»</b>: davall la llista de titulacions, just després de «Guia certificada de banys de bosc i professional de teràpia de bosc (FTHub)».",
+        "<b>Programes de benestar</b>, apartat «Treball en col·laboració»: davall l'enllaç a l'article de la revista Alimara."
+      ],
+      nota: "Ens has passat un logo, el de professional de teràpia de bosc. Si també en tens un de guia de banys de bosc, passa'ns-el i el posarem al costat."
     },
     {
       titol: "Ja no diu «Web en construcció»: cal revisar els preus",
