@@ -9,17 +9,26 @@
   "use strict";
 
   /* canviar-la fa que la finestra torni a sortir sola a qui ja l'havia vist */
-  var VERSIO = "2026-10-09c";
+  var VERSIO = "2026-10-15";
   var CLAU = "herbeta:novetats-vistes";
 
   var CANVIS = [
+    {
+      titol: "Fet amb els teus comentaris del 15 d'octubre",
+      intro: "Ja hi són els tres canvis que ens vas demanar:",
+      taula: [
+        ["Escoles i entitats, «Durades i preus orientatius» (CA i ES)", "Des dels 120 € fins als 350 € per sessió", "Des dels 150 € fins als 350 € per sessió"],
+        ["Castellà, Nit i Alba al Refugi (davall els formats de bany de bosc)", "Una experiencia de noche y madrugada en el refugio…", "Una experiencia de noche y amanecer en el refugio…"],
+        ["«Han confiat en el projecte» (CA i ES)", "…Siloé · Banc de Temps de Sencelles", "…Siloé · Banc de Temps de Sencelles · CTO La Gola · Ajuntament de Pollença · Parc arqueològic Puig de sa Morisca · Ajuntament de Calvià"]
+      ]
+    },
     {
       titol: "Ja no diu «Web en construcció»: cal revisar els preus",
       intro: "Hem llevat la franja de dalt («Web en construcció · alguns preus o dates poden no estar actualitzats») i el «Web en construcció · 2026» del peu, en català i en castellà. Com que ja no hi ha l'avís, <b>tots els preus que surten a la web han de ser correctes</b>. Són aquests:",
       punts: [
         "<b>Portada</b>, davall el titular: «Des de 30 € / persona».",
         "<b>Escoles i entitats</b>, a dalt: «Des de 150 € / grup».",
-        "<b>Escoles i entitats</b>, apartat «Durades i preus orientatius»: de 120 € a 350 € per sessió, i els banys de bosc escolars a partir de 150 € per grup de fins a 25 alumnes.",
+        "<b>Escoles i entitats</b>, apartat «Durades i preus orientatius»: de 150 € a 350 € per sessió, i els banys de bosc escolars a partir de 150 € per grup de fins a 25 alumnes.",
         "<b>Programes de benestar</b>, taula de formats: sessió puntual 200-300 €, programa de 6 setmanes 1.000-1.500 €, programa de 12 setmanes 1.800-2.500 €."
       ],
       nota: "Els preus de l'agenda ja són els que ens vas passar i ja surten a la web oficial. Els de la botiga no hi són: la botiga la mirarem més endavant i de moment queda com està."
