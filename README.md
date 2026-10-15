@@ -37,6 +37,9 @@ desaparèixer. D'aquí surten les decisions tècniques:
   obliga a tocar HTML.
 - **Dues pàgines en un sol document**, que s'alternen al navegador sense
   recarregar.
+- **Dues llengües, dues URL.** El català és a l'arrel i el castellà a `/es/`,
+  enllaçats amb `hreflang` perquè Google mostri a cadascú la seva. Qualsevol
+  canvi de text o d'agenda s'ha de fer a tots dos fitxers.
 
 ## Sistema visual
 
@@ -74,7 +77,11 @@ l'autoria, l'origen i la llicència, fitxer per fitxer.
 ## Repositori
 
 ```
-index.html          el lloc
+index.html          el lloc, en català
+es/index.html       el lloc, en castellà (mateix marcatge, textos traduïts)
+assets/css/         full d'estils, compartit per les dues llengües
+robots.txt          permisos per als cercadors
+sitemap.xml         les dues pàgines, amb la relació entre idiomes
 CNAME               domini
 CREDITS.md          autoria i llicència de les imatges
 assets/img/         imatges que carrega el web
