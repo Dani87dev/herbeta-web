@@ -9,13 +9,13 @@
   "use strict";
 
   /* canviar-la fa que la finestra torni a sortir sola a qui ja l'havia vist */
-  var VERSIO = "2026-10-19a";
+  var VERSIO = "2026-10-19b";
   var CLAU = "herbeta:novetats-vistes";
 
   var CANVIS = [
     {
       titol: "Agenda al dia (missatge del 19 d'octubre)",
-      intro: "Ja hi són els canvis que ens vas demanar, en català i en castellà:",
+      intro: "Ja hi són els canvis que em vas demanar, en català i en castellà:",
       punts: [
         "<b>Bany de bosc creatiu</b> (17 d'octubre): llevat, ja ha passat.",
         "<b>Jornada Origen</b>: llevada, sense cap avís.",
@@ -25,7 +25,7 @@
     {
       titol: "El sospir especial del dimecres 18",
       intro: "Davall la sessió del 18 hi surt una línia en color: «Especial · amb breathwork de Mercè Palou · 2 hores · 25 €».",
-      nota: "Com que dura 2 hores, hi hem posat de 9.30 a 11.30 h. Si l'hora de sortida és una altra, digues-nos-ho."
+      nota: "Com que dura 2 hores, hi he posat de 9.30 a 11.30 h. Si l'hora d'acabar és una altra, digues-m'ho."
     }
   ];
 
