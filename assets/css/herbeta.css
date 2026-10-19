@@ -427,6 +427,7 @@ section{padding-block:clamp(4rem,8vw,7rem); position:relative; overflow:hidden}
 .ag__ses li{display:grid; grid-template-columns:11.5rem 7.5rem minmax(0,1fr); gap:.2rem 1rem; padding:.55rem 0; border-bottom:1px solid var(--rule-soft); color:var(--ink-2)}
 .ag__ses li b{font-weight:500; color:var(--ink)}
 .ag__ses .is-past{opacity:.45}
+.ag__extra{grid-column:1/-1; font-style:normal; color:var(--terra); font-size:.85em}
 .ag__actions{display:flex; flex-wrap:wrap; align-items:center; gap:.75rem 1.75rem; margin-top:.5rem}
 .ag__price{color:var(--ink-3); font-size:var(--fs-sm)}
 .tag{display:inline-block; font-family:var(--f-label); font-size:.63rem; letter-spacing:.13em; text-transform:uppercase;

@@ -1203,7 +1203,8 @@
   /* ── home: agenda ──
      data: AAAA-MM-DD. fins (opcional): darrer dia, si en dura més d'un.
      Les activitats fixes no duen data sinó cada (p. ex. 'setmana') i van davant;
-     sessions (opcional): les trobades del mes, s'actualitzen cada mes.
+     sessions (opcional): les trobades del mes, s'actualitzen cada mes;
+     extra (opcional): una línia més davall una sessió que surt de lo normal.
      cartell (opcional): imatge del cartell. form (opcional): sense, la
      reserva va al formulari de contacte. */
   var agenda=[
@@ -1211,22 +1212,15 @@
      meta:['Sencelles y alrededores','Sesiones de 90 minutos','Semanas alternas de mañana y de tarde'],
      desc:'Pequeñas inmersiones de 90 minutos para reconectar con el silencio, con la naturaleza y contigo. Cada mes, cuatro sesiones en espacios naturales de Sencelles y alrededores. Cada sesión es única e independiente, así que puedes venir a la que mejor te vaya.',
      sessions:[
-       {data:'2026-10-05',hora:'17 – 18.30 h',lloc:'Cas Menescal'},
-       {data:'2026-10-13',hora:'9.30 – 11 h',lloc:'Cas Canar'},
        {data:'2026-10-21',hora:'17 – 18.30 h',lloc:'Son Boi'},
-       {data:'2026-10-29',hora:'9.30 – 11 h',lloc:'Cas Menescal'}],
+       {data:'2026-10-29',hora:'9.30 – 11 h',lloc:'Cas Menescal'},
+       {data:'2026-11-02',hora:'9.30 – 11 h',lloc:'Son Boi'},
+       {data:'2026-11-10',hora:'17 – 18.30 h',lloc:'Cas Menescal'},
+       {data:'2026-11-18',hora:'9.30 – 11.30 h',lloc:'Cas Menescal',
+        extra:'Especial · con breathwork de Mercè Palou · 2 horas · 25 €'},
+       {data:'2026-11-27',hora:'17 – 18.30 h',lloc:'Cas Canar'}],
      price:'15 €',state:'places',
      cartell:'../assets/img/cartell-sospirs-de-bosc.jpg'},
-    {data:'2026-10-17',t:'Baño de bosque creativo · Otoño',
-     meta:['Lloret de Vistalegre','9.30 – 13.30 h','Con Virginia de Moix & Moix'],
-     desc:'Un paseo lento por la naturaleza para despertar los sentidos, inspirado en los primeros signos del otoño y la sutileza de las pequeñas transformaciones. Nuestra cita estacional de octubre.',
-     price:'50 €',state:'places',
-     form:'https://forms.gle/Vj6uopooiaDSBWTb7',cartell:'../assets/img/cartell-bany-lloret-2026-10.jpg'},
-    {data:'2026-10-24',t:'Jornada Origen',
-     meta:['Pla de Mallorca','10.30 – 19 h','Con Mada Cardell (Magic Seeds)'],
-     desc:'Una jornada inmersiva en el mundo del bienestar natural con aceites esenciales y baño de bosque. Crearemos un botiquín natural de 6 roll-ons con aceites esenciales puros que te llevarás a casa, y también las pautas para incorporar el baño de bosque a tu rutina.',
-     price:'80 €',state:'places',
-     form:'https://forms.gle/b5ziEf5UZZSvmPtdA',cartell:'../assets/img/cartell-jornada-origen-2026-10.jpg'},
     {data:'2026-11-21',fins:'2026-11-22',t:'Nit i Alba al Refugi',
      meta:['Refugi del Castell d’Alaró'],
      desc:'Repetimos la noche en la montaña, esta vez en fin de semana: subida con paseo etnobotánico, cena en el refugio y baño de bosque al alba. Y añadimos una novedad: un taller de Diario de Naturaleza para aprovechar las horas de noche.',
@@ -1257,7 +1251,8 @@
     return '<ul class="ag__ses">'+llista.map(function(x){
       var f=dia(x.data), mes=MESOS[f.getMonth()];
       return '<li'+(f<avui?' class="is-past"':'')+'><b>'+DIES[f.getDay()]+' '+f.getDate()+' '+deMes(mes)+'</b>'+
-        '<span>'+x.hora+'</span><span>'+x.lloc+'</span></li>';
+        '<span>'+x.hora+'</span><span>'+x.lloc+'</span>'+
+        (x.extra?'<em class="ag__extra">'+x.extra+'</em>':'')+'</li>';
     }).join('')+'</ul>';
   }
   function agBtn(a){
