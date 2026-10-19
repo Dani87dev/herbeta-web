@@ -9,67 +9,23 @@
   "use strict";
 
   /* canviar-la fa que la finestra torni a sortir sola a qui ja l'havia vist */
-  var VERSIO = "2026-10-15d";
+  var VERSIO = "2026-10-19b";
   var CLAU = "herbeta:novetats-vistes";
 
   var CANVIS = [
     {
-      titol: "Fet amb els teus comentaris del 15 d'octubre",
-      intro: "Ja hi són els canvis que ens vas demanar:",
-      taula: [
-        ["Escoles i entitats, «Durades i preus orientatius» (CA i ES)", "Des dels 120 € fins als 350 € per sessió", "Des dels 150 € fins als 350 € per sessió"],
-        ["Castellà, Nit i Alba al Refugi (davall els formats de bany de bosc)", "Una experiencia de noche y madrugada en el refugio…", "Una experiencia de noche y amanecer en el refugio…"],
-        ["«Han confiat en el projecte» (CA i ES)", "…Siloé · Banc de Temps de Sencelles", "…Siloé · Banc de Temps de Sencelles · CTO La Gola · Ajuntament de Pollença · Parc arqueològic Puig de sa Morisca · Ajuntament de Calvià"]
-      ]
-    },
-    {
-      titol: "Els dos certificats de Forest Therapy Hub",
-      intro: "Hem posat els dos logos que ens vas passar (guia de banys de bosc i professional de teràpia de bosc), un al costat de l'altre i emmarcats com una làmina botànica. Si hi cliques, s'obren en gran, com els cartells de l'agenda. Surten en català i en castellà:",
+      titol: "Agenda al dia (missatge del 19 d'octubre)",
+      intro: "Ja hi són els canvis que em vas demanar, en català i en castellà:",
       punts: [
-        "<b>Portada, «Qui som»</b>: davall la teva foto.",
-        "<b>Programes de benestar</b>, apartat «Treball en col·laboració»: davall l'enllaç a l'article de la revista Alimara."
+        "<b>Bany de bosc creatiu</b> (17 d'octubre): llevat, ja ha passat.",
+        "<b>Jornada Origen</b>: llevada, sense cap avís.",
+        "<b>Sospirs de Bosc</b>: hi surten les dues que queden d'octubre (dimecres 21 a Son Boi i dijous 29 a Cas Menescal) i les quatre de novembre: dilluns 2 a Son Boi, dimarts 10 a Cas Menescal, dimecres 18 a Cas Menescal i divendres 27 a Cas Canar."
       ]
     },
     {
-      titol: "Ja no diu «Web en construcció»: cal revisar els preus",
-      intro: "Hem llevat la franja de dalt («Web en construcció · alguns preus o dates poden no estar actualitzats») i el «Web en construcció · 2026» del peu, en català i en castellà. Com que ja no hi ha l'avís, <b>tots els preus que surten a la web han de ser correctes</b>. Són aquests:",
-      punts: [
-        "<b>Portada</b>, davall el titular: «Des de 30 € / persona».",
-        "<b>Escoles i entitats</b>, a dalt: «Des de 150 € / grup».",
-        "<b>Escoles i entitats</b>, apartat «Durades i preus orientatius»: de 150 € a 350 € per sessió, i els banys de bosc escolars a partir de 150 € per grup de fins a 25 alumnes.",
-        "<b>Programes de benestar</b>, taula de formats: sessió puntual 200-300 €, programa de 6 setmanes 1.000-1.500 €, programa de 12 setmanes 1.800-2.500 €."
-      ],
-      nota: "Els preus de l'agenda ja són els que ens vas passar i ja surten a la web oficial. Els de la botiga no hi són: la botiga la mirarem més endavant i de moment queda com està."
-    },
-    {
-      titol: "Versió en castellà",
-      intro: "Tota la web està traduïda al castellà, sense afegir-hi contingut nou. Convé llegir-la de dalt a baix per si alguna frase no sona natural.",
-      punts: [
-        "A dalt a la dreta hi ha un selector <b>CA · ES</b> per canviar d'idioma.",
-        "Els noms de les activitats queden en català, igual que els cartells: Sospirs de Bosc, Nit i Alba al Refugi, Jornada Origen.",
-        "Si algú escriu des de la versió en castellà, el correu arriba amb «(en castellà)» a l'assumpte.",
-        "L'article de la revista Alimara s'enllaça tal com és, indicant que està en català."
-      ]
-    },
-    {
-      titol: "Textos que canvien en català",
-      intro: "Perquè la web surti quan es cerca «banys de bosc Mallorca» o «educació ambiental Mallorca». En castellà s'han fet els mateixos canvis.",
-      taula: [
-        ["Portada, etiqueta damunt el titular", "Cultivant vincles amb la natura", "Banys de bosc i educació ambiental a Mallorca"],
-        ["«Què és», primer paràgraf", "…originària del Japó (<i>shinrin-yoku</i>)…", "…originària del Japó (<i>shinrin-yoku</i>, o <i>forest bathing</i> en anglès)…"],
-        ["Titular de la pàgina d'escoles", "Programa educatiu i vivencial a la natura", "Programa d'educació ambiental i vivencial a Mallorca"],
-        ["Titular de la pàgina de benestar", "Programes de benestar a la natura", "Banys i teràpia de bosc: benestar a la natura de Mallorca"],
-        ["Peu de pàgina", "Malena Bibiloni Amorós · Mallorca", "Malena Bibiloni Amorós · Banys de bosc a Mallorca"]
-      ],
-      nota: "«Cultivant vincles amb la natura» es continua veient al peu de pàgina."
-    },
-    {
-      titol: "El que surt a Google",
-      intro: "No es veu a la pàgina: surt a la pestanya del navegador i als resultats de cerca.",
-      taula: [
-        ["Títol", "Herbeta del Bosc", "Banys de bosc i educació ambiental a Mallorca · Herbeta del Bosc"],
-        ["Descripció", "Herbeta del Bosc - banys de bosc, educacio ambiental i experiencies…", "Banys de bosc (shinrin-yoku o forest bathing), teràpia de bosc i educació ambiental a Mallorca per a particulars, escoles i entitats, amb na Malena Bibiloni."]
-      ]
+      titol: "El sospir especial del dimecres 18",
+      intro: "Davall la sessió del 18 hi surt una línia en color: «Especial · amb breathwork de Mercè Palou · 2 hores · 25 €».",
+      nota: "Com que dura 2 hores, hi he posat de 9.30 a 11.30 h. Si l'hora d'acabar és una altra, digues-m'ho."
     }
   ];
 
