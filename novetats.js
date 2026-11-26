@@ -24,8 +24,7 @@
     },
     {
       titol: "Els Sospirs, a la secció de benestar",
-      intro: "La frase que deia que els Sospirs eren setmanals ara diu: «Els Sospirs de Bosc són petites immersions puntuals per mantenir viva la connexió amb la natura. Quan n'hi hagi un de programat, el trobaràs a l'agenda.»",
-      nota: "He retocat una mica el text del SINCRONIA perquè soni com la resta de la web. Si vols que hi surti tal qual el vas escriure, digues-m'ho."
+      intro: "La frase que deia que els Sospirs eren setmanals ara diu: «Els Sospirs de Bosc són petites immersions puntuals per mantenir viva la connexió amb la natura. Quan n'hi hagi un de programat, el trobaràs a l'agenda.»"
     }
   ];
 
