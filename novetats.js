@@ -9,10 +9,25 @@
   "use strict";
 
   /* canviar-la fa que la finestra torni a sortir sola a qui ja l'havia vist */
-  var VERSIO = "2026-10-19b";
+  var VERSIO = "2026-11-26a";
   var CLAU = "herbeta:novetats-vistes";
 
-  var CANVIS = [];
+  var CANVIS = [
+    {
+      titol: "Agenda al dia (missatge del 26 de novembre)",
+      intro: "Ja hi són els canvis que em vas demanar, en català i en castellà:",
+      punts: [
+        "<b>Bany de Bosc SINCRONIA · Solstici d'Hivern</b>: afegit amb el teu cartell. Diumenge 20 de desembre, de 10 a 13 h, a Biniamar, 30 €.",
+        "<b>Sospirs de Bosc</b>: llevats de l'agenda. Quan en facis un, m'envies la informació i l'hi afegeixo com una activitat més.",
+        "<b>Nit i Alba al Refugi</b>: llevada, ja ha passat."
+      ]
+    },
+    {
+      titol: "Els Sospirs, a la secció de benestar",
+      intro: "La frase que deia que els Sospirs eren setmanals ara diu: «Els Sospirs de Bosc són petites immersions puntuals per mantenir viva la connexió amb la natura. Quan n'hi hagi un de programat, el trobaràs a l'agenda.»",
+      nota: "He retocat una mica el text del SINCRONIA perquè soni com la resta de la web. Si vols que hi surti tal qual el vas escriure, digues-m'ho."
+    }
+  ];
 
   if(!CANVIS.length) return;
 
