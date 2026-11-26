@@ -9,23 +9,22 @@
   "use strict";
 
   /* canviar-la fa que la finestra torni a sortir sola a qui ja l'havia vist */
-  var VERSIO = "2026-10-19b";
+  var VERSIO = "2026-11-26a";
   var CLAU = "herbeta:novetats-vistes";
 
   var CANVIS = [
     {
-      titol: "Agenda al dia (missatge del 19 d'octubre)",
+      titol: "Agenda al dia (missatge del 26 de novembre)",
       intro: "Ja hi són els canvis que em vas demanar, en català i en castellà:",
       punts: [
-        "<b>Bany de bosc creatiu</b> (17 d'octubre): llevat, ja ha passat.",
-        "<b>Jornada Origen</b>: llevada, sense cap avís.",
-        "<b>Sospirs de Bosc</b>: hi surten les dues que queden d'octubre (dimecres 21 a Son Boi i dijous 29 a Cas Menescal) i les quatre de novembre: dilluns 2 a Son Boi, dimarts 10 a Cas Menescal, dimecres 18 a Cas Menescal i divendres 27 a Cas Canar."
+        "<b>Bany de Bosc SINCRONIA · Solstici d'Hivern</b>: afegit amb el teu cartell. Diumenge 20 de desembre, de 10 a 13 h, a Biniamar, 30 €.",
+        "<b>Sospirs de Bosc</b>: llevats de l'agenda. Quan en facis un, m'envies la informació i l'hi afegeixo com una activitat més.",
+        "<b>Nit i Alba al Refugi</b>: llevada, ja ha passat."
       ]
     },
     {
-      titol: "El sospir especial del dimecres 18",
-      intro: "Davall la sessió del 18 hi surt una línia en color: «Especial · amb breathwork de Mercè Palou · 2 hores · 25 €».",
-      nota: "Com que dura 2 hores, hi he posat de 9.30 a 11.30 h. Si l'hora d'acabar és una altra, digues-m'ho."
+      titol: "Els Sospirs, a la secció de benestar",
+      intro: "La frase que deia que els Sospirs eren setmanals ara diu: «Els Sospirs de Bosc són petites immersions puntuals per mantenir viva la connexió amb la natura. Quan n'hi hagi un de programat, el trobaràs a l'agenda.»"
     }
   ];
 
